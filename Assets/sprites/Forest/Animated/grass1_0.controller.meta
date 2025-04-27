@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e4f41c0831c2b2b45a95df2e1b3b879d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 200092
+  packageName: SideScroll Worlds SET1
+  packageVersion: 1.0
+  assetPath: Assets/SSW_SET1/Animated/grass1_0.controller
+  uploadId: 445206
