@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     {   //Jump
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            rb.linearVelocity.nomalized; // Jump force
+  
             rb.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
         }
     }
