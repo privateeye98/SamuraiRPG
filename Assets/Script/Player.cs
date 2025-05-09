@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // -- components -- 
     Rigidbody2D rb;
     public float maxSpeed;
     SpriteRenderer spriteRenderer;
@@ -14,12 +15,27 @@ public class Player : MonoBehaviour
     public Vector2 groundCheckSize = new Vector2(0.45f, 0.05f);
     bool isGrounded;
 
+
+    //attack
+    [SerializeField] Collider2D attackCol;
+
+
+    //combo reference
+    int comboStep = 0;
+    float comboTimer = 0f;
+    [SerializeField] float comboTime = 0.4f;
+
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+
+        // -- start false --
+        if (attackCol) attackCol.enabled = false;
     }
+
 
     void Update()
     {
@@ -44,7 +60,30 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)           // 추가
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);     // 추가
+
+
+        // --  Attack
+
+        if (Time.time > comboTimer)
+            comboStep = 0;
+
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+
+            anim.ResetTrigger("AttackTrigger");
+            anim.SetFloat("AttackIndex", comboStep);
+            anim.SetTrigger("AttackTrigger");
+
+            comboStep = (comboStep + 1) % 3;
+            comboTimer = Time.time + comboTime;
+
+        }
+
+
     }
+
+
 
     void FixedUpdate()
     {
@@ -78,4 +117,20 @@ public class Player : MonoBehaviour
         }
 
     }
+
+
+    // -- HitBox --
+    public void EnableHitBox()
+    {
+        if (attackCol != null)
+            attackCol.enabled = true;
+    }
+    public void DisableHitBox()
+    {
+        if (attackCol != null)
+            attackCol.enabled = false;
+    }
+
+  
+
 }

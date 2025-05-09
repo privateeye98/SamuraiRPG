@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -88,9 +88,9 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -131,10 +131,10 @@ TextureImporter:
       name: ATTACK 3_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 14
-        width: 23
-        height: 37
+        x: 43
+        y: 15
+        width: 21
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +153,10 @@ TextureImporter:
       name: ATTACK 3_1
       rect:
         serializedVersion: 2
-        x: 137
-        y: 14
-        width: 24
-        height: 39
+        x: 138
+        y: 15
+        width: 22
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,10 +175,10 @@ TextureImporter:
       name: ATTACK 3_2
       rect:
         serializedVersion: 2
-        x: 228
-        y: 14
-        width: 57
-        height: 38
+        x: 229
+        y: 15
+        width: 55
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +197,10 @@ TextureImporter:
       name: ATTACK 3_3
       rect:
         serializedVersion: 2
-        x: 322
-        y: 14
-        width: 51
-        height: 30
+        x: 323
+        y: 15
+        width: 49
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,10 +219,10 @@ TextureImporter:
       name: ATTACK 3_4
       rect:
         serializedVersion: 2
-        x: 418
-        y: 14
-        width: 41
-        height: 30
+        x: 419
+        y: 15
+        width: 39
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,10 +241,10 @@ TextureImporter:
       name: ATTACK 3_5
       rect:
         serializedVersion: 2
-        x: 514
-        y: 14
-        width: 41
-        height: 30
+        x: 515
+        y: 15
+        width: 39
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,7 +263,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2220e1e2a73f0d447b67dabb261b891e
     internalID: 0
     vertices: []
     indices: 
@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ATTACK 3_0: 5657851921139860834
+      ATTACK 3_1: 8167334401786168451
+      ATTACK 3_2: -2486501126090535953
+      ATTACK 3_3: 5461953342878467935
+      ATTACK 3_4: 2706193367312493655
+      ATTACK 3_5: -8047713305943468122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
