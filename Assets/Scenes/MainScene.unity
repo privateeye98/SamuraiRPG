@@ -133,7 +133,8 @@ GameObject:
   - component: {fileID: 201286051}
   - component: {fileID: 201286053}
   - component: {fileID: 201286054}
-  m_Layer: 0
+  - component: {fileID: 201286055}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -181,8 +182,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1143510771
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 815424164945274260, guid: d689509d2a84b844c9f3ea0f301ec29e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -324,6 +325,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   groundCheckSize: {x: 0.45, y: 0.05}
+  dashSpeed: 10
+  dashDuration: 0.2
+  dashCooldown: 0.5
+  afterImagePrefab: {fileID: 453897729622259543, guid: a4e14ccbb0d103c4e80c2147aef9ea9c, type: 3}
+  afterImageInterval: 0.05
+--- !u!114 &201286055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201286048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a5141d542dbc54a87f670ee75d4800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &434970170
 GameObject:
   m_ObjectHideFlags: 0
