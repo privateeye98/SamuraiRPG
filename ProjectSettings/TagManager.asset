@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Platform
+  - PlayerAttack
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - UI
   - Platform
   - Effect
-  - 
-  - 
+  - PlayerAttack
+  - Enemy
   - 
   - 
   - 
@@ -47,6 +49,9 @@ TagManager:
     locked: 0
   - name: Effect
     uniqueID: 3614542123
+    locked: 0
+  - name: 
+    uniqueID: 3789620111
     locked: 0
   m_RenderingLayers:
   - Default

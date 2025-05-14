@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 37bacdefa860413429b070759ec80b11
+guid: 17706ba7cd147f647ba138e4557c7244
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4009253352588075672
-    second: TITLE_BACKGROUND_0
+      213: 5199326602348251612
+    second: Dragon2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,12 +113,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TITLE_BACKGROUND_0
+      name: Dragon2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1536
+        width: 1024
         height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 86d917851554c58c0800000000000000
-      internalID: -4009253352588075672
+      spriteID: cd9c4346ff7b72840800000000000000
+      internalID: 5199326602348251612
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      TITLE_BACKGROUND_0: -4009253352588075672
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

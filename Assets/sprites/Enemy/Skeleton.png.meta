@@ -1,37 +1,10 @@
 fileFormatVersion: 2
-guid: a8a712c6c58849e43ba133aec5687cef
+guid: 03ca565bbf707f149a0000e4f3bfba0e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4685664805989789715
-    second: TITLE_LOGO_0
-  - first:
-      213: -3830559385840950846
-    second: TITLE_LOGO_1
-  - first:
-      213: 4171249799367268917
-    second: TITLE_LOGO_2
-  - first:
-      213: 8441739170896711766
-    second: TITLE_LOGO_3
-  - first:
-      213: -7577310787092440160
-    second: TITLE_LOGO_4
-  - first:
-      213: -7938054337243578277
-    second: TITLE_LOGO_5
-  - first:
-      213: -4460398670362108118
-    second: TITLE_LOGO_6
-  - first:
-      213: 7846673039705998848
-    second: TITLE_LOGO_7
-  - first:
-      213: 2708903628309467104
-    second: TITLE_LOGO_8
-  - first:
-      213: -8756885036749792251
-    second: TITLE_LOGO_9
+      213: 4354231566380549168
+    second: Skeleton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -78,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -140,221 +113,265 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TITLE_LOGO_0
+      name: Skeleton_0
       rect:
         serializedVersion: 2
-        x: 259
-        y: 670
-        width: 181
-        height: 213
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3103299b053d60140800000000000000
-      internalID: 4685664805989789715
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TITLE_LOGO_1
-      rect:
-        serializedVersion: 2
-        x: 438
-        y: 608
-        width: 149
-        height: 181
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2c169e3a88e17dac0800000000000000
-      internalID: -3830559385840950846
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TITLE_LOGO_2
-      rect:
-        serializedVersion: 2
-        x: 442
-        y: 648
-        width: 174
-        height: 314
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 53a94b0a79143e930800000000000000
-      internalID: 4171249799367268917
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TITLE_LOGO_3
-      rect:
-        serializedVersion: 2
-        x: 135
-        y: 390
-        width: 147
-        height: 211
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6509cc7bc05172570800000000000000
-      internalID: 8441739170896711766
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TITLE_LOGO_4
-      rect:
-        serializedVersion: 2
-        x: 295
-        y: 393
-        width: 165
-        height: 184
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0ab9e964cfbf7d690800000000000000
-      internalID: -7577310787092440160
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TITLE_LOGO_5
-      rect:
-        serializedVersion: 2
-        x: 428
-        y: 395
-        width: 306
-        height: 182
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b5009dc43ad56d190800000000000000
-      internalID: -7938054337243578277
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TITLE_LOGO_6
-      rect:
-        serializedVersion: 2
-        x: 742
-        y: 395
-        width: 151
-        height: 189
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a2f1170aa0b7912c0800000000000000
-      internalID: -4460398670362108118
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TITLE_LOGO_7
-      rect:
-        serializedVersion: 2
-        x: 247
-        y: 88
-        width: 235
+        x: 83
+        y: 683
+        width: 202
         height: 281
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0068f406e8bf4ec60800000000000000
-      internalID: 7846673039705998848
+      spriteID: 034c7e73a865d6c30800000000000000
+      internalID: 4354231566380549168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TITLE_LOGO_8
+      name: Skeleton_1
       rect:
         serializedVersion: 2
-        x: 415
-        y: 159
-        width: 190
-        height: 207
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 328
+        y: 683
+        width: 184
+        height: 280
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0ef07206f75f79520800000000000000
-      internalID: 2708903628309467104
+      spriteID: 7d844e6809c85cd46a7852c059245b94
+      internalID: 2001040592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TITLE_LOGO_9
+      name: Skeleton_2
       rect:
         serializedVersion: 2
-        x: 605
-        y: 57
-        width: 240
+        x: 514
+        y: 684
+        width: 226
+        height: 281
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97c002724db297f4badf2523edabb3bd
+      internalID: 136416320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton_3
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 682
+        width: 216
+        height: 282
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8245b5db7f5767459a7b50d2a761f39
+      internalID: 1647783953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton_4
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 342
+        width: 210
         height: 311
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 50c589d747b497680800000000000000
-      internalID: -8756885036749792251
+      spriteID: bdfd31c5c832e9a47bda4dd04f75a641
+      internalID: -107686092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton_5
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 344
+        width: 217
+        height: 307
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b77c087426b5b2f46913d63f73d8343d
+      internalID: 1516476628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton_6
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 343
+        width: 229
+        height: 310
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a3a4f814002f5544ad0401904dac637
+      internalID: -1535052443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton_7
+      rect:
+        serializedVersion: 2
+        x: 761
+        y: 342
+        width: 204
+        height: 310
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7c1c8b7e356bf842acdfca1af8e958b
+      internalID: 2024664754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton_8
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 58
+        width: 218
+        height: 281
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 894498947a17ddc45ba5369b167ae177
+      internalID: 1785629199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton_9
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 63
+        width: 232
+        height: 279
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c204538e1cd3ea04faf72e6d64455f71
+      internalID: -457690312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton_10
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 63
+        width: 196
+        height: 279
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55f65116fc341ad49ba1d8dd9b751aa2
+      internalID: -1560320758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton_11
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 60
+        width: 210
+        height: 281
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2d1be075c14a604a9b215c55cbe7f54
+      internalID: 1606857867
       vertices: []
       indices: 
       edges: []
@@ -363,7 +380,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7e1ead3f36c59aa4e9389c20ba4e07b2
     internalID: 0
     vertices: []
     indices: 
@@ -373,16 +390,18 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TITLE_LOGO_0: 4685664805989789715
-      TITLE_LOGO_1: -3830559385840950846
-      TITLE_LOGO_2: 4171249799367268917
-      TITLE_LOGO_3: 8441739170896711766
-      TITLE_LOGO_4: -7577310787092440160
-      TITLE_LOGO_5: -7938054337243578277
-      TITLE_LOGO_6: -4460398670362108118
-      TITLE_LOGO_7: 7846673039705998848
-      TITLE_LOGO_8: 2708903628309467104
-      TITLE_LOGO_9: -8756885036749792251
+      Skeleton_0: 4354231566380549168
+      Skeleton_1: 2001040592
+      Skeleton_10: -1560320758
+      Skeleton_11: 1606857867
+      Skeleton_2: 136416320
+      Skeleton_3: 1647783953
+      Skeleton_4: -107686092
+      Skeleton_5: 1516476628
+      Skeleton_6: -1535052443
+      Skeleton_7: 2024664754
+      Skeleton_8: 1785629199
+      Skeleton_9: -457690312
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

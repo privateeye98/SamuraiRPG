@@ -1,21 +1,31 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;   
+
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] GameObject settingPanel;
+   
     public void OnClickGameStart()
     {
+       
         SceneManager.LoadScene("Game");
-
     }
 
-    public void OnclickSetting()
+    // ③ 설정 버튼 (예: 설정 패널 열기)
+    public void OnClickSetting()
     {
-        //구현
+        Debug.Log("SETTING 버튼 눌림");
+        settingPanel.SetActive(true); // 설정 패널 활성화
+       
     }
 
-    public void OnclickExit()
+    // ④ 종료 버튼
+    public void OnClickExit()
     {
+#if UNITY_EDITOR          // 에디터에서 테스트할 때
+        UnityEditor.EditorApplication.isPlaying = false;
+#else                     // 빌드된 실행 파일에서는
         Application.Quit();
-        Debug.Log("게임 종료");
+#endif
     }
 }
