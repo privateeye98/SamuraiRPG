@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     // -- components -- 
     Rigidbody2D rb;
@@ -91,7 +91,11 @@ public class Player : MonoBehaviour
     }
 
 
-
+    public void TakeDamage(int dmg,Vector2 hitpoint,Vector2 hitDir)
+    {
+        PlayerHealth.instance.TakeDamage(dmg);
+        Debug.Log("플레이어가 공격당함!");
+    }
     void FixedUpdate()
     {
         // Dashing
