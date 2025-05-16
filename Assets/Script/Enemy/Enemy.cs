@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     readonly float _yDeathLimit = -20f;
 
+    [SerializeField] int dropGold = 10;
+    [SerializeField] GameObject goldPrefab;
     void Awake()
     {
         _hp = maxHP;
@@ -80,6 +82,18 @@ public class Enemy : MonoBehaviour, IDamageable
         _rb.linearVelocity = Vector2.zero;
         _rb.simulated = false;             // Rigidbody2D 시뮬레이션 꺼버리기
         GetComponent<Collider2D>().enabled = false;
+
+        GoldManager.instance?.AddGold(dropGold);
+
+        if (goldPrefab != null)
+        {
+            GameObject gold = Instantiate(goldPrefab, transform.position, Quaternion.identity);
+            Rigidbody2D rb = gold.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.AddForce(new Vector2(Random.Range(-1f, 1f), 1f) * 5f, ForceMode2D.Impulse); // 튀어나오게
+            }
+        }
 
         // 원하는 시간 뒤 파괴
         Destroy(gameObject, 1f);

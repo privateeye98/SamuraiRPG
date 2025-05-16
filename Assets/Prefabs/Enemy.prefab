@@ -264,6 +264,8 @@ MonoBehaviour:
   maxHP: 100
   moveSpeed: 1.5
   chaseRange: 0
+  dropGold: 10
+  goldPrefab: {fileID: 1420984807580001495, guid: c3523e0207bdd8c489c4b1e09129b3ab, type: 3}
 --- !u!95 &1912335482205324146
 Animator:
   serializedVersion: 7

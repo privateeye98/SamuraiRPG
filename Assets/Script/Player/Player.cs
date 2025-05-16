@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class Player : MonoBehaviour, IDamageable
 {
     // -- components -- 
@@ -31,7 +31,36 @@ public class Player : MonoBehaviour, IDamageable
     public float afterImageInterval = 0.05f;
     float afterImageTimer = 0f;
 
-    
+    //-- SKILL
+    [SerializeField] Transform skillSpawnPoint;
+    [SerializeField] GameObject skillHitboxPrefab;
+    [SerializeField] int specialSkillCost = 70;
+    [SerializeField] string specialTriggerName = "Special"; // animator Trigger
+    [SerializeField] float SkillCooldown = 2f;
+    [SerializeField] float skillAfterImageDuration = 0.5f;
+    [SerializeField] float skillAfterImageInterval = 0.05f;
+    float lastSkillTime = -999f;
+
+
+    void SpawnSkillHitbox()
+    {
+        if (skillHitboxPrefab && skillSpawnPoint)
+        {
+            Instantiate(skillHitboxPrefab, skillSpawnPoint.position, Quaternion.identity);
+        }
+    }
+
+    IEnumerator StartSkillAfterImages()
+    {
+        float time = 0f;
+        while (time < skillAfterImageDuration)
+        {
+            CreateAfterImage(); // 기존에 만든 메서드 재사용
+            time += skillAfterImageInterval;
+            yield return new WaitForSeconds(skillAfterImageInterval);
+        }
+    }
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -66,14 +95,14 @@ public class Player : MonoBehaviour, IDamageable
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);     // 추가
 
         //-- Dash animator
-        if(Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && Time.time > lastDashTime + dashCooldown)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && Time.time > lastDashTime + dashCooldown)
         {
             isDashing = true;
             dashTime = dashDuration;
             lastDashTime = Time.time;
 
             float direction = Input.GetAxisRaw("Horizontal");
-            if(direction == 0)
+            if (direction == 0)
             {
                 direction = spriteRenderer.flipX ? -1 : 1;
             }
@@ -86,8 +115,35 @@ public class Player : MonoBehaviour, IDamageable
             rb.position += dashDirection * dashSpeed * Time.fixedDeltaTime * 8f; // Apply dash speed
 
             anim.SetBool("isDashing", true);
-        } 
+        }
 
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            bool enoughMana = PlayerMana.instance != null &&
+                      PlayerMana.instance.currentMP >= specialSkillCost;
+            bool cooldownReady = Time.time >= lastSkillTime + SkillCooldown;
+
+            if (enoughMana && cooldownReady)
+            {
+                PlayerMana.instance.UseMana(specialSkillCost);
+                anim.SetTrigger(specialTriggerName);
+                lastSkillTime = Time.time; // 쿨타임 기록
+
+
+                StartCoroutine(StartSkillAfterImages());
+                rb.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
+            }
+            else if (!cooldownReady)
+            {
+                Debug.Log("스킬 쿨타임 진행 중...");
+            }
+            else
+            {
+                Debug.Log("마나 부족!");
+            }
+
+        }
     }
 
 
@@ -154,7 +210,7 @@ public class Player : MonoBehaviour, IDamageable
 
     }
 
-    void CreateAfterImage()
+    void CreateAfterImage(bool isSkill = false)
     {
         if (afterImagePrefab == null) return;
 
@@ -168,6 +224,11 @@ public class Player : MonoBehaviour, IDamageable
             imgSpr.flipX = playerSpr.flipX;
             imgSpr.transform.localScale = transform.localScale;
             imgSpr.color = new Color(1f,1f,1f, 0.5f); // 50% alpha
+            if (isSkill)
+                imgSpr.color = new Color(0.5f, 1f, 1f, 0.6f);  // 청록색 스킬용
+            else
+                imgSpr.color = new Color(1f, 1f, 1f, 0.5f);
+
         }
     }
 

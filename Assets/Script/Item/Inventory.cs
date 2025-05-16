@@ -62,5 +62,11 @@ public class Inventory : MonoBehaviour
             case ItemType.Quest:
                 break;
         }
+        if (items.Contains(item))
+        {
+            GoldManager.instance.AddGold(item.price);
+            RemoveItem(item);
+            Debug.Log($"{item.itemName}을(를) {item.price} 골드에 판매!");
+        }
     }
 }
