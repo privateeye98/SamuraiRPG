@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 24695735bb6356a4e81a5efb8991738f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 200094
+  packageName: SideScroll Worlds Village Pack1
+  packageVersion: 1.0
+  assetPath: Assets/SSW_VP1/NPCs/Traveling_Merchant_0.controller
+  uploadId: 445208

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 659c1e114c833be4d8edf446dcc5608a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 200094
+  packageName: SideScroll Worlds Village Pack1
+  packageVersion: 1.0
+  assetPath: Assets/SSW_VP1/NPCs/Blacksmith_idle.anim
+  uploadId: 445208

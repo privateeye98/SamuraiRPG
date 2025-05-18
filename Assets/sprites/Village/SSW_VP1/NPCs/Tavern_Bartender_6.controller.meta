@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d7c0f3dd15f2c7045bec56bb24691fbf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 200094
+  packageName: SideScroll Worlds Village Pack1
+  packageVersion: 1.0
+  assetPath: Assets/SSW_VP1/NPCs/Tavern_Bartender_6.controller
+  uploadId: 445208

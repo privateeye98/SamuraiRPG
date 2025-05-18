@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 27ebe2e483f1a264c97403fa358a4843
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 200094
+  packageName: SideScroll Worlds Village Pack1
+  packageVersion: 1.0
+  assetPath: Assets/SSW_VP1/NPCs/Tavern_Musician_0.controller
+  uploadId: 445208

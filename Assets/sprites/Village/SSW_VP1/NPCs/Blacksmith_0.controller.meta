@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 97ae75a2fc0ee9541bc6c107b0a1cbe6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 200094
+  packageName: SideScroll Worlds Village Pack1
+  packageVersion: 1.0
+  assetPath: Assets/SSW_VP1/NPCs/Blacksmith_0.controller
+  uploadId: 445208

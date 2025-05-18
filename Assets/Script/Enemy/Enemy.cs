@@ -24,7 +24,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [Header("몬스터 설정")]
     [SerializeField] private int expReward = 100;
- 
+
+    [Header("몬스터가 입은 데미지출력")]
+    [SerializeField] GameObject floatingTextPrefab;
+    [SerializeField] Transform floatingTextSpawnPoint;
 
 
     void Awake()
@@ -70,6 +73,9 @@ public class Enemy : MonoBehaviour, IDamageable
         _anim?.SetTrigger("Hit");
 
         _rb.AddForce(hitDir.normalized * 5f, ForceMode2D.Impulse);
+
+        GameObject obj = Instantiate(floatingTextPrefab, floatingTextSpawnPoint.position, Quaternion.identity, GameObject.Find("Canvas").transform);
+        obj.GetComponent<FloatingDamageText>().SetDamage(dmg);
 
         if (_hp <= 0)
             Die();

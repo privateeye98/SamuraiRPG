@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c1c1d6489078b3d47b241b7f4aed7b08
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 200094
+  packageName: SideScroll Worlds Village Pack1
+  packageVersion: 1.0
+  assetPath: Assets/SSW_VP1/NPCs/Meat_Vendor_5.controller
+  uploadId: 445208

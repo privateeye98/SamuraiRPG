@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 175b6d409bfad224ab1459f6bed1a8b4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 200094
+  packageName: SideScroll Worlds Village Pack1
+  packageVersion: 1.0
+  assetPath: Assets/SSW_VP1/NPCs/Tavern_Guest3_0.controller
+  uploadId: 445208
