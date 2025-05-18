@@ -4,7 +4,7 @@ public class PlayerUI : MonoBehaviour
 {
     [SerializeField] Slider hpSlider;
     [SerializeField] Slider mpSlider;
-
+    [SerializeField] Slider expSlider;
     void Start()
     {
         if (PlayerHealth.instance != null)
@@ -18,6 +18,12 @@ public class PlayerUI : MonoBehaviour
             mpSlider.maxValue = PlayerMana.instance.maxMP;
             mpSlider.value = PlayerMana.instance.currentMP;
         }
+        if (PlayerLevel.instance != null)
+        {
+            expSlider.maxValue = PlayerLevel.instance.GetRequiredExp(PlayerLevel.instance.currentLevel);
+            expSlider.value = PlayerLevel.instance.currentExp;
+        }
+
     }
 
     void Update()
@@ -27,6 +33,11 @@ public class PlayerUI : MonoBehaviour
 
         if (PlayerMana.instance != null)
             mpSlider.value = PlayerMana.instance.currentMP;
+        if (PlayerLevel.instance != null)
+        {
+            expSlider.maxValue = PlayerLevel.instance.GetRequiredExp(PlayerLevel.instance.currentLevel);
+            expSlider.value = PlayerLevel.instance.currentExp;
+        }
     }
 
 }

@@ -8,6 +8,9 @@ public class InventoryUI : MonoBehaviour
 
     void Start()
     {
+        
+            Debug.Log("[InventoryUI] Ω√¿€µ ");
+        
         if (Inventory.instance == null)
         {
             Debug.LogWarning("Inventory.instance is null in InventoryUI.cs");
@@ -28,7 +31,6 @@ public class InventoryUI : MonoBehaviour
 
     }
 
-   
 
     void UpdateUI()
     {

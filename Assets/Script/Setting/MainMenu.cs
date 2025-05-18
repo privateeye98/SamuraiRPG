@@ -1,31 +1,47 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;   
+ï»¿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] GameObject[] buttons; // START, OPTION, EXIT ë“±
+    [SerializeField] GameObject titleLogo;
     [SerializeField] GameObject settingPanel;
-   
+
     public void OnClickGameStart()
     {
-       
+        Debug.Log("ðŸŽ¯ START ë²„íŠ¼ ëˆŒë¦¼ í…ŒìŠ¤íŠ¸ìš©");  // 
         SceneManager.LoadScene("Game");
     }
 
-    // ¨é ¼³Á¤ ¹öÆ° (¿¹: ¼³Á¤ ÆÐ³Î ¿­±â)
+
     public void OnClickSetting()
     {
-        Debug.Log("SETTING ¹öÆ° ´­¸²");
-        settingPanel.SetActive(true); // ¼³Á¤ ÆÐ³Î È°¼ºÈ­
-       
+        settingPanel.SetActive(true);
+
+        foreach (var btn in buttons)
+            btn.SetActive(false);
+
+        if (titleLogo != null)
+            titleLogo.SetActive(false);
     }
 
-    // ¨ê Á¾·á ¹öÆ°
     public void OnClickExit()
     {
-#if UNITY_EDITOR          // ¿¡µðÅÍ¿¡¼­ Å×½ºÆ®ÇÒ ¶§
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#else                     // ºôµåµÈ ½ÇÇà ÆÄÀÏ¿¡¼­´Â
+#else
         Application.Quit();
 #endif
+    }
+
+    public void OnCloseSetting()
+    {
+        settingPanel.SetActive(false);
+
+        foreach (var btn in buttons)
+            btn.SetActive(true);
+
+        if (titleLogo != null)
+            titleLogo.SetActive(true);
     }
 }

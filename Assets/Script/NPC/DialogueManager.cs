@@ -1,19 +1,18 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
-public class DialogueManager: MonoBehaviour
+public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
 
-    [SerializeField] UnityEngine.UI.Image portraitImage;
     [SerializeField] GameObject dialoguePanel;
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI dialogueText;
+    [SerializeField] Image portraitImage;
 
     string[] lines;
     int currentLine = 0;
-    [TextArea]
-
     System.Action onDialogueComplete;
 
     void Awake()
@@ -23,51 +22,50 @@ public class DialogueManager: MonoBehaviour
 
     public void StartDialogue(string npcName, string[] dialogueLines, Sprite portrait = null, System.Action onComplete = null)
     {
-        dialoguePanel.SetActive(true);
-        nameText.text = npcName;
+        if (dialogueLines == null || dialogueLines.Length == 0) return;
+
         lines = dialogueLines;
         currentLine = 0;
-        this.onDialogueComplete = onComplete;
+        onDialogueComplete = onComplete;
 
-        if (portraitImage != null && portrait != null)
-            portraitImage.sprite = portrait;
+        nameText.text = npcName;
+        dialogueText.text = lines[currentLine];
+        if (portraitImage && portrait) portraitImage.sprite = portrait;
 
-        ShowLine();
+        dialoguePanel.SetActive(true);
     }
 
     void Update()
     {
-        if (dialoguePanel.activeSelf && Input.GetKeyDown(KeyCode.Z))
+        if (!dialoguePanel.activeSelf || !Input.GetKeyDown(KeyCode.Z)) return;
+
+        Debug.Log($"[DEBUG] currentLine: {currentLine}");
+        Debug.Log($"[DEBUG] lines: {lines}");
+        Debug.Log($"[DEBUG] dialogueText: {dialogueText}");
+
+        currentLine++;
+        if (currentLine < lines.Length)
         {
-            Debug.Log("´ë»ç ³Ñ±â±â ½Ãµµ Áß");
-
-            currentLine++;
-            if (currentLine < lines.Length)
-            {
-                Debug.Log($"ÇöÀç ÁÙ: {currentLine} / ÃÑ ÁÙ ¼ö: {lines.Length}");
-                ShowLine();
-            }
-            else
-            {
-                EndDialogue();
-            }
+            dialogueText.text = lines[currentLine];
         }
-    }
-
-    void ShowLine()
-    {
-        if (currentLine < 0 || currentLine >= lines.Length)
+        else
         {
-            Debug.LogWarning("Àß¸øµÈ currentLine ÀÎµ¦½º Á¢±Ù");
-            return;
+            EndDialogue();
         }
-
-        dialogueText.text = lines[currentLine];
     }
 
     void EndDialogue()
     {
+        Debug.Log("ðŸ’¬ EndDialogue() í˜¸ì¶œë¨");
         dialoguePanel.SetActive(false);
-        onDialogueComplete?.Invoke(); // ¿©±â¼­ »óÁ¡ ¿­±â µî °¡´É
+        onDialogueComplete?.Invoke();
+    }
+
+    public bool IsDialogueActive() => dialoguePanel.activeSelf;
+
+    public void ForceCloseDialogue()
+    {
+        dialoguePanel.SetActive(false);
+        onDialogueComplete?.Invoke();
     }
 }

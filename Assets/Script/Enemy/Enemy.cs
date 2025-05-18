@@ -21,6 +21,12 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] int dropGold = 10;
     [SerializeField] GameObject goldPrefab;
+
+    [Header("몬스터 설정")]
+    [SerializeField] private int expReward = 100;
+ 
+
+
     void Awake()
     {
         _hp = maxHP;
@@ -94,9 +100,12 @@ public class Enemy : MonoBehaviour, IDamageable
                 rb.AddForce(new Vector2(Random.Range(-1f, 1f), 1f) * 5f, ForceMode2D.Impulse); // 튀어나오게
             }
         }
+        QuestManager.instance?.UpdateQuestProgress(gameObject.name);
 
-        // 원하는 시간 뒤 파괴
+        PlayerLevel.instance?.AddExp(expReward);
+
         Destroy(gameObject, 1f);
+
     }
 
     void OnTriggerEnter2D(Collider2D other)

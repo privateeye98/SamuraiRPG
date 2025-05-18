@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
         {
             bool now = !settingPanel.activeSelf;
             settingPanel.SetActive(now);
-            Time.timeScale = now ? 0 : 1;   // 게임 일시정지
+            Time.timeScale = now ? 0f : 1f;   // 게임 일시정지
         }
     }
 }

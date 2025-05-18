@@ -54,19 +54,35 @@ public class Inventory : MonoBehaviour
         switch (item.type)
         {
             case ItemType.Consumable:
+                // 체력이 가득 차 있으면 사용 불가
+                if (PlayerHealth.instance.currentHP >= PlayerHealth.instance.maxHP)
+                {
+                    Debug.Log("체력이 가득 차 있어 아이템을 사용할 수 없습니다.");
+                    return;
+                }
+
                 PlayerHealth.instance.Heal(item.healAmount);
                 RemoveItem(item);
                 break;
+
             case ItemType.Equipment:
+                Debug.Log("장비 사용은 아직 구현되지 않음");
                 break;
+
             case ItemType.Quest:
+                Debug.Log("퀘스트 아이템은 사용할 수 없습니다.");
                 break;
         }
-        if (items.Contains(item))
-        {
-            GoldManager.instance.AddGold(item.price);
-            RemoveItem(item);
-            Debug.Log($"{item.itemName}을(를) {item.price} 골드에 판매!");
-        }
+
+        // 더 이상 자동 판매 안 함
     }
+    public void SellItem(ItemData item)
+    {
+        if (!items.Contains(item)) return;
+
+        GoldManager.instance.AddGold(item.price);
+        RemoveItem(item);
+        Debug.Log($"{item.itemName}을(를) {item.price}골드에 판매했습니다.");
+    }
+
 }

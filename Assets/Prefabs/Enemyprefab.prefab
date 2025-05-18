@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 1912335482205324146}
   - component: {fileID: 3750768664356522085}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Enemyprefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

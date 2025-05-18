@@ -7,28 +7,60 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager instance;
 
-
+    [SerializeField] private Vector2 inventoryShopPosition = new Vector2(600f, 0f);
+    [Header("UI References")]
+    [SerializeField] RectTransform inventoryUI;
     [SerializeField] GameObject shopUI;
     [SerializeField] TextMeshProUGUI goldText;
     [SerializeField] Transform itemSlotParent;
     [SerializeField] GameObject itemSlotPrefab;
+    [SerializeField] RectTransform inventoryUI_Shop;
+
 
     public List<ItemData> shopItems = new List<ItemData>();
+    public GameObject shopInventoryUI;
     void Awake()
     {
         instance = this;
     }
 
-
+    void Update()
+    {
+        if (shopUI != null && shopUI.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseShop();
+        }
+    }
     public void OpenShop()
     {
+        CloseNPCUI();
+        Debug.Log("OpenShop 호출됨");
         shopUI.SetActive(true);
+        if (inventoryUI_Shop != null)
+        {
+            CloseNPCUI(); // Dialogue 닫기
+
+            shopUI.SetActive(true);
+
+            if (shopInventoryUI != null)
+                shopInventoryUI.SetActive(true);
+
+            Debug.Log("🛒 상점 + 인벤토리 열림");
+        }
         UpdateUI();
     }
-
     public void CloseShop()
     {
         shopUI.SetActive(false);
+        if (inventoryUI_Shop != null)
+            inventoryUI_Shop.gameObject.SetActive(false);
+
+        if (DialogueManager.instance != null)
+            DialogueManager.instance.ForceCloseDialogue();
+
+        InventoryToggle toggle = FindObjectOfType<InventoryToggle>();
+        if (toggle != null)
+            toggle.isShopOpen = false;
     }
 
     public void BuyItem(ItemData item)
@@ -109,4 +141,29 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    void PopulateShop()
+    {
+        foreach (Transform child in itemSlotParent)
+            Destroy(child.gameObject);
+
+        foreach (var item in shopItems)
+        {
+            if (item == null) continue;
+
+            GameObject slot = Instantiate(itemSlotPrefab, itemSlotParent);
+            ShopItemSlot shopSlot = slot.GetComponent<ShopItemSlot>();
+            if (shopSlot != null)
+                shopSlot.Setup(item);
+        }
+    }
+    public void CloseNPCUI()
+    {
+        if (DialogueManager.instance != null)
+        {
+            DialogueManager.instance.ForceCloseDialogue();
+            Debug.Log("📦 [ShopManager] DialoguePanel 닫음");
+        }
+
+
+    }
 }

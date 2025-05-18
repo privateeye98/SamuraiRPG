@@ -24,6 +24,12 @@ public class SettingMenu : MonoBehaviour
     void Awake()
     {
 
+        if (bgmSlider == null || sfxSlider == null || resolutionDropdown == null || fullscreenToggle == null)
+        {
+            Debug.LogError("UI 요소 연결 안됨!");
+            return;
+        }
+
         //-- 해상도 동적
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
@@ -70,13 +76,19 @@ public class SettingMenu : MonoBehaviour
     public  void Close() => gameObject.SetActive(false); // 설정 패널 닫기
     void OnEnable()
     {
-        bgmSlider.onValueChanged.AddListener(UpdateBGM);
-        sfxSlider.onValueChanged.AddListener(UpdateSFX);
+        if (bgmSlider != null)
+            bgmSlider.onValueChanged.AddListener(UpdateBGM);
+
+        if (sfxSlider != null)
+            sfxSlider.onValueChanged.AddListener(UpdateSFX);
     }
     void OnDisable()
     {
-        bgmSlider.onValueChanged.RemoveListener(UpdateBGM);
-        sfxSlider.onValueChanged.RemoveListener(UpdateSFX);
+        if (bgmSlider != null)
+            bgmSlider.onValueChanged.RemoveListener(UpdateBGM);
+
+        if (sfxSlider != null)
+            sfxSlider.onValueChanged.RemoveListener(UpdateSFX);
     }
 
     void UpdateBGM(float v) =>
@@ -84,5 +96,17 @@ public class SettingMenu : MonoBehaviour
 
     void UpdateSFX(float v) =>
         mixer.SetFloat("SFX", Mathf.Log10(Mathf.Max(v, 0.0001f)) * 20f);
+
+    public void OnClickSave()
+    {
+        GameSaveManager.I.SaveGame();
+    }
+
+    public void OnClickLoad()
+    {
+        GameSaveManager.I.LoadGame();
+    }
+
+
 }
 
