@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class PlayerLevel : MonoBehaviour
 {
     public static PlayerLevel instance;
-
+    PlayerStat stat;
     [Header("레벨 설정")]
     public int currentLevel = 1;
     public int currentExp = 0;
@@ -22,6 +22,7 @@ public class PlayerLevel : MonoBehaviour
     void Awake()
     {
         instance = this;
+        stat = FindObjectOfType<PlayerStat>();
         UpdateUI();
     }
 
@@ -40,6 +41,9 @@ public class PlayerLevel : MonoBehaviour
         {
             currentExp -= GetRequiredExp(currentLevel);
             currentLevel++;
+            if (stat != null)
+                stat.LevelUpBonus(currentLevel); // <-- 여기서 스탯 상승 적용
+
             Debug.Log($"🎉 레벨업! → Lv.{currentLevel}");
         }
 

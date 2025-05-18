@@ -74,9 +74,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
         _rb.AddForce(hitDir.normalized * 5f, ForceMode2D.Impulse);
 
-        GameObject obj = Instantiate(floatingTextPrefab, floatingTextSpawnPoint.position, Quaternion.identity, GameObject.Find("Canvas").transform);
-        obj.GetComponent<FloatingDamageText>().SetDamage(dmg);
-
         if (_hp <= 0)
             Die();
     }
