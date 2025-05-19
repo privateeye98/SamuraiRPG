@@ -516,16 +516,16 @@ MonoBehaviour:
   noButton: {fileID: 4240210155880904374}
   portrait: {fileID: 4989335771559519591}
   portalList:
-  - portalID: Field1-1
-    sceneName: "\uC0AC\uB0E5\uD130 1-1"
-    dialogue: "\uC0AC\uB0E5\uD130 1-1\uB85C \uAC00\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
-    portraitSprite: {fileID: -3419612406422529019, guid: e79bae45e3bf42b439879a2ef4625e48, type: 3}
-    spawnPointName: SpawnPoint_Field1-1
   - portalID: Village
     sceneName: Village
     dialogue: "\uB9C8\uC744\uB85C \uB3CC\uC544\uAC00\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
     portraitSprite: {fileID: -3419612406422529019, guid: e79bae45e3bf42b439879a2ef4625e48, type: 3}
     spawnPointName: SpawnPoint_Village
+  - portalID: Field1-1
+    sceneName: "\uC0AC\uB0E5\uD130 1-1"
+    dialogue: "\uC0AC\uB0E5\uD130 1-1\uB85C \uAC00\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+    portraitSprite: {fileID: -3419612406422529019, guid: e79bae45e3bf42b439879a2ef4625e48, type: 3}
+    spawnPointName: SpawnPoint_Field1-1
 --- !u!61 &7536393313934234769
 BoxCollider2D:
   m_ObjectHideFlags: 0

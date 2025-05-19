@@ -24,22 +24,7 @@ public class DamageTextSpawner : MonoBehaviour
 
     public void Spawn(int damage, Vector3 worldPos, bool isCritical)
     {
-        if (damageTextPrefab == null || canvas == null)
-        {
-            Debug.LogError("❌ DamageTextSpawner 설정이 안 되어 있음.");
-            return;
-        }
-
-        // 프리팹이 프리팹 에셋인지 체크 (에디터에서만 작동)
-#if UNITY_EDITOR
-        if (UnityEditor.PrefabUtility.IsPartOfPrefabAsset(damageTextPrefab))
-        {
-            Debug.LogError("❌ damageTextPrefab이 Prefab Asset입니다. Instantiate 하지 마세요!");
-            return;
-        }
-#endif
-
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+           Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
         GameObject dmgObj = Instantiate(damageTextPrefab);
         dmgObj.transform.SetParent(canvas.transform, false);
