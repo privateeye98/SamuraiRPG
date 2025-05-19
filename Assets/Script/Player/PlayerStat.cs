@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
@@ -42,5 +43,29 @@ public class PlayerStat : MonoBehaviour
     public float GetCriticalMultiplier()
     {
         return 1.5f; // 또는 2.0f
+    }
+
+    public void ApplyEquipmentStats(Dictionary<ItemPartType,ItemData> items)
+    {
+        // 초기값으로 리셋
+        maxHP = 100;
+        maxMP = 50;
+        strength = 10;
+        dexterity = 5;
+        critical = 1;
+
+        foreach (var pair in items)
+        {
+            var item = pair.Value;
+            int lv = item.level;
+
+            maxHP += item.hpBonusPerLevel * lv;
+            maxMP += item.mpBonusPerLevel * lv;
+            strength += item.strBonusPerLevel * lv;
+            dexterity += item.dexBonusPerLevel * lv;
+            critical += item.critBonusPerLevel * lv;
+        }
+
+        Debug.Log($"[장비 스탯 적용] HP:{maxHP}, STR:{strength}, DEX:{dexterity}, CRIT:{critical}");
     }
 }
