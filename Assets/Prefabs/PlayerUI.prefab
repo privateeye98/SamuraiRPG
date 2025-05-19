@@ -513,6 +513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5703576342635398328}
   - component: {fileID: 7906581972987929088}
+  - component: {fileID: 6561461412173387855}
   m_Layer: 0
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -550,6 +551,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMP: 300
   currentMP: 300
+--- !u!114 &6561461412173387855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6532879629665213851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d02577d33f0a94f9b847fbe7f1ea68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6918261925196419402
 GameObject:
   m_ObjectHideFlags: 0
