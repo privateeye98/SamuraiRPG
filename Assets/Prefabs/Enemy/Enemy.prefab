@@ -36,6 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2542911434493693647}
+  - {fileID: 6221469185340850648}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2901977395825574468
@@ -183,6 +184,9 @@ MonoBehaviour:
   chaseRange: 7
   dropGold: 10000000
   goldPrefab: {fileID: 1420984807580001495, guid: c3523e0207bdd8c489c4b1e09129b3ab, type: 3}
+  expReward: 100
+  floatingTextPrefab: {fileID: 0}
+  floatingTextSpawnPoint: {fileID: 0}
 --- !u!95 &7411527903260366052
 Animator:
   serializedVersion: 7
@@ -219,6 +223,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 20
   attackCooldown: 1
+--- !u!1 &5064984211150517860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6221469185340850648}
+  m_Layer: 9
+  m_Name: FloatingTextSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6221469185340850648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064984211150517860}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8612363630889490153}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9215118370368998329
 GameObject:
   m_ObjectHideFlags: 0

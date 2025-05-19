@@ -28,11 +28,13 @@ public class Hitbox : MonoBehaviour
                 Debug.Log($"크리티컬 발생! x{critMulti} → {damage} 데미지");
             }
 
-            // 몬스터 머리 위로 띄우기
+            // 몬스터 머리 위 좌표 계산
             Vector3 topOfTarget = other.bounds.center + Vector3.up * (other.bounds.extents.y + 0.5f);
+
+            // 데미지 텍스트 출력만
             DamageTextSpawner.I.Spawn(damage, topOfTarget, isCrit);
 
-            // 데미지 적용
+            // 실제 데미지 적용
             target.TakeDamage(damage, contact, dir);
         }
     }

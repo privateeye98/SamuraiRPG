@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class DamageText : MonoBehaviour
@@ -8,13 +8,16 @@ public class DamageText : MonoBehaviour
     [SerializeField] float duration = 1f;
 
     Vector3 moveDir = Vector3.up;
+    float timeElapsed = 0f;
+    bool isCritical = false;
 
     public void Init(int damage, bool isCritical)
     {
-        Debug.Log($"[�ؽ�Ʈ ������] {damage}");
+        this.isCritical = isCritical;
+
         text.text = damage.ToString();
+        text.fontSize = isCritical ? 60 : 40;
         text.color = isCritical ? Color.red : Color.white;
-        text.fontSize = 40;
         text.alpha = 1f;
         text.enabled = true;
         text.gameObject.SetActive(true);
@@ -26,6 +29,28 @@ public class DamageText : MonoBehaviour
 
     void Update()
     {
+        timeElapsed += Time.deltaTime;
+
+        // 🎯 1. 위로 부드럽게 이동
         transform.position += moveDir * floatSpeed * Time.deltaTime;
+        floatSpeed = Mathf.Lerp(floatSpeed, 0, Time.deltaTime * 2f);
+
+        // 🎯 2. 알파값 계산
+        float alpha = Mathf.Lerp(1f, 0f, timeElapsed / duration);
+
+        // 🎯 3. 크리티컬이면 점멸 + 알파 적용
+        if (isCritical)
+        {
+            float flash = Mathf.PingPong(timeElapsed * 8f, 1f); // 0~1 반복
+            Color flashColor = Color.Lerp(Color.red, Color.white, flash);
+            flashColor.a = alpha;
+            text.color = flashColor;
+        }
+        else
+        {
+            Color c = text.color;
+            c.a = alpha;
+            text.color = c;
+        }
     }
 }

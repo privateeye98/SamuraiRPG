@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4266787527635788213}
   - component: {fileID: 3140731254021497898}
+  - component: {fileID: 8937792358961995463}
   m_Layer: 0
   m_Name: InventoryToggle
   m_TagString: Untagged
@@ -48,3 +49,15 @@ MonoBehaviour:
   centerPosition: {x: 0, y: 0}
   shopOpenPosition: {x: -400, y: 0}
   isShopOpen: 0
+--- !u!114 &8937792358961995463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882511170440373044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d02577d33f0a94f9b847fbe7f1ea68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

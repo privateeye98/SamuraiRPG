@@ -9,6 +9,7 @@ public class PlayerUIFollow : MonoBehaviour
     void Start()
     {
         rt = GetComponent<RectTransform>();
+        target = GameObject.FindWithTag("Player").transform;
     }
 
     void Update()

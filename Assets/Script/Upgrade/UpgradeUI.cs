@@ -16,12 +16,16 @@ public class UpgradeUI : MonoBehaviour
     private Dictionary<ItemPartType, ItemData> upgradeItems;
     private ItemData currentItem;
 
-    void Start()
+    void OnEnable()
     {
         upgradeButton.onClick.AddListener(() => TryUpgrade());
         partDropdown.onValueChanged.AddListener(OnDropdownChanged);
     }
-
+    void OnDisable()
+    {
+        upgradeButton.onClick.RemoveAllListeners();
+        partDropdown.onValueChanged.RemoveAllListeners();
+    }
     public void Open(Dictionary<ItemPartType, ItemData> data)
     {
         upgradeItems = data;
@@ -53,7 +57,7 @@ public class UpgradeUI : MonoBehaviour
             itemNameText.text = "해당 아이템 없음";
             levelText.text = "-";
             costText.text = "-";
-            resultText.text = "";
+            //resultText.text = "";
         }
     }
 

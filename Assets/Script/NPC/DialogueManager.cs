@@ -17,7 +17,14 @@ public class DialogueManager : MonoBehaviour
 
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject); // 중복 제거
+            return;
+        }
+
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void StartDialogue(string npcName, string[] dialogueLines, Sprite portrait = null, System.Action onComplete = null)

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2661366853157313889}
   - component: {fileID: 5130676666807699710}
+  - component: {fileID: 1132386022428136101}
   m_Layer: 0
   m_Name: GameBootstrap
   m_TagString: Untagged
@@ -45,3 +46,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPrefab: {fileID: 6535530587128798233, guid: 9f9e8cef8a3c7fd4b9df1bd740f71c2a, type: 3}
+--- !u!114 &1132386022428136101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4633505127810413570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d02577d33f0a94f9b847fbe7f1ea68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

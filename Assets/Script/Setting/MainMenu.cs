@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     public void OnClickGameStart()
     {
         Debug.Log("🎯 START 버튼 눌림 테스트용");  // 
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Village");
     }
 
 

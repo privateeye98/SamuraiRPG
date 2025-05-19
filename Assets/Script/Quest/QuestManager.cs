@@ -10,6 +10,14 @@ public class QuestManager : MonoBehaviour
     {
         if (instance && instance != this) { Destroy(gameObject); return; }
         instance = this;
+
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject); // 중복 제거
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void AcceptQuest(QuestData data)

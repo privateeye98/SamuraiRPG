@@ -74,6 +74,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
         _rb.AddForce(hitDir.normalized * 5f, ForceMode2D.Impulse);
 
+        DamageTextSpawner.I.Spawn(dmg, transform.position, false);
+
         if (_hp <= 0)
             Die();
     }

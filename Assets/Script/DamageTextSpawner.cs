@@ -7,9 +7,19 @@ public class DamageTextSpawner : MonoBehaviour
     [SerializeField] GameObject damageTextPrefab;
     [SerializeField] Canvas canvas;
 
+    private static DamageTextSpawner instance;
+
     void Awake()
     {
+        if (I != null && I != this)
+        {
+            Destroy(gameObject);  // 이미 있는 인스턴스와 다르면 제거
+            return;
+        }
+
         I = this;
+        DontDestroyOnLoad(gameObject);
+
     }
 
     public void Spawn(int damage, Vector3 worldPos, bool isCritical)
@@ -21,11 +31,13 @@ public class DamageTextSpawner : MonoBehaviour
         }
 
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
-        GameObject go = Instantiate(damageTextPrefab, canvas.transform);
-        RectTransform rect = go.GetComponent<RectTransform>();
-        rect.position = screenPos;
 
-        DamageText dt = go.GetComponent<DamageText>();
-        dt.Init(damage, isCritical);
+
+        GameObject dmgObj = Instantiate(damageTextPrefab); // 에셋에서 인스턴스를 만들고
+        dmgObj.transform.SetParent(canvas.transform, false); // 
+        dmgObj.GetComponent<RectTransform>().position = screenPos; // 
+
+        dmgObj.GetComponent<DamageText>().Init(damage, isCritical); //
+
     }
 }
