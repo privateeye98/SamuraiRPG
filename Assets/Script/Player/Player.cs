@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System;
+using UnityEditor.Rendering.LookDev;
 public class Player : MonoBehaviour, IDamageable
 {
     // -- components -- 
@@ -8,7 +10,7 @@ public class Player : MonoBehaviour, IDamageable
     public float animAccel = 5f;
     SpriteRenderer spriteRenderer;
     Animator anim;
-    
+
 
 
     public float jumpForce;
@@ -40,6 +42,15 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float skillAfterImageDuration = 0.5f;
     [SerializeField] float skillAfterImageInterval = 0.05f;
     float lastSkillTime = -999f;
+
+    [SerializeField] int wideSkillCost = 500;
+    [SerializeField] GameObject skillPortraitUI;
+    [SerializeField] float wideSkillCooldown = 5f;
+    float lastWideSkillTime = -999f;
+    [SerializeField] float wideSkillMultiplier = 1.8f; // 퍼뎀 (180%)
+    [SerializeField] int wideSkillBaseDamage = 10;     // 기본값
+
+
 
 
     void SpawnSkillHitbox()
@@ -144,10 +155,36 @@ public class Player : MonoBehaviour, IDamageable
             }
 
         }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            bool enoughMana = PlayerMana.instance != null &&
+                              PlayerMana.instance.currentMP >= wideSkillCost;
+            bool cooldownReady = Time.time >= lastWideSkillTime + wideSkillCooldown;
+
+            if (enoughMana && cooldownReady)
+            {
+                PlayerMana.instance.UseMana(wideSkillCost);
+                lastWideSkillTime = Time.time;
+
+                StartCoroutine(ShowSkillPortrait());
+                CameraShake.instance?.StartCoroutine(CameraShake.instance.Shake(0.3f, 0.2f));
+
+                DamageAllEnemies(); // 🧨
+            }
+            else if (!cooldownReady)
+            {
+                Debug.Log("광역 스킬 쿨타임 진행 중...");
+            }
+            else
+            {
+                Debug.Log("마나 부족!");
+            }
+        }
     }
 
 
-    public void TakeDamage(int dmg,Vector2 hitpoint,Vector2 hitDir)
+    public void TakeDamage(int dmg, Vector2 hitpoint, Vector2 hitDir)
     {
         PlayerHealth.instance.TakeDamage(dmg);
         Debug.Log("플레이어가 공격당함!");
@@ -161,7 +198,7 @@ public class Player : MonoBehaviour, IDamageable
 
             //--create after image;
             afterImageTimer -= Time.fixedDeltaTime;
-            if(afterImageTimer <= 0f)
+            if (afterImageTimer <= 0f)
             {
                 CreateAfterImage();
                 afterImageTimer = afterImageInterval;
@@ -218,12 +255,12 @@ public class Player : MonoBehaviour, IDamageable
         SpriteRenderer imgSpr = img.GetComponent<SpriteRenderer>();
         SpriteRenderer playerSpr = spriteRenderer;
 
-        if(imgSpr != null && playerSpr != null)
+        if (imgSpr != null && playerSpr != null)
         {
             imgSpr.sprite = playerSpr.sprite;
             imgSpr.flipX = playerSpr.flipX;
             imgSpr.transform.localScale = transform.localScale;
-            imgSpr.color = new Color(1f,1f,1f, 0.5f); // 50% alpha
+            imgSpr.color = new Color(1f, 1f, 1f, 0.5f); // 50% alpha
             if (isSkill)
                 imgSpr.color = new Color(0.5f, 1f, 1f, 0.6f);  // 청록색 스킬용
             else
@@ -231,5 +268,33 @@ public class Player : MonoBehaviour, IDamageable
 
         }
     }
+    IEnumerator ShowSkillPortrait()
+    {
+        if (skillPortraitUI == null) yield break;
+        skillPortraitUI.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        skillPortraitUI.SetActive(false);
+    }
 
+    void DamageAllEnemies()
+    {
+        float str = PlayerStat.instance.strength;
+        float dex = PlayerStat.instance.dexterity;
+
+        float rawDamage = wideSkillBaseDamage + (str * 2f) + (dex * 0.5f);
+        int totalDamage = Mathf.RoundToInt(rawDamage * wideSkillMultiplier);
+
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (var enemyObj in enemies)
+        {
+            if (enemyObj.TryGetComponent<IDamageable>(out var target))
+            {
+                Vector2 hitDir = enemyObj.transform.position - transform.position;
+                target.TakeDamage(totalDamage, enemyObj.transform.position, hitDir.normalized);
+            }
+        }
+
+        Debug.Log($"전체 적 {enemies.Length}명에게 {totalDamage} 데미지 (퍼뎀 {wideSkillMultiplier}배)");
+    }
 }

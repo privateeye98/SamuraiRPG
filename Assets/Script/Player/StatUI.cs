@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 
 public class StatUI : MonoBehaviour
@@ -9,7 +9,13 @@ public class StatUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI critText;
 
     [SerializeField] PlayerStat playerStat;
+    [SerializeField] UpgradePanelToggle upgradePanelToggle;
 
+    void Awake()
+    {
+        if (playerStat == null)
+            playerStat = PlayerStat.instance;
+    }
     public void UpdateUI()
     {
         if (playerStat == null) return;
@@ -22,6 +28,22 @@ public class StatUI : MonoBehaviour
 
     void OnEnable()
     {
-        UpdateUI(); // ÆĞ³ÎÀÌ ÄÑÁú ¶§ ÀÚµ¿ ¹İ¿µ
+        // ğŸ”’ playerStat ì—°ê²° ë³´ì¥
+        if (playerStat == null)
+            playerStat = PlayerStat.instance;
+
+        // ğŸ”’ ì¥ë¹„ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+        var toggle = FindObjectOfType<UpgradePanelToggle>();
+        if (toggle != null)
+        {
+            var items = toggle.GetUpgradeItems();
+            if (items != null && items.Count > 0)
+            {
+                PlayerStat.instance?.ApplyEquipmentStats(items);
+            }
+        }
+
+        // ğŸ” UI ê°±ì‹ 
+        UpdateUI();
     }
 }

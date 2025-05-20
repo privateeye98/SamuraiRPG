@@ -45021,8 +45021,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3552511695627968009, guid: f29d1acc2a5c7894784700c49c5ce103, type: 3}
       propertyPath: maxHP
-      value: 10000
+      value: 20000
       objectReference: {fileID: 0}
+    - target: {fileID: 3552511695627968009, guid: f29d1acc2a5c7894784700c49c5ce103, type: 3}
+      propertyPath: floatingTextPrefab
+      value: 
+      objectReference: {fileID: 254734313003267582, guid: 13c763a7b636e3e49bf553bc4e3515a5, type: 3}
     - target: {fileID: 3552511695627968009, guid: f29d1acc2a5c7894784700c49c5ce103, type: 3}
       propertyPath: floatingTextSpawnPoint
       value: 
@@ -45360,15 +45364,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2967119103175226762, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: lifeTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287383446106181768, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: wideSkillCost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287383446106181768, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: skillPortraitUI
+      value: 
+      objectReference: {fileID: 5857349164224129874, guid: d72abbca0415e1f489db68dc9561bb71, type: 3}
+    - target: {fileID: 3287383446106181768, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: skillSpawnPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287383446106181768, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: skillHitboxPrefab
+      value: 
+      objectReference: {fileID: 8790503719302296094}
+    - target: {fileID: 3287383446106181768, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: wideSkillCooldown
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355304806434321492, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: maxHP
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355304806434321492, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: maxMP
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355304806434321492, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: critical
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355304806434321492, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: strength
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4355304806434321492, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+      propertyPath: dexterity
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6966770823524794767, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9205709773461157254, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+--- !u!1 &8790503719302296094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 24205399952357140, guid: 233938ea17f5c6e4898827a71d431bab, type: 3}
+  m_PrefabInstance: {fileID: 8790503719302296092}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -186,7 +186,7 @@ MonoBehaviour:
   goldPrefab: {fileID: 1420984807580001495, guid: c3523e0207bdd8c489c4b1e09129b3ab, type: 3}
   expReward: 100
   floatingTextPrefab: {fileID: 0}
-  floatingTextSpawnPoint: {fileID: 0}
+  floatingTextSpawnPoint: {fileID: 2133551516618825362, guid: 13c763a7b636e3e49bf553bc4e3515a5, type: 3}
 --- !u!95 &7411527903260366052
 Animator:
   serializedVersion: 7

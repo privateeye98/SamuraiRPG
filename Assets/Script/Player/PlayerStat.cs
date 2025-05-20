@@ -54,6 +54,9 @@ public class PlayerStat : MonoBehaviour
         dexterity = 5;
         critical = 1;
 
+
+        Debug.Log($"[ApplyEquipmentStats 호출됨] 장비 수: {items.Count}");
+
         foreach (var pair in items)
         {
             var item = pair.Value;

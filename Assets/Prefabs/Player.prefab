@@ -231,8 +231,8 @@ GameObject:
   - component: {fileID: 3287383446106181768}
   - component: {fileID: 4761227292646143126}
   - component: {fileID: 8490508910154590780}
-  - component: {fileID: 6372910666573826592}
   - component: {fileID: 2714542593548156120}
+  - component: {fileID: 4355304806434321492}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -437,7 +437,7 @@ MonoBehaviour:
   skillHitboxPrefab: {fileID: 0}
   specialSkillCost: 70
   specialTriggerName: Special
-  SkillCooldown: 2
+  SkillCooldown: 10
   skillAfterImageDuration: 0.5
   skillAfterImageInterval: 0.05
 --- !u!114 &4761227292646143126
@@ -468,23 +468,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   currentHP: 100
---- !u!114 &6372910666573826592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6966770823524794767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac192bd07dfe75b469c3790ed5871625, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  maxMP: 100
-  strength: 10
-  dexterity: 5
-  critical: 1
 --- !u!114 &2714542593548156120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +480,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482f99e1668e39c47bff8048166533f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4355304806434321492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6966770823524794767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac192bd07dfe75b469c3790ed5871625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  maxMP: 50
+  strength: 10
+  dexterity: 5
+  critical: 1
 --- !u!1 &9205709773461157254
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ public class UpgradePanelToggle : MonoBehaviour
 {
     [SerializeField] GameObject upgradePanel;
     [SerializeField] UpgradeUI upgradeUI;
+    public Dictionary<ItemPartType, ItemData> GetUpgradeItems() => upgradeItems;
 
     // 기본 장비들 등록
     [SerializeField] ItemData head;
@@ -24,6 +25,7 @@ public class UpgradePanelToggle : MonoBehaviour
             [ItemPartType.Glove] = glove,
             [ItemPartType.Weapon] = weapon
         };
+        PlayerStat.instance?.ApplyEquipmentStats(upgradeItems);
     }
    void Update()
     {
