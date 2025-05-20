@@ -17,7 +17,7 @@ public class ItemData : ScriptableObject
     [Header("강화 확률 설정")]
     public float baseSuccessRate = 0.5f;       // 기본 성공률 50%
     public float penaltyPerLevel = 0.1f;       // 단계당 -10%
-    public float minSuccessRate = 0.1f;
+    public float minSuccessRate = 0.0001f;
 
 
     public int level = 1;

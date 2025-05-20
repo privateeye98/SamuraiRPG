@@ -233,7 +233,7 @@ public class Player : MonoBehaviour, IDamageable
 
         if (rb.linearVelocity.y < 0)
         {
-            Debug.DrawRay(transform.position, Vector3.down * 1f, Color.blue);
+            Debug.DrawRay(transform.position, Vector3.down * 2f, Color.blue);
             // Check if the player is grounded
             RaycastHit2D rH = Physics2D.Raycast(rb.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
             if (rH.collider != null)
