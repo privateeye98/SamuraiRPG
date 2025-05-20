@@ -53,6 +53,7 @@ cd roguelike-rpg
 - DOTween, TextMeshPro 사용
 
 # 📂 디렉토리 구조
+```
 Assets/
 ├── Script/
 │   ├── Player/
@@ -63,7 +64,7 @@ Assets/
 ├── Animations/
 ├── Sprites/
 └── Scenes/
-
+```
 
 #📈 향후 개발 계획
 - 기본 전투 시스템 구현(완료)
