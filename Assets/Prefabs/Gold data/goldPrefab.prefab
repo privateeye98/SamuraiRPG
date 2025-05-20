@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4191604438533670542}
   - component: {fileID: -5634403045806308333}
   - component: {fileID: 2810581321767869658}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: goldPrefab
-  m_TagString: Untagged
+  m_TagString: Gold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300816, guid: 4e799e9a72d583c4ebba9f2e35c2a5f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

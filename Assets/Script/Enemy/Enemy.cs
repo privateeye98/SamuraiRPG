@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public int defense = 0;
     public int evade = 5;
 
+    public System.Action onDeath;
     void Awake()
     {
         _hp = maxHP;
@@ -99,6 +100,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (_dead) return;
         _dead = true;
+
+        onDeath?.Invoke();
 
         // 사망 애니메이션
         if (_anim && _anim.enabled)

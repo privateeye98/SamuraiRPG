@@ -8,7 +8,7 @@ public class PlayerStat : MonoBehaviour
     public int strength = 10;
     public int dexterity = 5;
     public int critical = 1;
-
+    public int exp = 1;
     public static PlayerStat instance;
 
 

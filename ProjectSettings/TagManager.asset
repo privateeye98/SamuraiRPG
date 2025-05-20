@@ -7,6 +7,7 @@ TagManager:
   - Platform
   - PlayerAttack
   - Enemy
+  - Gold
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Enemy
   - NPC
   - BACKGROUND
-  - 
+  - Gold
   - 
   - 
   - 
