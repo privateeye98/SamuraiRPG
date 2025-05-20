@@ -53,7 +53,7 @@ public class PauseMenuUI : MonoBehaviour
     public void OnClickQuit()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu"); // ¶Ç´Â Application.Quit();
+        SceneManager.LoadScene("MainMenu");
     }
 }
 

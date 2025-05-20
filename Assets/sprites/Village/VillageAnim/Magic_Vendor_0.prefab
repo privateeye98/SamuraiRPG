@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2072339106385085460}
   - component: {fileID: 5543507261402919309}
   - component: {fileID: 5340826772518275988}
+  - component: {fileID: 7358641765782089106}
+  - component: {fileID: 6517877894880364674}
   m_Layer: 0
   m_Name: Magic_Vendor_0
   m_TagString: Untagged
@@ -110,3 +112,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7358641765782089106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184402200845879794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de76afdce0d414c41aeab2f7f91ff127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionsPanel: {fileID: 0}
+  questDecisionPanel: {fileID: 0}
+--- !u!114 &6517877894880364674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184402200845879794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddb4ca95348ca24ca70b9b31be328c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: "\uC18C\uBE44\uC0C1\uC778 \uB9C8\uC57C"
+  portrait: {fileID: -3419612406422529019, guid: e79bae45e3bf42b439879a2ef4625e48, type: 3}
+  greetDialogue:
+  - "\uC5B4\uC11C\uC624\uC138\uC694. \uBB3C\uC57D\uC774 \uD544\uC694\uD558\uC2E0\uAC00\uC694
+    ?"
+  - "\uD574\uB2F9 NPC\uB294 \uD018\uC2A4\uD2B8\uAC00 \uC788\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
+  questData: {fileID: 0}

@@ -1,33 +1,34 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
-
+using System;
+using UnityEditor.Rendering.LookDev;
 public class CameraShake : MonoBehaviour
 {
     public static CameraShake instance;
 
-    Vector3 initialLocalPosition;
-
     void Awake()
     {
         instance = this;
-        initialLocalPosition = transform.localPosition; // 로컬 기준
     }
 
     public IEnumerator Shake(float duration, float magnitude)
     {
-        float elapsed = 0f;
+        Vector3 originalPos = transform.localPosition;
+
+        float elapsed = 0.0f;
 
         while (elapsed < duration)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
+            float x = UnityEngine.Random.Range(-1f, 1f) * magnitude;
+            float y = UnityEngine.Random.Range(-1f, 1f) * magnitude;
 
-            transform.localPosition = initialLocalPosition + new Vector3(x, y, 0f);
+            transform.localPosition = originalPos + new Vector3(x, y, 0);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        transform.localPosition = initialLocalPosition;
+        transform.localPosition = originalPos;
     }
 }

@@ -50,9 +50,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float wideSkillMultiplier = 1.8f; // 퍼뎀 (180%)
     [SerializeField] int wideSkillBaseDamage = 10;     // 기본값
 
-
-
-
+    public static Player instance;
     void SpawnSkillHitbox()
     {
         if (skillHitboxPrefab && skillSpawnPoint)
@@ -71,9 +69,26 @@ public class Player : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(skillAfterImageInterval);
         }
     }
+    void Start()
+    {
+        StartCoroutine(AssignCameraTargetAfterDelay());
+    }
+
+    IEnumerator AssignCameraTargetAfterDelay()
+    {
+        yield return new WaitForSeconds(0.1f); // 카메라가 먼저 Awake되도록 기다림
+
+        var cam = FindObjectOfType<TMPro.Examples.CameraController>();
+        if (cam != null)
+        {
+            cam.CameraTarget = this.transform;
+            Debug.Log("📷 CameraTarget 연결 완료");
+        }
+    }
 
     void Awake()
     {
+        instance = this;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -131,13 +146,13 @@ public class Player : MonoBehaviour, IDamageable
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            bool enoughMana = PlayerMana.instance != null &&
-                      PlayerMana.instance.currentMP >= specialSkillCost;
+            bool enoughMana = PlayerStat.instance != null &&
+                      PlayerStat.instance.currentMP >= specialSkillCost;
             bool cooldownReady = Time.time >= lastSkillTime + SkillCooldown;
 
             if (enoughMana && cooldownReady)
             {
-                PlayerMana.instance.UseMana(specialSkillCost);
+                PlayerStat.instance.UseMana(specialSkillCost);
                 anim.SetTrigger(specialTriggerName);
                 lastSkillTime = Time.time; // 쿨타임 기록
 
@@ -158,19 +173,19 @@ public class Player : MonoBehaviour, IDamageable
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            bool enoughMana = PlayerMana.instance != null &&
-                              PlayerMana.instance.currentMP >= wideSkillCost;
+            bool enoughMana = PlayerStat.instance != null &&
+                  PlayerStat.instance.currentMP >= specialSkillCost;
             bool cooldownReady = Time.time >= lastWideSkillTime + wideSkillCooldown;
 
             if (enoughMana && cooldownReady)
             {
-                PlayerMana.instance.UseMana(wideSkillCost);
+                PlayerStat.instance.UseMana(wideSkillCost);
                 lastWideSkillTime = Time.time;
 
                 StartCoroutine(ShowSkillPortrait());
                 CameraShake.instance?.StartCoroutine(CameraShake.instance.Shake(0.3f, 0.2f));
 
-                DamageAllEnemies(); // 🧨
+                DamageAllEnemies(); //
             }
             else if (!cooldownReady)
             {
@@ -180,6 +195,11 @@ public class Player : MonoBehaviour, IDamageable
             {
                 Debug.Log("마나 부족!");
             }
+        }
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            PlayerStat.instance.RecoverMana(100);
+            Debug.Log("🔵 마나 +100 회복됨");
         }
     }
 

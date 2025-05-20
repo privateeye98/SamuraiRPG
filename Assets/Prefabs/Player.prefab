@@ -440,6 +440,11 @@ MonoBehaviour:
   SkillCooldown: 10
   skillAfterImageDuration: 0.5
   skillAfterImageInterval: 0.05
+  wideSkillCost: 500
+  skillPortraitUI: {fileID: 0}
+  wideSkillCooldown: 5
+  wideSkillMultiplier: 1.8
+  wideSkillBaseDamage: 10
 --- !u!114 &4761227292646143126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +502,8 @@ MonoBehaviour:
   strength: 10
   dexterity: 5
   critical: 1
+  currentHP: 0
+  currentMP: 0
 --- !u!1 &9205709773461157254
 GameObject:
   m_ObjectHideFlags: 0

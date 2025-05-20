@@ -46,7 +46,7 @@ public class PlayerSpawnManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("❌ SpawnPoint 또는 Player 찾기 실패");
+            Debug.LogWarning("SpawnPoint 또는 Player 찾기 실패");
         }
     }
 }

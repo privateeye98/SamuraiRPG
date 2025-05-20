@@ -26,7 +26,8 @@ public class PlayerLevel : MonoBehaviour
         UpdateUI();
     }
 
-    public void AddExp(int amount)
+
+    public void AddExp(int baseAmount)
     {
         if (currentLevel >= maxLevel)
         {
@@ -34,21 +35,27 @@ public class PlayerLevel : MonoBehaviour
             return;
         }
 
-        currentExp += amount;
-        Debug.Log($"+{amount} EXP 획득! (현재: {currentExp})");
+        float multiplier = PlayerStat.instance != null ? PlayerStat.instance.expMultiplier : 1f;
+        int finalAmount = Mathf.RoundToInt(baseAmount * multiplier);
+
+        currentExp += finalAmount;
+        Debug.Log($"+{finalAmount} EXP (x{multiplier}) 획득! (현재: {currentExp})");
 
         while (currentLevel < maxLevel && currentExp >= GetRequiredExp(currentLevel))
         {
             currentExp -= GetRequiredExp(currentLevel);
             currentLevel++;
-            if (stat != null)
-                stat.LevelUpBonus(currentLevel); // <-- 여기서 스탯 상승 적용
 
+            if (stat != null)
+                stat.LevelUpBonus(currentLevel);
+
+            FindObjectOfType<StatUI>()?.UpdateUI();
             Debug.Log($"🎉 레벨업! → Lv.{currentLevel}");
         }
 
         UpdateUI();
     }
+
 
     public int GetRequiredExp(int level)
     {

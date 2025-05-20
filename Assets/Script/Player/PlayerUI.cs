@@ -13,10 +13,10 @@ public class PlayerUI : MonoBehaviour
             hpSlider.value = PlayerHealth.instance.currentHP;
         }
 
-        if (PlayerMana.instance != null)
+        if (PlayerStat.instance != null)
         {
-            mpSlider.maxValue = PlayerMana.instance.maxMP;
-            mpSlider.value = PlayerMana.instance.currentMP;
+            mpSlider.maxValue = PlayerStat.instance.maxMP;
+            mpSlider.value = PlayerStat.instance.currentMP;
         }
         if (PlayerLevel.instance != null)
         {
@@ -31,8 +31,8 @@ public class PlayerUI : MonoBehaviour
         if (PlayerHealth.instance != null)
             hpSlider.value = PlayerHealth.instance.currentHP;
 
-        if (PlayerMana.instance != null)
-            mpSlider.value = PlayerMana.instance.currentMP;
+        if (PlayerStat.instance != null)
+            mpSlider.value = PlayerStat.instance.currentMP;
         if (PlayerLevel.instance != null)
         {
             expSlider.maxValue = PlayerLevel.instance.GetRequiredExp(PlayerLevel.instance.currentLevel);
