@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &1407460 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5925586090258264130, guid: 358dd6120e8ae19429164a4a683abbe1, type: 3}
-  m_PrefabInstance: {fileID: 2042431582476161917}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &51882507
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,11 +324,10 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1585320641342225188, guid: 358dd6120e8ae19429164a4a683abbe1, type: 3}
   m_PrefabInstance: {fileID: 2042431582476161917}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &408777316
+--- !u!114 &408777316 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2110339094146938207, guid: 358dd6120e8ae19429164a4a683abbe1, type: 3}
+  m_PrefabInstance: {fileID: 2042431582476161917}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408777311}
   m_Enabled: 1
@@ -347,11 +335,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99bd4fbc3d97a204cb6209fa0633e0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmSlider: {fileID: 1984501559}
-  sfxSlider: {fileID: 221414281}
-  resolutionDropdown: {fileID: 1407460}
-  fullscreenToggle: {fileID: 1257614750}
-  mixer: {fileID: 24100000, guid: d34ce55759d11174281808ec30dd105f, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,17 +1030,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918274657}
   m_CullTransparentMesh: 1
---- !u!114 &1257614750 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5923366265428989083, guid: 358dd6120e8ae19429164a4a683abbe1, type: 3}
-  m_PrefabInstance: {fileID: 2042431582476161917}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1408684424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,6 +1844,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2110339094146938207, guid: 358dd6120e8ae19429164a4a683abbe1, type: 3}
+      propertyPath: bgmSlider
+      value: 
+      objectReference: {fileID: 1984501559}
+    - target: {fileID: 2110339094146938207, guid: 358dd6120e8ae19429164a4a683abbe1, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 221414281}
     - target: {fileID: 5592924424213927643, guid: 358dd6120e8ae19429164a4a683abbe1, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.2
@@ -1926,9 +1906,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1585320641342225188, guid: 358dd6120e8ae19429164a4a683abbe1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 408777316}
     - targetCorrespondingSourceObject: {fileID: 3526543870783684127, guid: 358dd6120e8ae19429164a4a683abbe1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1984501559}

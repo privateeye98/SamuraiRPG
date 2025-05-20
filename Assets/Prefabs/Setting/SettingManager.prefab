@@ -549,6 +549,7 @@ GameObject:
   - component: {fileID: 5867059294466043717}
   - component: {fileID: 596855174766378120}
   - component: {fileID: 896883546957590361}
+  - component: {fileID: 2110339094146938207}
   m_Layer: 5
   m_Name: SettingManager
   m_TagString: Untagged
@@ -639,6 +640,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2110339094146938207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585320641342225188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99bd4fbc3d97a204cb6209fa0633e0c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  resolutionDropdown: {fileID: 5925586090258264130}
+  fullscreenToggle: {fileID: 5923366265428989083}
+  mixer: {fileID: 24100000, guid: d34ce55759d11174281808ec30dd105f, type: 2}
 --- !u!1 &1726526391181764044
 GameObject:
   m_ObjectHideFlags: 0

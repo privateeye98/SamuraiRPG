@@ -1,7 +1,8 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class SettingMenu : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class SettingMenu : MonoBehaviour
     [SerializeField] TMP_Dropdown resolutionDropdown;
     [SerializeField] Toggle fullscreenToggle;
 
-
     [Header("Audio")]
     [SerializeField] AudioMixer mixer;
+
     const string KEY_RES = "ResolutionIndex";
     const string KEY_FULL = "FullScreen";
     const string KEY_BGM = "BGMVol";
@@ -23,14 +24,13 @@ public class SettingMenu : MonoBehaviour
 
     void Awake()
     {
-
         if (bgmSlider == null || sfxSlider == null || resolutionDropdown == null || fullscreenToggle == null)
         {
-            Debug.LogError("UI ø‰º“ ø¨∞· æ»µ !");
+            Debug.LogError("‚ùå UI ÏöîÏÜå Ïó∞Í≤∞ ÏïàÎê®!");
             return;
         }
 
-        //-- «ÿªÛµµ µø¿˚
+        // Ìï¥ÏÉÅÎèÑ Î™©Î°ù Íµ¨ÏÑ±
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
 
@@ -38,55 +38,62 @@ public class SettingMenu : MonoBehaviour
         int current = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string label = $"{resolutions[i].width}°ø{resolutions[i].height}";
+            string label = $"{resolutions[i].width}√ó{resolutions[i].height}";
             options.Add(label);
             if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
                 current = i;
         }
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = PlayerPrefs.GetInt("ResolutionIndex", current);
+        resolutionDropdown.value = PlayerPrefs.GetInt(KEY_RES, current);
 
-        // - ∫“∑˝ ¿¸√º»≠∏È √ ±‚∞™ ----
-
-        bgmSlider.value = PlayerPrefs.GetFloat("BGMVol", 0.8f);
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol", 0.8f);
-        fullscreenToggle.isOn = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
+        // Î∂àÎ•® Î∞è ÌôîÎ©¥ Î™®Îìú Ï¥àÍ∏∞Í∞í
+        bgmSlider.value = PlayerPrefs.GetFloat(KEY_BGM, 0.8f);
+        sfxSlider.value = PlayerPrefs.GetFloat(KEY_SFX, 0.8f);
+        fullscreenToggle.isOn = PlayerPrefs.GetInt(KEY_FULL, 1) == 1;
     }
 
     public void ApplyAndClose()
     {
-        // 1) ∫º∑˝ ¡ÔΩ√ ¿˚øÎ (BGM¿∫ AudioMixer ±«¿Â, øπΩ√¥¬ ¥‹º¯»≠)
-        AudioListener.volume = bgmSlider.value;         // ¿¸√º ∫º∑˝
+        // 1) Î≥ºÎ•® Ï†ÅÏö©
+        AudioListener.volume = bgmSlider.value;
 
-        // 2) «ÿªÛµµ/¿¸√º»≠∏È
+        // 2) Ìï¥ÏÉÅÎèÑ Ï†ÅÏö©
         Resolution r = resolutions[resolutionDropdown.value];
         Screen.SetResolution(r.width, r.height, fullscreenToggle.isOn);
 
-        // 3) ¿˙¿Â
-        PlayerPrefs.SetFloat("BGMVol", bgmSlider.value);
-        PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
-        PlayerPrefs.SetInt("ResolutionIndex", resolutionDropdown.value);
-        PlayerPrefs.SetInt("FullScreen", fullscreenToggle.isOn ? 1 : 0);
+        // 3) Ï†ÄÏû•
+        PlayerPrefs.SetFloat(KEY_BGM, bgmSlider.value);
+        PlayerPrefs.SetFloat(KEY_SFX, sfxSlider.value);
+        PlayerPrefs.SetInt(KEY_RES, resolutionDropdown.value);
+        PlayerPrefs.SetInt(KEY_FULL, fullscreenToggle.isOn ? 1 : 0);
         PlayerPrefs.Save();
 
-        // 4) √¢ ¥›±‚
+        // 4) Îã´Í∏∞
         gameObject.SetActive(false);
+        if (IsInGameScene())
+            Time.timeScale = 1f;
     }
-    public  void Close() => gameObject.SetActive(false); // º≥¡§ ∆–≥Œ ¥›±‚
+
+    public void Close()
+    {
+        gameObject.SetActive(false);
+        if (IsInGameScene())
+            Time.timeScale = 1f;
+    }
+
     void OnEnable()
     {
         if (bgmSlider != null)
             bgmSlider.onValueChanged.AddListener(UpdateBGM);
-
         if (sfxSlider != null)
             sfxSlider.onValueChanged.AddListener(UpdateSFX);
     }
+
     void OnDisable()
     {
         if (bgmSlider != null)
             bgmSlider.onValueChanged.RemoveListener(UpdateBGM);
-
         if (sfxSlider != null)
             sfxSlider.onValueChanged.RemoveListener(UpdateSFX);
     }
@@ -99,14 +106,18 @@ public class SettingMenu : MonoBehaviour
 
     public void OnClickSave()
     {
-        GameSaveManager.I.SaveGame();
+        if (GameSaveManager.I != null)
+            GameSaveManager.I.SaveGame();
     }
 
     public void OnClickLoad()
     {
-        GameSaveManager.I.LoadGame();
+        if (GameSaveManager.I != null)
+            GameSaveManager.I.LoadGame();
     }
 
-
+    bool IsInGameScene()
+    {
+        return SceneManager.GetActiveScene().name != "MainMenu";
+    }
 }
-

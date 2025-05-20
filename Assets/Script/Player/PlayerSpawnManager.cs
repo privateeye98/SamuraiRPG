@@ -7,7 +7,15 @@ public class PlayerSpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnWithFreeze());
     }
+    IEnumerator SpawnAndLoadRoutine()
+    {
+        yield return null;
 
+        GameSaveManager.I.LoadGame();
+
+        yield return new WaitForSeconds(0.1f); // 조금 기다렸다가
+        yield return StartCoroutine(SpawnWithFreeze());
+    }
     IEnumerator SpawnWithFreeze()
     {
         yield return null; // 1프레임 대기

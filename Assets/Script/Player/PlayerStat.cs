@@ -26,7 +26,14 @@ public class PlayerStat : MonoBehaviour
         if (level % 3 == 0) // 예: 3레벨마다 치명타 증가
             critical += 1;
 
+
+
         Debug.Log($"[레벨업 보너스] HP:{maxHP}, STR:{strength}, DEX:{dexterity}, CRIT:{critical}");
+
+        PlayerHealth.instance.maxHP = maxHP;
+        PlayerHealth.instance.currentHP = maxHP;
+
+
     }
     public int GetAttackDamage()
     {
@@ -68,7 +75,9 @@ public class PlayerStat : MonoBehaviour
             dexterity += item.dexBonusPerLevel * lv;
             critical += item.critBonusPerLevel * lv;
         }
-
         Debug.Log($"[장비 스탯 적용] HP:{maxHP}, STR:{strength}, DEX:{dexterity}, CRIT:{critical}");
+
+        PlayerHealth.instance.maxHP = maxHP;
+        PlayerHealth.instance.currentHP = Mathf.Min(PlayerHealth.instance.currentHP, maxHP);
     }
 }
