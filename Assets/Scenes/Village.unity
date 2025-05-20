@@ -45020,8 +45020,16 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3552511695627968009, guid: f29d1acc2a5c7894784700c49c5ce103, type: 3}
+      propertyPath: evade
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552511695627968009, guid: f29d1acc2a5c7894784700c49c5ce103, type: 3}
       propertyPath: maxHP
       value: 20000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3552511695627968009, guid: f29d1acc2a5c7894784700c49c5ce103, type: 3}
+      propertyPath: defense
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3552511695627968009, guid: f29d1acc2a5c7894784700c49c5ce103, type: 3}
       propertyPath: floatingTextPrefab

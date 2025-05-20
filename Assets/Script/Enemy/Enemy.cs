@@ -29,6 +29,9 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] GameObject floatingTextPrefab;
     [SerializeField] Transform floatingTextSpawnPoint;
 
+    [Header("전투 스탯")]
+    public int defense = 0;
+    public int evade = 5;
 
     void Awake()
     {
@@ -69,16 +72,28 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (_dead) return;
 
-        _hp -= dmg;
-        _anim?.SetTrigger("Hit");
+        int playerAccuracy = PlayerStat.instance.dexterity;
+        bool isEvaded = playerAccuracy < evade;
 
+        if (isEvaded)
+        {
+            Debug.Log("몬스터가 회피했습니다!");
+            DamageTextSpawner.I.SpawnText("Miss", transform.position + Vector3.up * 1.2f);
+            return;
+        }
+
+        int finalDamage = Mathf.Max(0, dmg - defense);
+        _hp -= finalDamage;
+
+        _anim?.SetTrigger("Hit");
         _rb.AddForce(hitDir.normalized * 5f, ForceMode2D.Impulse);
 
-        DamageTextSpawner.I.Spawn(dmg, transform.position, false);
+        DamageTextSpawner.I.Spawn(finalDamage, transform.position, false);
 
         if (_hp <= 0)
             Die();
     }
+
     #endregion
     void Die()
     {
