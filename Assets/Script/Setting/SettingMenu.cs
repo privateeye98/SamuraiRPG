@@ -106,14 +106,14 @@ public class SettingMenu : MonoBehaviour
 
     public void OnClickSave()
     {
-        if (GameSaveManager.I != null)
-            GameSaveManager.I.SaveGame();
+        if (GameSaveManager.instance != null)
+            GameSaveManager.instance.SaveGame();
     }
 
     public void OnClickLoad()
     {
-        if (GameSaveManager.I != null)
-            GameSaveManager.I.LoadGame();
+        if (GameSaveManager.instance != null)
+            GameSaveManager.instance.LoadGame();
     }
 
     bool IsInGameScene()

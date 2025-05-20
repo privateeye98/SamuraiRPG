@@ -31,7 +31,15 @@ public class PlayerStat : MonoBehaviour
     public event Action OnStatChanged;
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // 계속 유지
+        }
+        else
+        {
+            Destroy(gameObject); // 새로 생긴 거 파괴
+        }
     }
 
     public void LevelUpBonus(int level)

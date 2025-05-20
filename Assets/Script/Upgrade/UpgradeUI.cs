@@ -13,19 +13,29 @@ public class UpgradeUI : MonoBehaviour
     public TextMeshProUGUI resultText;
     public Button upgradeButton;
 
-    private Dictionary<ItemPartType, ItemData> upgradeItems;
+    public static UpgradeUI instance;
+
+    // 외부 접근 허용을 위해 public으로 변경
+    public Dictionary<ItemPartType, ItemData> upgradeItems;
     private ItemData currentItem;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void OnEnable()
     {
         upgradeButton.onClick.AddListener(() => TryUpgrade());
         partDropdown.onValueChanged.AddListener(OnDropdownChanged);
     }
+
     void OnDisable()
     {
         upgradeButton.onClick.RemoveAllListeners();
         partDropdown.onValueChanged.RemoveAllListeners();
     }
+
     public void Open(Dictionary<ItemPartType, ItemData> data)
     {
         upgradeItems = data;
@@ -39,6 +49,12 @@ public class UpgradeUI : MonoBehaviour
         if (upgradeItems == null)
         {
             Debug.LogWarning("upgradeItems가 초기화되지 않았습니다.");
+            return;
+        }
+
+        if (!System.Enum.IsDefined(typeof(ItemPartType), index))
+        {
+            Debug.LogWarning("잘못된 파트 인덱스입니다.");
             return;
         }
 
@@ -57,7 +73,6 @@ public class UpgradeUI : MonoBehaviour
             itemNameText.text = "해당 아이템 없음";
             levelText.text = "-";
             costText.text = "-";
-            //resultText.text = "";
         }
     }
 
@@ -99,6 +114,11 @@ public class UpgradeUI : MonoBehaviour
             resultText.text = "강화 실패...";
         }
 
+        OnDropdownChanged(partDropdown.value);
+    }
+
+    public void RefreshStatPreview()
+    {
         OnDropdownChanged(partDropdown.value);
     }
 }

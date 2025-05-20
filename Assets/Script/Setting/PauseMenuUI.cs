@@ -42,12 +42,12 @@ public class PauseMenuUI : MonoBehaviour
 
     public void OnClickSave()
     {
-        GameSaveManager.I.SaveGame();
+        GameSaveManager.instance.SaveGame();
     }
 
     public void OnClickLoad()
     {
-        GameSaveManager.I.LoadGame();
+        GameSaveManager.instance.LoadGame();
     }
 
     public void OnClickQuit()

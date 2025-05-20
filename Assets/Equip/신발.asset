@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7d82828f1e8094b8ed0537efa95668, type: 3}
   m_Name: "\uC2E0\uBC1C"
   m_EditorClassIdentifier: 
-  level: 1
-  maxLevel: 10
+  baseSuccessRate: 0.5
+  penaltyPerLevel: 0.1
+  minSuccessRate: 10
+  level: 0
+  maxLevel: 50
   upgradeCost: 100
   hpBonusPerLevel: 50
   mpBonusPerLevel: 10
@@ -28,3 +31,4 @@ MonoBehaviour:
   part: 3
   description: 
   price: 0
+  statType: 0

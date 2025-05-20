@@ -10,9 +10,11 @@ public class StatUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI expText;
 
     [SerializeField] PlayerStat playerStat;
+    public static StatUI instance;
 
     void Awake()
     {
+        instance = this;
         if (playerStat == null)
             playerStat = PlayerStat.instance;
     }

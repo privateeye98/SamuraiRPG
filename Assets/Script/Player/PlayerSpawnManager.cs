@@ -11,7 +11,7 @@ public class PlayerSpawnManager : MonoBehaviour
     {
         yield return null;
 
-        GameSaveManager.I.LoadGame();
+        GameSaveManager.instance.LoadGame();
 
         yield return new WaitForSeconds(0.1f); // 조금 기다렸다가
         yield return StartCoroutine(SpawnWithFreeze());

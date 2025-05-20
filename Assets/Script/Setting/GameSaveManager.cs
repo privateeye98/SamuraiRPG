@@ -1,62 +1,114 @@
+ï»¿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameSaveManager : MonoBehaviour
 {
-    public static GameSaveManager I;
+    public static GameSaveManager instance;
 
-    [SerializeField] Transform player;
+    [Header("í”Œë ˆì´ì–´ í”„ë¦¬íŒ¹ ë° ì°¸ì¡°")]
+    public GameObject playerPrefab;
 
-    void Awake()
+    private void Awake()
     {
-        if (I == null) { I = this; DontDestroyOnLoad(gameObject); }
-        else Destroy(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void SaveGame()
+
     {
-        if (player == null) return;
+        PlayerPrefs.SetString("SceneName", SceneManager.GetActiveScene().name);
 
-        // ÇöÀç ¾À ÀÌ¸§ ÀúÀå
-        string sceneName = SceneManager.GetActiveScene().name;
-        PlayerPrefs.SetString("SceneName", sceneName);
+        var player = Player.instance;
+        Vector3 pos = player.transform.position;
+        PlayerPrefs.SetFloat("PlayerX", pos.x);
+        PlayerPrefs.SetFloat("PlayerY", pos.y);
+        PlayerPrefs.SetFloat("PlayerZ", pos.z);
 
-        // À§Ä¡ ÀúÀå
-        PlayerPrefs.SetFloat("PlayerX", player.position.x);
-        PlayerPrefs.SetFloat("PlayerY", player.position.y);
-        PlayerPrefs.SetFloat("PlayerZ", player.position.z);
-
-        // ·¹º§, °æÇèÄ¡ ÀúÀå
         PlayerPrefs.SetInt("PlayerLevel", PlayerLevel.instance.currentLevel);
-        PlayerPrefs.SetFloat("PlayerExp", PlayerLevel.instance.currentExp);
+        PlayerPrefs.SetInt("PlayerExp", PlayerLevel.instance.currentExp);
+
+        PlayerPrefs.SetInt("PlayerSTR", PlayerStat.instance.strength);
+        PlayerPrefs.SetInt("PlayerDEX", PlayerStat.instance.dexterity);
+        PlayerPrefs.SetInt("PlayerCRIT", PlayerStat.instance.critical);
+        PlayerPrefs.SetFloat("PlayerExpBonus", PlayerStat.instance.expMultiplier);
+
+        // ê°•í™” ì•„ì´í…œ ì €ì¥
+        var upgradeItems = UpgradeUI.instance.upgradeItems;
+        int index = 0;
+        foreach (var kvp in upgradeItems)
+        {
+            var item = kvp.Value;
+            PlayerPrefs.SetString($"Item{index}_Name", item.itemName);
+            PlayerPrefs.SetInt($"Item{index}_Level", item.level);
+            PlayerPrefs.SetInt($"Item{index}_StatType", (int)item.statType);
+            index++;
+        }
+
 
         PlayerPrefs.Save();
-        Debug.Log("°ÔÀÓ ÀúÀå ¿Ï·á");
     }
 
     public void LoadGame()
     {
-        string sceneName = PlayerPrefs.GetString("SceneName", SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene(sceneName);
+        string scene = PlayerPrefs.GetString("SceneName", "");
+        if (!string.IsNullOrEmpty(scene))
+            SceneManager.LoadScene(scene);
 
-        // ¾ÀÀÌ ·ÎµåµÈ ÈÄ À§Ä¡ ¹× ½ºÅÈ º¹¿øÀº Äİ¹é ¶Ç´Â StartCoroutine »ç¿ë
-        StartCoroutine(LoadAfterSceneLoaded());
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    System.Collections.IEnumerator LoadAfterSceneLoaded()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        yield return new WaitForSeconds(0.1f); // ¾À ·Îµù ´ë±â
+        SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        if (player == null) yield break;
+        Vector3 pos = new Vector3(
+            PlayerPrefs.GetFloat("PlayerX", 0f),
+            PlayerPrefs.GetFloat("PlayerY", 0f),
+            PlayerPrefs.GetFloat("PlayerZ", 0f));
 
-        float x = PlayerPrefs.GetFloat("PlayerX", player.position.x);
-        float y = PlayerPrefs.GetFloat("PlayerY", player.position.y);
-        float z = PlayerPrefs.GetFloat("PlayerZ", player.position.z);
-        player.position = new Vector3(x, y, z);
+        var player = Player.instance;
+        if (player == null && playerPrefab != null)
+        {
+            player = Instantiate(playerPrefab, pos, Quaternion.identity).GetComponent<Player>();
+        }
+        else
+        {
+            player.transform.position = pos;
+        }
 
         PlayerLevel.instance.currentLevel = PlayerPrefs.GetInt("PlayerLevel", 1);
         PlayerLevel.instance.currentExp = PlayerPrefs.GetInt("PlayerExp", 0);
 
-        Debug.Log("°ÔÀÓ ºÒ·¯¿À±â ¿Ï·á");
+        PlayerStat.instance.strength = PlayerPrefs.GetInt("PlayerSTR", 0);
+        PlayerStat.instance.dexterity = PlayerPrefs.GetInt("PlayerDEX", 0);
+        PlayerStat.instance.critical = PlayerPrefs.GetInt("PlayerCRIT", 0);
+        PlayerStat.instance.expMultiplier = PlayerPrefs.GetFloat("PlayerExpBonus", 1f);
+
+        PlayerStat.instance.RecalculateStats();
+        StatUI.instance?.UpdateUI();
+
+        // ê°•í™” ì•„ì´í…œ ë¶ˆëŸ¬ì˜¤ê¸°
+        var upgradeItems = UpgradeUI.instance.upgradeItems;
+        int index = 0;
+        List<ItemPartType> keys = new List<ItemPartType>(upgradeItems.Keys);
+        foreach (var key in keys)
+        {
+            var item = upgradeItems[key];
+            item.itemName = PlayerPrefs.GetString($"Item{index}_Name", "");
+            item.level = PlayerPrefs.GetInt($"Item{index}_Level", 0);
+            item.statType = (StatType)PlayerPrefs.GetInt($"Item{index}_StatType", 0);
+            index++;
+        }
+        UpgradeUI.instance.RefreshStatPreview();
     }
 }
