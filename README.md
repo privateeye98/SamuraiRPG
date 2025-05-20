@@ -1,128 +1,86 @@
-# 🎮 Unity 로그라이크 액션 RPG 개발 리포트
+# 🎮 Unity Roguelike Action RPG
 
-## 📌 프로젝트 개요
+메이플스토리와 Skull에서 영감을 받은 2D 로그라이크 액션 RPG입니다.  
+정밀한 히트박스 전투, 스탯 성장, 실시간 스킬 시스템을 직접 Unity로 구현한 프로젝트입니다.
 
-- **장르**: 2D 로그라이크 액션 RPG  
-- **엔진**: Unity (2D 기반)  
-- **플랫폼**: PC  
-- **참고 게임**: MapleStory, Skull  
-- **특징**
-  - 히트박스 기반 정밀 전투
-  - 실시간 스킬/대시/잔상 시스템
-  - 플레이어 성장(레벨, 스탯)
-  - 직관적인 UI와 연동된 전투 흐름
+![Game Demo](https://your-image-link-or-gif.gif)
 
 ---
 
-## 🧍‍♂️ 플레이어 시스템
+## 📌 주요 기능
 
-### ▶ 기본 이동 & 점프
-- Rigidbody2D 기반 물리 이동
-- 방향키 + 점프(Space)로 기본 이동
-- `LeftShift` → 방향 대시 구현
-- `AfterImage` 오브젝트로 잔상 효과 제공
+### ✅ 플레이어 시스템
+- 방향키 이동, 점프, 대시 (잔상 포함)
+- 스킬 발동 시스템 (마나 및 쿨타임)
+- 3연타 기본 공격 콤보
 
-### ▶ 스킬 시스템 (`Q`)
-- 마나 소모 + 쿨타임 체크 → 스킬 발동
-- 스킬 히트박스 프리팹 (`SkillHitbox`) 생성
-- 캐릭터 위로 점프 + 잔상 지속 출력
+### ✅ 전투 시스템
+- 히트박스 기반 피해 판정
+- 크리티컬 및 데미지 출력
+- 적 추적 AI 및 공격 판정
 
----
+### ✅ 성장 시스템
+- 레벨 업 → 스탯 증가 (STR, DEX, CRIT)
+- 경험치 획득 및 EXP 게이지 표시
 
-## ⚔️ 전투 시스템
+### ✅ UI 시스템
+- HP / MP / EXP 슬라이더
+- 스탯 패널 토글 (S 키)
+- 플레이어 따라다니는 UI (월드-스크린 변환)
 
-### ▶ 기본 공격 (`Z`)
-- 3단 콤보 애니메이션 공격
-- `Hitbox.cs`를 통해 적에게 데미지 전달
-- 치명타 판정 및 데미지 배율 계산 포함
-
-### ▶ 적의 공격
-- `EnemyAttack.cs` → 일정 간격으로 `Player`에 데미지
-- 쿨타임 체크, `IDamageable` 인터페이스 기반
-
-### ▶ 데미지 출력
-- `DamageTextSpawner` → 적 머리 위 숫자 텍스트
-- 크리티컬 여부에 따라 스타일 분리 가능
+### ✅ 몬스터 시스템
+- 추적, 피격, 사망 → 골드 및 EXP 드랍
+- 퀘스트 진행 연동
 
 ---
 
-## 🧠 스탯 및 레벨 시스템
+## 🖼️ 스크린샷
 
-### ▶ 스탯 관리
-- `PlayerStat.cs`
-  - **STR** → 공격력 증가
-  - **DEX** → 공격력 + 명중치
-  - **CRIT** → 크리티컬 확률
+| 전투 시스템 | 스탯 창 UI | 스킬 연출 |
+|-------------|------------|------------|
+| ![](images/combat.png) | ![](images/stat.png) | ![](images/skill.gif) |
 
-### ▶ 레벨업 (`EXP`)
-- `PlayerLevel.cs`:
-  - 몬스터 처치 시 경험치 획득
-  - `레벨업` 시 스탯 자동 증가
-  - `baseExp` * 성장계수 기반 곡선형 성장
+---
 
-```csharp
-public int GetRequiredExp(int level)
-{
-    return Mathf.RoundToInt(baseExp * Mathf.Pow(expGrowthFactor, level - 1));
-}
+## 🚀 실행 방법
+
+```bash
+git clone https://github.com/your-name/roguelike-rpg.git
+cd roguelike-rpg
+# Unity에서 프로젝트 열기
 ```
+- Unity 2021 이상 권장
+- DOTween, TextMeshPro 사용
 
-# 🖥️ UI 시스템
-## ▶ Player 상태 UI
-- PlayerUI.cs: HP/MP/EXP 슬라이더 실시간 업데이트
+# 📂 디렉토리 구조
+Assets/
+├── Script/
+│   ├── Player/
+│   ├── Enemy/
+│   ├── UI/
+│   └── Common/
+├── Prefabs/
+├── Animations/
+├── Sprites/
+└── Scenes/
 
-- FollowPlayerUI.cs: 화면 내 캐릭터 하단에 고정 UI 표시
 
-## ▶ 스탯 패널 (S 키)
-- StatPanelToggle.cs: S 키로 패널 ON/OFF
+#📈 향후 개발 계획
+- 기본 전투 시스템 구현(완료)
 
-- StatUI.cs: 텍스트로 STR/DEX/CRIT 시각화
+- 스킬 및 잔상 연출(스킬완료, 잔상 진행중)
 
-- 시각화
+ - 레벨 & 스탯 시스템(완료)
 
-# 👹 몬스터 시스템
-Enemy.cs:
+ - 장비 시스템(진행중)
 
-- chaseRange 내 접근 시 추적
+ - 던전 보스 전투(진행중)
 
-- 사망 시 애니메이션 → 골드 생성
+  - 세이브 / 로드 기능(완료)
 
-- 경험치 및 퀘스트 진행 연동
+ - 랜덤 던전 생성(계획없음)
 
-```
-PlayerLevel.instance?.AddExp(expReward);
-QuestManager.instance?.UpdateQuestProgress(gameObject.name);
-```
-🧩 기타 시스템
-▶ 스폰 시스템
-- PlayerSpawnManager.cs
+   👤 제작자
+김범수 (Unity 개발자 / 게임 클라이언트 / C++,C#)
 
-- `PlayerPrefs`에서 스폰 위치 불러오기
-
-- `Rigidbody2D` 물리 제어 후 정확한 위치 이동
-
-▶ 인터페이스 구조화
-- ```IDamageable``` 인터페이스:
-
-- 모든 피해 처리 객체에 TakeDamage() 통일 적용
-
-# 🧱 향후 개발 계획
- ### 기본 전투 시스템 구현
-
- ### 스킬 및 대시 잔상 효과 연출
-
- ### 경험치/레벨/스탯 시스템 완성
-
- ### 장비 & 인벤토리 시스템 연동
-
- ### 던전 & 보스 전용 시스템 추가
-
- ### 세이브/로드 기능 개발(완료)
-
- ### 배경 맵 랜덤 생성기능
-
-# 결론
-이 프로젝트는 Unity를 활용하여 로그라이크 액션 RPG의 핵심 시스템을 대부분 구현하였다. 특히 전투, 성장, UI, 스킬 요소를 직접 설계 및 최적화하면서 구조적 설계와 모듈화에 중점을 두었다.
-
-향후 개발 및 확장을 위한 기반이 충분히 마련된 상태이다.
-
+문의: makeurselfff@gmail.com
