@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\uB9C8\uC744_-_\uC0AC\uB0E5\uD1301-1"
       objectReference: {fileID: 0}
+    - target: {fileID: 2872748499783889620, guid: 5ae763bd93472d84bb45cf063b49155e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5211349105208146311, guid: 5ae763bd93472d84bb45cf063b49155e, type: 3}
       propertyPath: portalID
       value: Village
@@ -272,6 +276,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PortalManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6021597995565997254, guid: 3f47c2cd448bacd49839492dfb180acd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -331,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2717878125263561909, guid: 5cbfe9e6999e2b74dbb441dd84dfbe97, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -397,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9135271171596533391, guid: 5ae6caa6d773a1e4886e97835959fc46, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -463,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5873000240897339805, guid: 911a7e43ee557e34eabaaae4c4a3bbe7, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -529,7 +537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9135271171596533391, guid: 5ae6caa6d773a1e4886e97835959fc46, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -555,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2785088550036500, guid: 51d2937788b79b44c8e06d63a7433933, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6060130935162531219, guid: 51d2937788b79b44c8e06d63a7433933, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3739,7 +3747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4068516928000118482, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6557744964613702560, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3805,7 +3813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4068516928000118482, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6557744964613702560, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3872,7 +3880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 455654796}
   - component: {fileID: 455654795}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: background_day1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3963,7 +3971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4827721013207675057, guid: e8fad94925d08e447b1c97453ea6a66e, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7012309691210163573, guid: e8fad94925d08e447b1c97453ea6a66e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4100,7 +4108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9135271171596533391, guid: 5ae6caa6d773a1e4886e97835959fc46, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4166,7 +4174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8703203524655051412, guid: d8d1cd9c3cf59064484660567258ff16, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4232,7 +4240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 802838680}
   - component: {fileID: 802838679}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: background_day1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4370,7 +4378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4068516928000118482, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6557744964613702560, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4476,7 +4484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5873000240897339805, guid: 911a7e43ee557e34eabaaae4c4a3bbe7, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4498,7 +4506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1095996167}
   - component: {fileID: 1095996166}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: background_day1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4584,7 +4592,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1136958352}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4663,7 +4671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 525095580795904936, guid: a99dc285cc1af324a9d421d18714c195, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4675,6 +4683,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 415052998018158945, guid: a99dc285cc1af324a9d421d18714c195, type: 3}
   m_PrefabInstance: {fileID: 1148278223}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1742758668
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6421295268349619226, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: layers.Array.data[0].parent
+      value: 
+      objectReference: {fileID: 1136958352}
+    - target: {fileID: 6421295268349619226, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: layers.Array.data[1].parent
+      value: 
+      objectReference: {fileID: 1991367140}
+    - target: {fileID: 8294167273992185553, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_Name
+      value: TimeController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994070531800770530, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 67.28759
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994070531800770530, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.968658
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994070531800770530, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.19397113
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994070531800770530, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994070531800770530, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994070531800770530, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994070531800770530, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994070531800770530, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994070531800770530, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994070531800770530, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eaf0f0d3b2ce5e440ae6682853298ad2, type: 3}
 --- !u!1001 &1889264419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4689,7 +4762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2785088550036500, guid: 51d2937788b79b44c8e06d63a7433933, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6060130935162531219, guid: 51d2937788b79b44c8e06d63a7433933, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4809,7 +4882,7 @@ GameObject:
   - component: {fileID: 1991367140}
   - component: {fileID: 1991367142}
   - component: {fileID: 1991367141}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: MiddleGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4945,3 +5018,4 @@ SceneRoots:
   - {fileID: 64524803}
   - {fileID: 1979245137}
   - {fileID: 797023025}
+  - {fileID: 1742758668}

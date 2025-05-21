@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +16,7 @@ public class GameSaveManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            ItemDatabase.Init();
+            ItemDatabaseGlobal.Init();
         }
         else
         {
@@ -26,6 +27,7 @@ public class GameSaveManager : MonoBehaviour
     public void SaveGame()
     {
         SaveData data = new SaveData();
+        
         data.sceneName = SceneManager.GetActiveScene().name;
 
         if (Player.instance != null)
@@ -57,9 +59,22 @@ public class GameSaveManager : MonoBehaviour
             }
         }
 
+        foreach (var quest in QuestManager.instance.activeQuests)
+        {
+            SavedQuest saved = new()
+            {
+                questID = quest.data.questID,
+                currentAmount = quest.currentAmount,
+                state = quest.state
+            };
+            data.savedQuests.Add(saved);
+        }
+
         string json = JsonUtility.ToJson(data);
         PlayerPrefs.SetString("SaveData", json);
         PlayerPrefs.Save();
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(savePath, json);
     }
 
     public void LoadGame()
@@ -101,7 +116,7 @@ public class GameSaveManager : MonoBehaviour
         {
             if (System.Enum.TryParse(saved.part, out ItemPartType part))
             {
-                ItemData original = ItemDatabase.GetItemById(saved.itemId);
+                ItemData original = ItemDatabaseGlobal.GetItemById(saved.itemId);
                 if (original != null)
                 {
                     ItemData clone = Instantiate(original);
@@ -144,7 +159,7 @@ public class SavedItem
     public StatType statType;
 }
 
-public static class ItemDatabase
+public static class ItemDatabaseGlobal
 {
     public static List<ItemData> allItems;
 

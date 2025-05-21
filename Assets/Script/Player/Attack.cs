@@ -27,7 +27,10 @@ public class Attack : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
-        {
+        {      
+
+
+
             int next = (anim.GetInteger(HashAttackCount) + 1) % 3;
             anim.SetInteger(HashAttackCount, next);
             anim.SetTrigger(HashAttack);
@@ -55,6 +58,9 @@ public void OnAttackAnimEnd()
     {
         anim.SetInteger(HashAttackCount, 0);
         DisableHitBox();
+
+
+
     }
 }
 

@@ -74,15 +74,4 @@ public class PortalManager : MonoBehaviour
         });
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerPrefs.SetString("SpawnPoint", "SpawnPoint_Field1");
-            PlayerPrefs.Save();
-
-            SceneManager.LoadScene("HuntingGround1-1");
-        }
-    }
-
 }

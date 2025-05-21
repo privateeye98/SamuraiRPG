@@ -98,6 +98,7 @@ public class Player : MonoBehaviour, IDamageable
 
     void Update()
     {
+
         // -- Jump
         if (Input.GetKeyDown(KeyCode.Space) && !anim.GetBool("isJumping"))
         {
@@ -152,6 +153,7 @@ public class Player : MonoBehaviour, IDamageable
 
             if (enoughMana && cooldownReady)
             {
+
                 PlayerStat.instance.UseMana(specialSkillCost);
                 anim.SetTrigger(specialTriggerName);
                 lastSkillTime = Time.time; // 쿨타임 기록
@@ -159,6 +161,7 @@ public class Player : MonoBehaviour, IDamageable
 
                 StartCoroutine(StartSkillAfterImages());
                 rb.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
+
             }
             else if (!cooldownReady)
             {
@@ -179,6 +182,7 @@ public class Player : MonoBehaviour, IDamageable
 
             if (enoughMana && cooldownReady)
             {
+
                 PlayerStat.instance.UseMana(wideSkillCost);
                 lastWideSkillTime = Time.time;
 
@@ -186,6 +190,7 @@ public class Player : MonoBehaviour, IDamageable
                 CameraShake.instance?.StartCoroutine(CameraShake.instance.Shake(0.3f, 0.2f));
 
                 DamageAllEnemies(); //
+
             }
             else if (!cooldownReady)
             {
@@ -211,6 +216,8 @@ public class Player : MonoBehaviour, IDamageable
     }
     void FixedUpdate()
     {
+
+
         // Dashing
         if (isDashing)
         {
@@ -311,4 +318,7 @@ public class Player : MonoBehaviour, IDamageable
 
         Debug.Log($"전체 적 {enemies.Length}명에게 {totalDamage} 데미지 (퍼뎀 {wideSkillMultiplier}배)");
     }
+
+
+
 }

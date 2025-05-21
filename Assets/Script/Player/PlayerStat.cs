@@ -5,6 +5,11 @@ public class PlayerStat : MonoBehaviour
 {
     public static PlayerStat instance;
 
+    // 전투력
+    public int MinDamage => Mathf.RoundToInt(GetBaseAttack() * 0.9f);
+    public int MaxDamage => Mathf.RoundToInt(GetBaseAttack() * 1.1f);
+
+
     // 기본값
     private const int BASE_HP = 100;
     private const int BASE_MP = 50;
@@ -97,12 +102,32 @@ public class PlayerStat : MonoBehaviour
         OnStatChanged?.Invoke();
     }
 
+
+    private float GetBaseAttack()
+    {
+        float baseatk = 5;
+        float strBonus = strength * 2f;
+        float dexBonus = dexterity * 1.2f;
+        float weaponbonus = 0f;
+
+        if(equippedItems != null && equippedItems.TryGetValue(ItemPartType.Weapon,out var weapon))
+        {
+            weaponbonus += weapon.strBonusPerLevel * weapon.level;
+            weaponbonus += weapon.dexBonusPerLevel * weapon.level;
+        }
+        return baseatk + strBonus + dexBonus + weaponbonus;
+    }
+
+
     public int GetAttackDamage()
     {
-        int baseDamage = 5;
-        float strengthBonus = strength * 2f;
-        float dexBonus = dexterity * 1.2f;
-        return Mathf.RoundToInt(baseDamage + strengthBonus + dexBonus);
+        float raw = UnityEngine.Random.Range(MinDamage, MaxDamage + 1);
+        if (IsCriticalHit())
+        {
+            raw *= GetCriticalMultiplier();
+            Debug.Log("crit");
+        }
+        return Mathf.RoundToInt(raw);
     }
 
     public bool IsCriticalHit()

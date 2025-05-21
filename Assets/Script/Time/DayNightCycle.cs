@@ -4,13 +4,16 @@ using UnityEngine;
 public class LayerGroup
 {
     public string name;
-    public Transform parent;               // BACKGROUND or MIDDLEGROUND
+    public Transform parent;               // BACKGROUND , MIDDLEGROUND
     public Gradient colorOverTime;        // 시간에 따른 색상
     [HideInInspector] public SpriteRenderer[] renderers;
 }
 
 public class DayNightCycle : MonoBehaviour
 {
+
+    public static float currentTime { get; private set; }
+
     public float cycleDuration = 60f;
     public LayerGroup[] layers;
 
@@ -30,6 +33,8 @@ public class DayNightCycle : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        currentTime = timer;
+
         float t = (timer % cycleDuration) / cycleDuration;
 
         foreach (var layer in layers)

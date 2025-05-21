@@ -798,7 +798,7 @@ GameObject:
   - component: {fileID: 610959664500287521}
   - component: {fileID: 5071592782097515296}
   m_Layer: 5
-  m_Name: HITABLE
+  m_Name: DMG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -851,7 +851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'HITABLE : 0'
+  m_text: 'damage : '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -1091,11 +1091,11 @@ RectTransform:
   - {fileID: 1407810275201138840}
   - {fileID: 5164501992290079782}
   - {fileID: 4638015151855814785}
-  - {fileID: 3948097796788473161}
+  - {fileID: 942588783892177772}
   - {fileID: 4277806979343444430}
   - {fileID: 5466441185660848465}
-  - {fileID: 942588783892177772}
   - {fileID: 4036621236432020227}
+  - {fileID: 3948097796788473161}
   m_Father: {fileID: 2821494803127386106}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1206,7 +1206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8886490851947454144, guid: 150b3fbc3f120004295449e5229d26f7, type: 3}
+  m_Sprite: {fileID: 1504170606973777858, guid: 57dbdb5526a38c944a397c0a9a206461, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -15,7 +15,9 @@ public class ShopManager : MonoBehaviour
     [SerializeField] Transform itemSlotParent;
     [SerializeField] GameObject itemSlotPrefab;
     [SerializeField] RectTransform inventoryUI_Shop;
-
+    [SerializeField] GameObject buyPopup;
+    [SerializeField] TMP_InputField amountInput;
+    ItemData selectedItem;
 
     public List<ItemData> shopItems = new List<ItemData>();
     public GameObject shopInventoryUI;
@@ -166,4 +168,42 @@ public class ShopManager : MonoBehaviour
 
 
     }
+    public void OpenBuyAmountPopup(ItemData item)
+    {
+        selectedItem = item;
+        buyPopup.SetActive(true);
+        amountInput.text = "1";
+    }
+    public void ConfirmBuy()
+    {
+        if (selectedItem == null) return;
+
+        if (!int.TryParse(amountInput.text, out int amount) || amount <= 0)
+        {
+            Debug.Log("잘못된 수량 입력!");
+            return;
+        }
+        int totalCost = selectedItem.price * amount;
+
+        if (GoldManager.instance.SpendGold(totalCost))
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Inventory.instance.AddItem(selectedItem);
+            }
+            Debug.Log($"{selectedItem.itemName}을(를) {amount}개 구매했습니다.");
+        }
+        else
+        {
+            Debug.Log("골드 부족!");
+        }
+
+        buyPopup.SetActive(false);
+    }
+    public void CancelBuy()
+    {
+        selectedItem = null;
+        buyPopup.SetActive(false);
+    }
+
 }

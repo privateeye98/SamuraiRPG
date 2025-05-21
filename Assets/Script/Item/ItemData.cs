@@ -26,7 +26,13 @@ public class ItemData : ScriptableObject
     public int healAmount;
 
     public ItemPartType part;
-    public StatType statType; // 누락된 필드 추가
+    public StatType statType;
+    //소비중첩
+    public bool isStackable = false;
+    public int maxStack = 200;
+
+
+
 
     [TextArea]
     public string description;

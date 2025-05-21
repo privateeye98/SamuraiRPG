@@ -4,6 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Enemy : MonoBehaviour, IDamageable
 {
+
+
+    [Header("밤배수체크")]
+    public EnemyNightBuff nightbuff;
+    bool Nightbuffapplied = false;
+
     [Header("Stats")]
     public int maxHP = 3;
     public float moveSpeed = 1.5f;
@@ -47,6 +53,16 @@ public class Enemy : MonoBehaviour, IDamageable
     void Update()
     {
         if (_dead || !_player) return;
+
+        if(!Nightbuffapplied && DayNightCycle.currentTime > nightbuff.nightStartTime )
+        {
+            maxHP = Mathf.RoundToInt(maxHP * nightbuff.healthMultiplier);
+            _hp = Mathf.RoundToInt(_hp*nightbuff.healthMultiplier);
+            Nightbuffapplied = true;
+
+            Debug.Log($"{gameObject.name} 밤시간대 Enemy 강화! HP: {maxHP}");
+        }
+
 
         float dist = Vector2.Distance(_player.position, transform.position);
         if (dist < chaseRange)

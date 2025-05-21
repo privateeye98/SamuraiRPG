@@ -1,19 +1,31 @@
-using UnityEngine;
-
-public enum QuestConditionType { Kill, Gather, Talk }
+Ôªøusing UnityEngine;
+public enum QuestConditionType
+{
+    KillTarget,
+    CollectItem,
+    TalkToNPC,
+    ReachLocation
+}
 
 [CreateAssetMenu(fileName = "NewQuest", menuName = "Quest/QuestData")]
 public class QuestData : ScriptableObject
 {
     public string questID;
+    public string questTitle;
     public string npcName;
 
-    [Header("¡∂∞«")]
+    [Header("Ï°∞Í±¥")]
     public QuestConditionType conditionType;
     public string targetName;
     public int requiredAmount = 1;
+
+    [Header("Î≥¥ÏÉÅ")]
     public int rewardGold;
+    public int rewardItemId;
+
+    public int rewardItemAmount = 1;
 
     [TextArea]
     public string[] dialogueLines;
 }
+

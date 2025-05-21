@@ -20,6 +20,6 @@ public class ShopItemSlot : MonoBehaviour
     public void OnClickBuy()
     {
         Debug.Log($"[클릭] {item.itemName} 구매 버튼 클릭됨");
-        ShopManager.instance.BuyItem(item);
+        ShopManager.instance.OpenBuyAmountPopup(item);
     }
 }

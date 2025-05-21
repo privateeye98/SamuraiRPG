@@ -17,7 +17,7 @@ public class InventoryUI : MonoBehaviour
             return;
         }
 
-        Inventory.instance.onItemChangedCallback += UpdateUI;
+        Inventory.instance.OnItemChangedCallback += UpdateUI;
 
         slots = new ItemSlot[Inventory.instance.capacity];
 

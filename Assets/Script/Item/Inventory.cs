@@ -5,11 +5,12 @@ using System.Collections.Generic;
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
-    public List<ItemData> items = new List<ItemData>();
+    public List<InventoryItem> items = new List<InventoryItem>();
+
     public int capacity = 9;
 
     public delegate void OnItemChanged();
-    public event OnItemChanged onItemChangedCallback;
+    public event OnItemChanged OnItemChangedCallback;
 
     void Awake()
     {
@@ -22,17 +23,29 @@ public class Inventory : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public bool AddItem(ItemData item)
+    public bool AddItem(ItemData itemData)
     {
+        if(itemData.isStackable)
+        {
+            foreach(var invItem in items)
+            {
+                if(invItem.itemData.id == itemData.id && invItem.quantity < itemData.maxStack)
+                    {
+                    invItem.quantity++;
+                    OnItemChangedCallback?.Invoke();
+                    return true;
+                }
+            }
+        }
+
         if (items.Count >= capacity)
         {
             Debug.Log("Not enough room.");
             return false;
         }
 
-        items.Add(item);
-        Debug.Log($"{item.name} 아이템 추가됨");
-        onItemChangedCallback?.Invoke(); // UI 갱신 호출
+        items.Add(new InventoryItem(itemData));
+        OnItemChangedCallback?.Invoke(); // UI 갱신 호출
 
 
         return true;
@@ -41,28 +54,25 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(ItemData item)
     {
-        items.Remove(item);
-        onItemChangedCallback?.Invoke();
+        var invItme = items.Find(i=>i.itemData == item);
+        OnItemChangedCallback?.Invoke();
     }
 
     public void UseItem(ItemData item)
     {
-        if (!items.Contains(item)) return;
-
-        Debug.Log("포션 사용됨: " + item.itemName);
+        var invItem = items.Find(i => i.itemData == item);
+        if (invItem == null) return;
 
         switch (item.type)
         {
             case ItemType.Consumable:
-                // 체력이 가득 차 있으면 사용 불가
-                if (PlayerHealth.instance.currentHP >= PlayerHealth.instance.maxHP)
-                {
-                    Debug.Log("체력이 가득 차 있어 아이템을 사용할 수 없습니다.");
-                    return;
-                }
-
                 PlayerHealth.instance.Heal(item.healAmount);
-                RemoveItem(item);
+                invItem.quantity--;
+
+                if (invItem.quantity <= 0)
+                    items.Remove(invItem);
+
+                OnItemChangedCallback?.Invoke();
                 break;
 
             case ItemType.Equipment:
@@ -73,12 +83,11 @@ public class Inventory : MonoBehaviour
                 Debug.Log("퀘스트 아이템은 사용할 수 없습니다.");
                 break;
         }
-
-        // 더 이상 자동 판매 안 함
     }
     public void SellItem(ItemData item)
     {
-        if (!items.Contains(item)) return;
+        var invItem = items.Find(i => i.itemData == item);
+        if(invItem == null)return;
 
         GoldManager.instance.AddGold(item.price);
         RemoveItem(item);

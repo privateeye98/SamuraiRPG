@@ -28,11 +28,11 @@ public class QuestManager : MonoBehaviour
             {
                 if (quest.state == QuestState.Completed)
                 {
-                    QuestPopupUI.instance?.ShowProgress("🏁 이미 완료한 퀘스트입니다.");
+                    QuestPopupUI.instance?.ShowProgress("이미 완료한 퀘스트입니다.");
                 }
                 else
                 {
-                    QuestPopupUI.instance?.ShowProgress("⚠ 이미 수락한 퀘스트입니다.");
+                    QuestPopupUI.instance?.ShowProgress("이미 수락한 퀘스트입니다.");
                 }
                 return;
             }
@@ -42,11 +42,12 @@ public class QuestManager : MonoBehaviour
         newQuest.state = QuestState.InProgress;
         activeQuests.Add(newQuest);
 
-        QuestPopupUI.instance?.ShowProgress("✅ 퀘스트 수락됨!");
+        QuestPopupUI.instance?.ShowProgress("퀘스트 수락됨!");
     }
-
-
-
+    public bool HasQuest(QuestData data)
+    {
+        return activeQuests.Exists(q => q.data == data);
+    }
     public void UpdateQuestProgress(string target)
     {
         foreach (var quest in activeQuests)

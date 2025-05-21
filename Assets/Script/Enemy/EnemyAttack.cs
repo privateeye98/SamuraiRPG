@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    [Header("밤시간대 버프")]
+    public EnemyNightBuff NightBuff;
+    bool nightbuffapplied = false;
+
 
     [Header("공격력")]
     public int attackDamage = 1;
@@ -10,6 +14,19 @@ public class EnemyAttack : MonoBehaviour
     public float attackCooldown = 1f;
 
     private float lastAttackTime = -999f;
+
+     void Update()
+    {
+        if(!nightbuffapplied && DayNightCycle.currentTime > NightBuff.nightStartTime)
+        {
+            attackDamage = Mathf.RoundToInt(attackDamage*NightBuff.attackMultiplier);
+            nightbuffapplied = true;
+
+            Debug.Log($"{gameObject.name} 공격력 강화 Enemy TK:{attackDamage}");
+
+        }
+    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
