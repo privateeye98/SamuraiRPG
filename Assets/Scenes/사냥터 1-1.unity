@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\uB9C8\uC744_-_\uC0AC\uB0E5\uD1301-1"
       objectReference: {fileID: 0}
+    - target: {fileID: 5211349105208146311, guid: 5ae763bd93472d84bb45cf063b49155e, type: 3}
+      propertyPath: portalID
+      value: Village
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -325,6 +329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: plant1_0
       objectReference: {fileID: 0}
+    - target: {fileID: 2717878125263561909, guid: 5cbfe9e6999e2b74dbb441dd84dfbe97, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -386,6 +394,10 @@ PrefabInstance:
     - target: {fileID: 9135271171596533391, guid: 5ae6caa6d773a1e4886e97835959fc46, type: 3}
       propertyPath: m_Name
       value: tree_dark2_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135271171596533391, guid: 5ae6caa6d773a1e4886e97835959fc46, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -449,6 +461,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: grass1_0
       objectReference: {fileID: 0}
+    - target: {fileID: 5873000240897339805, guid: 911a7e43ee557e34eabaaae4c4a3bbe7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -511,6 +527,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree_dark2_0
       objectReference: {fileID: 0}
+    - target: {fileID: 9135271171596533391, guid: 5ae6caa6d773a1e4886e97835959fc46, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -532,6 +552,10 @@ PrefabInstance:
     - target: {fileID: 2785088550036500, guid: 51d2937788b79b44c8e06d63a7433933, type: 3}
       propertyPath: m_Name
       value: tree_dark4_0 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785088550036500, guid: 51d2937788b79b44c8e06d63a7433933, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6060130935162531219, guid: 51d2937788b79b44c8e06d63a7433933, type: 3}
       propertyPath: m_LocalPosition.x
@@ -595,7 +619,7 @@ GameObject:
   - component: {fileID: 268689554}
   - component: {fileID: 268689553}
   - component: {fileID: 268689555}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "\uAE38,\uBC14\uB2E5"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3713,6 +3737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree_bright1_0
       objectReference: {fileID: 0}
+    - target: {fileID: 4068516928000118482, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6557744964613702560, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.482987
@@ -3774,6 +3802,10 @@ PrefabInstance:
     - target: {fileID: 4068516928000118482, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_Name
       value: tree_bright1_0 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068516928000118482, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6557744964613702560, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3840,7 +3872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 455654796}
   - component: {fileID: 455654795}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: background_day1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3928,6 +3960,10 @@ PrefabInstance:
     - target: {fileID: 4827721013207675057, guid: e8fad94925d08e447b1c97453ea6a66e, type: 3}
       propertyPath: m_Name
       value: grass2_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4827721013207675057, guid: e8fad94925d08e447b1c97453ea6a66e, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7012309691210163573, guid: e8fad94925d08e447b1c97453ea6a66e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4062,6 +4098,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree_dark2_0 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9135271171596533391, guid: 5ae6caa6d773a1e4886e97835959fc46, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4123,6 +4163,10 @@ PrefabInstance:
     - target: {fileID: 8703203524655051412, guid: d8d1cd9c3cf59064484660567258ff16, type: 3}
       propertyPath: m_Name
       value: tree_dark1_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703203524655051412, guid: d8d1cd9c3cf59064484660567258ff16, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4188,7 +4232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 802838680}
   - component: {fileID: 802838679}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: background_day1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4275,7 +4319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 835588632}
   - component: {fileID: 835588631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4323,6 +4367,10 @@ PrefabInstance:
     - target: {fileID: 4068516928000118482, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_Name
       value: tree_bright1_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068516928000118482, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6557744964613702560, guid: 59ccd855c183d5a449bd176aec20a763, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4426,6 +4474,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: grass1_0 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5873000240897339805, guid: 911a7e43ee557e34eabaaae4c4a3bbe7, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4446,7 +4498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1095996167}
   - component: {fileID: 1095996166}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: background_day1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4532,7 +4584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1136958352}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4609,6 +4661,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tree_bright3_0
       objectReference: {fileID: 0}
+    - target: {fileID: 525095580795904936, guid: a99dc285cc1af324a9d421d18714c195, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4630,6 +4686,10 @@ PrefabInstance:
     - target: {fileID: 2785088550036500, guid: 51d2937788b79b44c8e06d63a7433933, type: 3}
       propertyPath: m_Name
       value: tree_dark4_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785088550036500, guid: 51d2937788b79b44c8e06d63a7433933, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6060130935162531219, guid: 51d2937788b79b44c8e06d63a7433933, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4749,7 +4809,7 @@ GameObject:
   - component: {fileID: 1991367140}
   - component: {fileID: 1991367142}
   - component: {fileID: 1991367141}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MiddleGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ public class ShopItemSlot : MonoBehaviour
         item = newItem;
         icon.sprite = item.icon;
         nameText.text = item.itemName;
-        priceText.text = item.price.ToString();
+        priceText.text = $"{item.price} 골드";
     }
 
     public void OnClickBuy()

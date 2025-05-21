@@ -25,7 +25,7 @@ public class DamageTextSpawner : MonoBehaviour
     {
         if (damageTextPrefab == null || canvas == null)
         {
-            Debug.LogWarning("❌ DamageTextSpawner: 프리팹이나 캔버스가 비어있습니다.");
+            Debug.LogWarning("DamageTextSpawner: 프리팹이나 캔버스가 비어있습니다.");
             return;
         }
 
@@ -42,7 +42,7 @@ public class DamageTextSpawner : MonoBehaviour
     {
         if (damageTextPrefab == null || canvas == null)
         {
-            Debug.LogWarning("❌ DamageTextSpawner: 프리팹이나 캔버스가 비어있습니다.");
+            Debug.LogWarning("DamageTextSpawner: 프리팹이나 캔버스가 비어있습니다.");
             return;
         }
 

@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 8490508910154590780}
   - component: {fileID: 2714542593548156120}
   - component: {fileID: 4355304806434321492}
+  - component: {fileID: 6783016689313378140}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -440,7 +441,7 @@ MonoBehaviour:
   SkillCooldown: 10
   skillAfterImageDuration: 0.5
   skillAfterImageInterval: 0.05
-  wideSkillCost: 500
+  wideSkillCost: 1
   skillPortraitUI: {fileID: 0}
   wideSkillCooldown: 5
   wideSkillMultiplier: 1.8
@@ -497,6 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac192bd07dfe75b469c3790ed5871625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expMultiplier: 1
   maxHP: 100
   maxMP: 50
   strength: 10
@@ -504,6 +506,18 @@ MonoBehaviour:
   critical: 1
   currentHP: 0
   currentMP: 0
+--- !u!114 &6783016689313378140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6966770823524794767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70617a97708b3c6469cc9dd74b1c263b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9205709773461157254
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerSpawnManager : MonoBehaviour
 {
-    void Start()
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         StartCoroutine(SpawnWithFreeze());
     }
-    IEnumerator SpawnAndLoadRoutine()
-    {
-        yield return null;
 
-        GameSaveManager.instance.LoadGame();
-
-        yield return new WaitForSeconds(0.1f); // 조금 기다렸다가
-        yield return StartCoroutine(SpawnWithFreeze());
-    }
     IEnumerator SpawnWithFreeze()
     {
-        yield return null; // 1프레임 대기
+        yield return null;
 
         string spawnName = PlayerPrefs.GetString("SpawnPoint", "SpawnPoint_Default");
         GameObject point = GameObject.Find(spawnName);
@@ -26,23 +29,20 @@ public class PlayerSpawnManager : MonoBehaviour
 
         if (point != null && player != null)
         {
-            // ✅ Rigidbody 잠깐 멈춤
             Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
                 rb.linearVelocity = Vector2.zero;
-                rb.isKinematic = true; // 중력 안 먹게 함
+                rb.isKinematic = true;
             }
 
             player.transform.position = point.transform.position + Vector3.up * 0.1f;
-            Debug.Log($"[스폰] {spawnName} 위치로 이동됨");
+            Debug.Log($"[스폰 완료] {spawnName} 위치로 이동");
 
-            yield return new WaitForEndOfFrame(); // 1프레임 더 대기
+            yield return new WaitForEndOfFrame();
 
             if (rb != null)
-            {
-                rb.isKinematic = false; // 다시 정상 동작
-            }
+                rb.isKinematic = false;
         }
         else
         {

@@ -137,8 +137,8 @@ public class Player : MonoBehaviour, IDamageable
 
 
 
-            rb.linearVelocity = Vector2.zero; // Reset velocity before dashing
-            rb.position += dashDirection * dashSpeed * Time.fixedDeltaTime * 8f; // Apply dash speed
+            rb.linearVelocity = Vector2.zero; 
+            rb.position += dashDirection * dashSpeed * Time.fixedDeltaTime * 8f; 
 
             anim.SetBool("isDashing", true);
         }
@@ -182,7 +182,7 @@ public class Player : MonoBehaviour, IDamageable
                 PlayerStat.instance.UseMana(wideSkillCost);
                 lastWideSkillTime = Time.time;
 
-                StartCoroutine(ShowSkillPortrait());
+
                 CameraShake.instance?.StartCoroutine(CameraShake.instance.Shake(0.3f, 0.2f));
 
                 DamageAllEnemies(); //
@@ -288,13 +288,7 @@ public class Player : MonoBehaviour, IDamageable
 
         }
     }
-    IEnumerator ShowSkillPortrait()
-    {
-        if (skillPortraitUI == null) yield break;
-        skillPortraitUI.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
-        skillPortraitUI.SetActive(false);
-    }
+
 
     void DamageAllEnemies()
     {

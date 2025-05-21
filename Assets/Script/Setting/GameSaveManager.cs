@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +15,7 @@ public class GameSaveManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            ItemDatabase.Init();
         }
         else
         {
@@ -24,91 +24,139 @@ public class GameSaveManager : MonoBehaviour
     }
 
     public void SaveGame()
-
     {
-        PlayerPrefs.SetString("SceneName", SceneManager.GetActiveScene().name);
+        SaveData data = new SaveData();
+        data.sceneName = SceneManager.GetActiveScene().name;
 
-        var player = Player.instance;
-        Vector3 pos = player.transform.position;
-        PlayerPrefs.SetFloat("PlayerX", pos.x);
-        PlayerPrefs.SetFloat("PlayerY", pos.y);
-        PlayerPrefs.SetFloat("PlayerZ", pos.z);
-
-        PlayerPrefs.SetInt("PlayerLevel", PlayerLevel.instance.currentLevel);
-        PlayerPrefs.SetInt("PlayerExp", PlayerLevel.instance.currentExp);
-
-        PlayerPrefs.SetInt("PlayerSTR", PlayerStat.instance.strength);
-        PlayerPrefs.SetInt("PlayerDEX", PlayerStat.instance.dexterity);
-        PlayerPrefs.SetInt("PlayerCRIT", PlayerStat.instance.critical);
-        PlayerPrefs.SetFloat("PlayerExpBonus", PlayerStat.instance.expMultiplier);
-
-        // 강화 아이템 저장
-        var upgradeItems = UpgradeUI.instance.upgradeItems;
-        int index = 0;
-        foreach (var kvp in upgradeItems)
+        if (Player.instance != null)
         {
-            var item = kvp.Value;
-            PlayerPrefs.SetString($"Item{index}_Name", item.itemName);
-            PlayerPrefs.SetInt($"Item{index}_Level", item.level);
-            PlayerPrefs.SetInt($"Item{index}_StatType", (int)item.statType);
-            index++;
+            data.playerPosition = Player.instance.transform.position;
         }
 
+        data.level = PlayerLevel.instance.currentLevel;
+        data.exp = PlayerLevel.instance.currentExp;
 
+        data.str = PlayerStat.instance.strength;
+        data.dex = PlayerStat.instance.dexterity;
+        data.crit = PlayerStat.instance.critical;
+        data.expMultiplier = PlayerStat.instance.expMultiplier;
+
+        // 강화 아이템 저장
+        if (UpgradeUI.instance != null && UpgradeUI.instance.upgradeItems != null)
+        {
+            foreach (var kvp in UpgradeUI.instance.upgradeItems)
+            {
+                SavedItem item = new SavedItem
+                {
+                    part = kvp.Key.ToString(),
+                    itemId = kvp.Value.id,
+                    level = kvp.Value.level,
+                    statType = kvp.Value.statType
+                };
+                data.equippedItems.Add(item);
+            }
+        }
+
+        string json = JsonUtility.ToJson(data);
+        PlayerPrefs.SetString("SaveData", json);
         PlayerPrefs.Save();
     }
 
     public void LoadGame()
     {
-        string scene = PlayerPrefs.GetString("SceneName", "");
-        if (!string.IsNullOrEmpty(scene))
-            SceneManager.LoadScene(scene);
+        if (!PlayerPrefs.HasKey("SaveData")) return;
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        string json = PlayerPrefs.GetString("SaveData");
+        SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+        SceneManager.sceneLoaded += (scene, mode) => OnSceneLoaded(scene, mode, data);
+        SceneManager.LoadScene(data.sceneName);
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode, SaveData data)
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded -= (s, m) => OnSceneLoaded(s, m, data);
 
-        Vector3 pos = new Vector3(
-            PlayerPrefs.GetFloat("PlayerX", 0f),
-            PlayerPrefs.GetFloat("PlayerY", 0f),
-            PlayerPrefs.GetFloat("PlayerZ", 0f));
-
-        var player = Player.instance;
-        if (player == null && playerPrefab != null)
+        if (playerPrefab != null && Player.instance == null)
         {
-            player = Instantiate(playerPrefab, pos, Quaternion.identity).GetComponent<Player>();
+            var obj = Instantiate(playerPrefab, data.playerPosition, Quaternion.identity);
+            Player.instance = obj.GetComponent<Player>();
         }
-        else
+        else if (Player.instance != null)
         {
-            player.transform.position = pos;
+            Player.instance.transform.position = data.playerPosition;
         }
 
-        PlayerLevel.instance.currentLevel = PlayerPrefs.GetInt("PlayerLevel", 1);
-        PlayerLevel.instance.currentExp = PlayerPrefs.GetInt("PlayerExp", 0);
+        PlayerLevel.instance.currentLevel = data.level;
+        PlayerLevel.instance.currentExp = data.exp;
 
-        PlayerStat.instance.strength = PlayerPrefs.GetInt("PlayerSTR", 0);
-        PlayerStat.instance.dexterity = PlayerPrefs.GetInt("PlayerDEX", 0);
-        PlayerStat.instance.critical = PlayerPrefs.GetInt("PlayerCRIT", 0);
-        PlayerStat.instance.expMultiplier = PlayerPrefs.GetFloat("PlayerExpBonus", 1f);
+        PlayerStat.instance.strength = data.str;
+        PlayerStat.instance.dexterity = data.dex;
+        PlayerStat.instance.critical = data.crit;
+        PlayerStat.instance.expMultiplier = data.expMultiplier;
 
-        PlayerStat.instance.RecalculateStats();
+        Dictionary<ItemPartType, ItemData> items = new();
+
+        foreach (var saved in data.equippedItems)
+        {
+            if (System.Enum.TryParse(saved.part, out ItemPartType part))
+            {
+                ItemData original = ItemDatabase.GetItemById(saved.itemId);
+                if (original != null)
+                {
+                    ItemData clone = Instantiate(original);
+                    clone.level = saved.level;
+                    clone.statType = saved.statType;
+                    items[part] = clone;
+                }
+            }
+        }
+
+        if (UpgradeUI.instance != null)
+        {
+            UpgradeUI.instance.upgradeItems = items;
+            UpgradeUI.instance.RefreshStatPreview();
+        }
+
+        PlayerStat.instance.ApplyEquipmentStats(items);
         StatUI.instance?.UpdateUI();
-
-        // 강화 아이템 불러오기
-        var upgradeItems = UpgradeUI.instance.upgradeItems;
-        int index = 0;
-        List<ItemPartType> keys = new List<ItemPartType>(upgradeItems.Keys);
-        foreach (var key in keys)
-        {
-            var item = upgradeItems[key];
-            item.itemName = PlayerPrefs.GetString($"Item{index}_Name", "");
-            item.level = PlayerPrefs.GetInt($"Item{index}_Level", 0);
-            item.statType = (StatType)PlayerPrefs.GetInt($"Item{index}_StatType", 0);
-            index++;
-        }
-        UpgradeUI.instance.RefreshStatPreview();
     }
 }
+
+[System.Serializable]
+public class SaveData
+{
+    public string sceneName;
+    public Vector3 playerPosition;
+    public int level;
+    public int exp;
+    public int str, dex, crit;
+    public float expMultiplier;
+    public List<SavedItem> equippedItems = new();
+}
+
+[System.Serializable]
+public class SavedItem
+{
+    public string part;
+    public int itemId;
+    public int level;
+    public StatType statType;
+}
+
+public static class ItemDatabase
+{
+    public static List<ItemData> allItems;
+
+    public static void Init()
+    {
+        allItems = new List<ItemData>(Resources.LoadAll<ItemData>("Items"));
+    }
+
+    public static ItemData GetItemById(int id)
+    {
+        return allItems?.Find(i => i.id == id);
+    }
+}
+
+
