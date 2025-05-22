@@ -42,7 +42,7 @@ public class PauseMenuUI : MonoBehaviour
 
     public void OnClickSave()
     {
-        GameSaveManager.instance.SaveGame();
+        GameSaveManager.instance.SaveGame();    
     }
 
     public void OnClickLoad()

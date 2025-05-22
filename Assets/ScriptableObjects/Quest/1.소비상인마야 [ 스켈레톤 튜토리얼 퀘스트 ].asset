@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1717bf93db41d4e48b59ea8c51607b20, type: 3}
+  m_Name: "1.\uC18C\uBE44\uC0C1\uC778\uB9C8\uC57C [ \uC2A4\uCF08\uB808\uD1A4 \uD29C\uD1A0\uB9AC\uC5BC
+    \uD018\uC2A4\uD2B8 ]"
+  m_EditorClassIdentifier: 
+  questID: Q001
+  questTitle: "\uC2A4\uCF08\uB808\uD1A4\uC7A1\uAE30"
+  npcName: "\uC18C\uBE44\uC0C1\uC778 \uB9C8\uC57C "
+  conditionType: 0
+  targetName: Skeleton
+  requiredAmount: 100
+  rewardGold: 10000
+  rewardItemId: 1
+  rewardItemAmount: 100
+  dialogueLines:
+  - "\uC9C0\uB098\uAC00\uB294 \uC6A9\uC0AC\uB2D8, \uC7A0\uAE50 \uC800\uC880 \uB3C4\uC640\uC8FC\uC2E4\uC218
+    \uC788\uB098\uC694 ?"
+  - "\uC9C0\uAE08, \uB9C8\uC744 \uC55E\uC5D0 \uC2A4\uCF08\uB808\uD1A4 \uBB34\uB9AC\uB4E4\uC774
+    \uB098\uD0C0\uB0AC\uC5B4\uC694."
+  - "50\uB9C8\uB9AC\uB97C \uCC98\uCE58\uD6C4 \uC800\uB97C \uB2E4\uC2DC \uCC3E\uC544\uC8FC\uC138\uC694."
+  - "\uCC98\uCE58 \uD6C4 \uB3CC\uC544\uC624\uC2DC\uBA74, \uCDA9\uBD84\uD55C \uBCF4\uC0C1\uC744
+    \uB4DC\uB9B4\uAC8C\uC694!"

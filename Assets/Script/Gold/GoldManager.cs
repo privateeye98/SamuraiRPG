@@ -34,4 +34,11 @@ public class GoldManager : MonoBehaviour
         Debug.Log("∞ÒµÂ ∫Œ¡∑!");
         return false;
     }
+
+    public void SetGold(int amount)
+    {
+        currentGold = amount;
+    }
+
+
 }

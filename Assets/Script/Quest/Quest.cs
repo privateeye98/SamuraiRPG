@@ -41,12 +41,15 @@ public class Quest
         // 아이템 보상
         if (data.rewardItemId != 0)
         {
-            ItemData rewardItem = ItemDatabaseGlobal.GetItemById(data.rewardItemId);
+            ItemData rewardItem = ItemDatabase.instance.GetItemById(data.rewardItemId);
+
             if (rewardItem != null)
             {
-                for (int i = 0; i < data.rewardItemAmount; i++)
-                    Inventory.instance.AddItem(rewardItem);
-
+                if (Inventory.instance.HasRoom())
+                {
+                    for (int i = 0; i < data.rewardItemAmount; i++)
+                        Inventory.instance.AddItem(rewardItem);
+                }
                 Debug.Log($"+{data.rewardItemAmount}개 [{rewardItem.itemName}] 획득");
             }
             else
@@ -55,7 +58,6 @@ public class Quest
             }
         }
     }
-
 
 
 }

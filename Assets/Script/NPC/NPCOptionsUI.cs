@@ -36,17 +36,22 @@ public class NPCOptionsUI : MonoBehaviour
 
     public void OnQuest()
     {
-        var quest = currentNPC.questData;
-        if (quest == null)
+        var quests = currentNPC.availableQuests;
+        if (quests == null || quests.Count == 0)
         {
             Debug.LogWarning("퀘스트 없음");
             return;
         }
 
-        DialogueManager.instance.StartDialogue(quest.npcName, quest.dialogueLines, currentNPC.portrait, () =>
-        {
-            questDecisionPanel.SetActive(true);
-        });
+
+        QuestData firstQuest = quests[0];
+
+        DialogueManager.instance.StartDialogue(
+            firstQuest.npcName,
+            firstQuest.dialogueLines,
+            currentNPC.portrait,
+            () => questDecisionPanel.SetActive(true)
+            );
 
         optionsPanel.SetActive(false);
     }
@@ -64,30 +69,18 @@ public class NPCOptionsUI : MonoBehaviour
 
     public void AcceptQuest()
     {
-        Debug.Log("▶ AcceptQuest() 호출됨");
+        if (currentNPC == null || currentNPC.availableQuests == null || currentNPC.availableQuests.Count == 0)
+    {
+        Debug.LogError("❌ 퀘스트 데이터가 없습니다");
+        return;
+    }
 
-        if (currentNPC == null)
-        {
-            Debug.LogError("❌ currentNPC == null");
-            return;
-        }
+    QuestData firstQuest = currentNPC.availableQuests[0]; // 나중엔 선택한 퀘스트로 확장 가능
+    QuestManager.instance.AcceptQuest(firstQuest);
+        CloseAll();
+    questDecisionPanel.SetActive(false);
+    Time.timeScale = 1f;
 
-        if (QuestManager.instance == null)
-        {
-            Debug.LogError("❌ QuestManager.instance == null");
-            return;
-        }
-
-        if (currentNPC.questData == null)
-        {
-            Debug.LogError("❌ currentNPC.questData == null");
-            return;
-        }
-
-        QuestManager.instance.AcceptQuest(currentNPC.questData);
-
-        questDecisionPanel.SetActive(false);
-        Time.timeScale = 1f;
     }
 
 
@@ -96,6 +89,7 @@ public class NPCOptionsUI : MonoBehaviour
     {
         DialogueManager.instance.ForceCloseDialogue();
         questDecisionPanel.SetActive(false);
+        CloseAll();
         Time.timeScale = 1f;
     }
 

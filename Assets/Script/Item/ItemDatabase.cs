@@ -26,8 +26,6 @@ public class ItemDatabase : MonoBehaviour
 
     public ItemData GetItemById(int id)
     {
-        if (itemDict.TryGetValue(id, out var item))
-            return item;
-        return null;
+        return items.Find(item => item.id == id);
     }
 }

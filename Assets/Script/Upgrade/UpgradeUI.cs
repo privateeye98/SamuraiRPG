@@ -121,4 +121,26 @@ public class UpgradeUI : MonoBehaviour
     {
         OnDropdownChanged(partDropdown.value);
     }
+
+    public void LoadUpgrades(List<SavedItem> savedItems)
+    {
+        upgradeItems = new Dictionary<ItemPartType, ItemData>();
+
+        foreach (var saved in savedItems)
+        {
+            if (!System.Enum.TryParse(saved.part, out ItemPartType part)) continue;
+
+            ItemData item = ItemDatabase.instance.GetItemById(saved.itemId);
+            if (item != null)
+            {
+                item.level = saved.level;
+                item.statType = saved.statType;
+                upgradeItems[part] = item;
+            }
+        }
+
+        RefreshStatPreview();
+    }
+
+
 }

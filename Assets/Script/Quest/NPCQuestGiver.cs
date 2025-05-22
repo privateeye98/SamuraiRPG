@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCQuestGiver : MonoBehaviour
@@ -7,13 +8,16 @@ public class NPCQuestGiver : MonoBehaviour
 
     public GameObject questIndicator;
 
-    void Start()
+    IEnumerator Start()
     {
+        yield return new WaitUntil(() => QuestManager.instance != null);
         UpdateQuestIndicator();
     }
 
     public void UpdateQuestIndicator()
     {
+        if (QuestManager.instance == null) return;
+
         bool hasAvailable = false;
         foreach (var quest in availableQuests)
         {
@@ -23,7 +27,11 @@ public class NPCQuestGiver : MonoBehaviour
                 break;
             }
         }
-        questIndicator.SetActive(hasAvailable);
+
+        if (questIndicator != null)
+        {
+            questIndicator.SetActive(hasAvailable);
+        }
     }
 
     public void Interact()

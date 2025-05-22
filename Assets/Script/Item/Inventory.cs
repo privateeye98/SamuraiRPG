@@ -37,7 +37,6 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-
         if (items.Count >= capacity)
         {
             Debug.Log("Not enough room.");
@@ -46,15 +45,19 @@ public class Inventory : MonoBehaviour
 
         items.Add(new InventoryItem(itemData));
         OnItemChangedCallback?.Invoke(); // UI 갱신 호출
-
-
         return true;
     }
-
+    public bool HasRoom()
+    {
+        return items.Count < capacity;
+    }
 
     public void RemoveItem(ItemData item)
     {
-        var invItme = items.Find(i=>i.itemData == item);
+        var invItem = items.Find(i => i.itemData == item);
+        if (invItem != null)
+            items.Remove(invItem);
+
         OnItemChangedCallback?.Invoke();
     }
 
@@ -92,6 +95,11 @@ public class Inventory : MonoBehaviour
         GoldManager.instance.AddGold(item.price);
         RemoveItem(item);
         Debug.Log($"{item.itemName}을(를) {item.price}골드에 판매했습니다.");
+    }
+    public void Clear()
+    {
+        items.Clear();
+        OnItemChangedCallback?.Invoke(); // UI 갱신
     }
 
 }

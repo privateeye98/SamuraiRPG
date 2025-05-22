@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,34 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameSaveManager : MonoBehaviour
 {
     public static GameSaveManager instance;
-
-    [Header("플레이어 프리팹 및 참조")]
-    public GameObject playerPrefab;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            ItemDatabaseGlobal.Init();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    private string savePath => Application.persistentDataPath + "/save.json";
 
     public void SaveGame()
     {
-        SaveData data = new SaveData();
-        
-        data.sceneName = SceneManager.GetActiveScene().name;
+        SaveData data = new();
 
-        if (Player.instance != null)
-        {
-            data.playerPosition = Player.instance.transform.position;
-        }
+        data.sceneName = SceneManager.GetActiveScene().name;
+        data.playerPosition = Player.instance?.transform.position ?? Vector3.zero;
 
         data.level = PlayerLevel.instance.currentLevel;
         data.exp = PlayerLevel.instance.currentExp;
@@ -43,66 +24,58 @@ public class GameSaveManager : MonoBehaviour
         data.crit = PlayerStat.instance.critical;
         data.expMultiplier = PlayerStat.instance.expMultiplier;
 
-        // 강화 아이템 저장
-        if (UpgradeUI.instance != null && UpgradeUI.instance.upgradeItems != null)
+        data.gold = GoldManager.instance.currentGold;
+
+        foreach (var item in Inventory.instance.items)
         {
-            foreach (var kvp in UpgradeUI.instance.upgradeItems)
+            data.inventory.Add(new SavedInventoryItem
             {
-                SavedItem item = new SavedItem
-                {
-                    part = kvp.Key.ToString(),
-                    itemId = kvp.Value.id,
-                    level = kvp.Value.level,
-                    statType = kvp.Value.statType
-                };
-                data.equippedItems.Add(item);
-            }
+                itemId = item.itemData.id,
+                quantity = item.quantity
+            });
         }
 
         foreach (var quest in QuestManager.instance.activeQuests)
         {
-            SavedQuest saved = new()
+            data.savedQuests.Add(new SavedQuest
             {
                 questID = quest.data.questID,
                 currentAmount = quest.currentAmount,
                 state = quest.state
-            };
-            data.savedQuests.Add(saved);
+            });
         }
 
-        string json = JsonUtility.ToJson(data);
-        PlayerPrefs.SetString("SaveData", json);
-        PlayerPrefs.Save();
+        foreach (var kvp in UpgradeUI.instance.upgradeItems)
+        {
+            data.equippedItems.Add(new SavedItem
+            {
+                part = kvp.Key.ToString(),
+                itemId = kvp.Value.id,
+                level = kvp.Value.level,
+                statType = kvp.Value.statType
+            });
+        }
+
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(savePath, json);
+        PlayerPrefs.SetString("SaveData", json);
+        PlayerPrefs.Save();
+
+        Debug.Log($"[GameSaveManager] 저장 완료: {savePath}");
     }
 
     public void LoadGame()
     {
-        if (!PlayerPrefs.HasKey("SaveData")) return;
+        if (!File.Exists(savePath))
+        {
+            Debug.LogWarning("저장 파일 없음");
+            return;
+        }
 
-        string json = PlayerPrefs.GetString("SaveData");
+        string json = File.ReadAllText(savePath);
         SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-        SceneManager.sceneLoaded += (scene, mode) => OnSceneLoaded(scene, mode, data);
-        SceneManager.LoadScene(data.sceneName);
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode, SaveData data)
-    {
-        SceneManager.sceneLoaded -= (s, m) => OnSceneLoaded(s, m, data);
-
-        if (playerPrefab != null && Player.instance == null)
-        {
-            var obj = Instantiate(playerPrefab, data.playerPosition, Quaternion.identity);
-            Player.instance = obj.GetComponent<Player>();
-        }
-        else if (Player.instance != null)
-        {
-            Player.instance.transform.position = data.playerPosition;
-        }
-
-        PlayerLevel.instance.currentLevel = data.level;
+        PlayerLevel.instance.SetLevel(data.level);
         PlayerLevel.instance.currentExp = data.exp;
 
         PlayerStat.instance.strength = data.str;
@@ -110,68 +83,31 @@ public class GameSaveManager : MonoBehaviour
         PlayerStat.instance.critical = data.crit;
         PlayerStat.instance.expMultiplier = data.expMultiplier;
 
-        Dictionary<ItemPartType, ItemData> items = new();
+        GoldManager.instance.SetGold(data.gold);
 
-        foreach (var saved in data.equippedItems)
+        Inventory.instance.Clear();
+        foreach (var item in data.inventory)
         {
-            if (System.Enum.TryParse(saved.part, out ItemPartType part))
+            ItemData loaded = ItemDatabase.instance.GetItemById(item.itemId);
+            for (int i = 0; i < item.quantity; i++)
+                Inventory.instance.AddItem(loaded);
+        }
+
+        QuestManager.instance.activeQuests.Clear();
+        foreach (var saved in data.savedQuests)
+        {
+            QuestData questData = QuestManager.instance.GetQuestDataByID(saved.questID);
+            if (questData != null)
             {
-                ItemData original = ItemDatabaseGlobal.GetItemById(saved.itemId);
-                if (original != null)
-                {
-                    ItemData clone = Instantiate(original);
-                    clone.level = saved.level;
-                    clone.statType = saved.statType;
-                    items[part] = clone;
-                }
+                Quest quest = new Quest(questData);
+                quest.currentAmount = saved.currentAmount;
+                quest.state = saved.state;
+                QuestManager.instance.activeQuests.Add(quest);
             }
         }
 
-        if (UpgradeUI.instance != null)
-        {
-            UpgradeUI.instance.upgradeItems = items;
-            UpgradeUI.instance.RefreshStatPreview();
-        }
+        UpgradeUI.instance.LoadUpgrades(data.equippedItems);
 
-        PlayerStat.instance.ApplyEquipmentStats(items);
-        StatUI.instance?.UpdateUI();
+        Debug.Log("[GameSaveManager] 불러오기 완료");
     }
 }
-
-[System.Serializable]
-public class SaveData
-{
-    public string sceneName;
-    public Vector3 playerPosition;
-    public int level;
-    public int exp;
-    public int str, dex, crit;
-    public float expMultiplier;
-    public List<SavedItem> equippedItems = new();
-}
-
-[System.Serializable]
-public class SavedItem
-{
-    public string part;
-    public int itemId;
-    public int level;
-    public StatType statType;
-}
-
-public static class ItemDatabaseGlobal
-{
-    public static List<ItemData> allItems;
-
-    public static void Init()
-    {
-        allItems = new List<ItemData>(Resources.LoadAll<ItemData>("Items"));
-    }
-
-    public static ItemData GetItemById(int id)
-    {
-        return allItems?.Find(i => i.id == id);
-    }
-}
-
-

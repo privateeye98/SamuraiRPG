@@ -5,7 +5,18 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance;
     public List<Quest> activeQuests = new List<Quest>();
-
+    public QuestData GetQuestDataByID(string id)
+    {
+    
+        QuestData[] allData = Resources.LoadAll<QuestData>("Quest"); 
+        foreach (var q in allData)
+        {
+            if (q.questID == id)
+                return q;
+        }
+        Debug.LogWarning($"QuestData ID '{id}'를 찾을 수 없습니다.");
+        return null;
+    }
     void Awake()
     {
         if (instance && instance != this) { Destroy(gameObject); return; }

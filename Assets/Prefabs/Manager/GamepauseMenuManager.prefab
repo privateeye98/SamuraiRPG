@@ -734,7 +734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuPanel: {fileID: 2639456309922013967}
-  settingMenuPanel: {fileID: 0}
+  settingMenuPanel: {fileID: 5786761175361670672, guid: 474406e7d276d604dab0aee6d20f6d97, type: 3}
 --- !u!1 &6463974106835791672
 GameObject:
   m_ObjectHideFlags: 0

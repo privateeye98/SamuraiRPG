@@ -78,4 +78,11 @@ public class PlayerLevel : MonoBehaviour
             expSlider.value = currentExp;
         }
     }
+
+    public void SetLevel(int level)
+    {
+        currentLevel = level;
+        UpdateUI(); // UI 동기화
+    }
+
 }

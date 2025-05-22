@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class NPCTrigger : MonoBehaviour
 {
     public string npcName;
     public Sprite portrait;
     [TextArea] public string[] greetDialogue;
-    public QuestData questData;
-
+    public List<QuestData> availableQuests;
     bool isPlayerInRange = false;
 
     void Update()
