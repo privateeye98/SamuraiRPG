@@ -33,7 +33,7 @@ RectTransform:
   m_Father: {fileID: 3885461525224659197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -109,9 +109,9 @@ RectTransform:
   - {fileID: 6320741127746745008}
   m_Father: {fileID: 5968557910051196990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -15}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &392153776505338859
@@ -213,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &466577326796089194
 RectTransform:
   m_ObjectHideFlags: 0
@@ -228,6 +228,7 @@ RectTransform:
   m_Children:
   - {fileID: 1291068073113212095}
   - {fileID: 42411924309489635}
+  - {fileID: 6445593303592157966}
   m_Father: {fileID: 1115799314502201606}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -285,7 +286,7 @@ GameObject:
   - component: {fileID: 9113100187987615160}
   - component: {fileID: 2050016085512557389}
   - component: {fileID: 1113817981773135366}
-  - component: {fileID: 1731095829281514570}
+  - component: {fileID: 1790713323349403951}
   m_Layer: 5
   m_Name: QuestManager
   m_TagString: Untagged
@@ -306,7 +307,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 466577326796089194}
-  - {fileID: 6445593303592157966}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1731095829281514570
+--- !u!114 &1790713323349403951
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,12 +386,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1517664058625652582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7daa8ee946242c5428e0e59c00b29248, type: 3}
+  m_Script: {fileID: 11500000, guid: d24b5d8038e9f964886395f5f5bd4cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questButtonPrefab: {fileID: 7492617107833886716, guid: 7567abe546f71204ca88ef1d079009b7, type: 3}
-  contentParent: {fileID: 5968557910051196990}
-  npcNameText: {fileID: 2305497618680745394}
 --- !u!1 &1899241494996148573
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,9 +659,9 @@ RectTransform:
   m_Father: {fileID: 42411924309489635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 20, y: -17}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &8506371857438334000
 CanvasRenderer:
@@ -788,9 +785,9 @@ RectTransform:
   m_Father: {fileID: 42411924309489635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -17, y: -17}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5494427699983608691
 CanvasRenderer:
@@ -1048,7 +1045,7 @@ RectTransform:
   m_Father: {fileID: 7580395139609531438}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1122,7 +1119,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5020638015447405304}
-  m_Father: {fileID: 1115799314502201606}
+  m_Father: {fileID: 466577326796089194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1211,7 +1208,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1731095829281514570}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: QuestSelectionUI, Assembly-CSharp
         m_MethodName: Close
         m_Mode: 1
@@ -1503,9 +1500,9 @@ RectTransform:
   m_Father: {fileID: 42411924309489635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: -17, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6232816028791983559
 CanvasRenderer:

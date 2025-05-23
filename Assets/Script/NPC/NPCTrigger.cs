@@ -3,11 +3,26 @@ using System.Collections.Generic;
 
 public class NPCTrigger : MonoBehaviour
 {
+    public GameObject questIndicator;
     public string npcName;
     public Sprite portrait;
     [TextArea] public string[] greetDialogue;
     public List<QuestData> availableQuests;
     bool isPlayerInRange = false;
+
+    void Start()
+    {
+        RefreshQuestIndicator();
+
+    }
+    void OnEnable()
+    {
+        QuestManager.OnQuestAccepted += RefreshQuestIndicator;
+    }
+    void OnDisable()
+    {
+        QuestManager.OnQuestAccepted -= RefreshQuestIndicator;
+    }
 
     void Update()
     {
@@ -30,7 +45,12 @@ public class NPCTrigger : MonoBehaviour
             });
         }
     }
-
+    void RefreshQuestIndicator(QuestData _)
+    {
+        // 이미 수락된 퀘스트는 숨기기
+        availableQuests.RemoveAll(q => QuestManager.instance.HasQuest(q));
+        questIndicator.SetActive(availableQuests.Count > 0);
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -42,4 +62,13 @@ public class NPCTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
             isPlayerInRange = false;
     }
+    public void RefreshQuestIndicator()
+    {
+        // 아직 수락하지 않은 퀘스트만 남김
+        availableQuests.RemoveAll(q => QuestManager.instance.HasQuest(q));
+        // 느낌표 On/Off
+        if (questIndicator != null)
+            questIndicator.SetActive(availableQuests.Count > 0);
+    }
+
 }

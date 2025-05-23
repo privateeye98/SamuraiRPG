@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageTextPrefab: {fileID: 6900372073469435726, guid: f7a087e09cf6de64c9c7f0f87a701d24, type: 3}
-  canvas: {fileID: 0}
+  canvas: {fileID: 6552099500967534183, guid: 57192176c1df4584485213599c9842d8, type: 3}

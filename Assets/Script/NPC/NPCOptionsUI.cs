@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.UI;
 public class NPCOptionsUI : MonoBehaviour
 {
     public static NPCOptionsUI instance;
@@ -7,18 +7,25 @@ public class NPCOptionsUI : MonoBehaviour
     [Header("UI")]
     public GameObject optionsPanel;
     public GameObject questDecisionPanel;
-
+    public Button questButton;
     NPCTrigger currentNPC;
 
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
-        Debug.Log("🟢 NPCOptionsUI Singleton 초기화됨");
+        DontDestroyOnLoad(gameObject);
+        Debug.Log($"NPCOptionsUI Awake – ID:{GetInstanceID()}");
+
     }
 
     public void OpenOptions(NPCTrigger npc)
     {
-        Debug.Log("🟡 OpenOptions 호출됨, 버튼 패널 열기 시도");
+        Debug.Log("OpenOptions 호출됨, 버튼 패널 열기 시도");
         currentNPC = npc;
         optionsPanel.SetActive(true);
         Time.timeScale = 0f;
@@ -36,10 +43,16 @@ public class NPCOptionsUI : MonoBehaviour
 
     public void OnQuest()
     {
+        if (currentNPC == null)
+        {
+            Debug.LogError("currentNPC가 null입니다. 먼저 Z키로 NPC와 상호작용했는지 확인!");
+            return;
+        }
+
         var quests = currentNPC.availableQuests;
         if (quests == null || quests.Count == 0)
         {
-            Debug.LogWarning("퀘스트 없음");
+            Debug.LogWarning("퀘스트가 없습니다.");
             return;
         }
 
@@ -69,17 +82,36 @@ public class NPCOptionsUI : MonoBehaviour
 
     public void AcceptQuest()
     {
-        if (currentNPC == null || currentNPC.availableQuests == null || currentNPC.availableQuests.Count == 0)
-    {
-        Debug.LogError("❌ 퀘스트 데이터가 없습니다");
-        return;
-    }
+        if (QuestManager.instance == null)
+        {
+            Debug.LogError("QuestManager 인스턴스를 찾을 수 없습니다! 씬에 QuestManager 오브젝트가 있는지 확인하세요.");
+            return;
+        }
 
-    QuestData firstQuest = currentNPC.availableQuests[0]; // 나중엔 선택한 퀘스트로 확장 가능
-    QuestManager.instance.AcceptQuest(firstQuest);
+        if (currentNPC == null)
+        {
+            Debug.LogError("currentNPC가 null입니다. 먼저 Z키로 NPC와 상호작용했는지 확인!");
+            return;
+        }
+
+        var quests = currentNPC.availableQuests;
+        if (quests == null || quests.Count == 0)
+        {
+            Debug.LogWarning("퀘스트가 없습니다.");
+            return;
+        }
+
+        if (currentNPC == null || currentNPC.availableQuests == null || currentNPC.availableQuests.Count == 0)
+        {
+            Debug.LogError("퀘스트 데이터가 없습니다");
+            return;
+        }
+
+        QuestData firstQuest = currentNPC.availableQuests[0]; // 나중엔 선택한 퀘스트로 확장 가능
+        QuestManager.instance.AcceptQuest(firstQuest);
         CloseAll();
-    questDecisionPanel.SetActive(false);
-    Time.timeScale = 1f;
+        questDecisionPanel.SetActive(false);
+        Time.timeScale = 1f;
 
     }
 
@@ -90,7 +122,6 @@ public class NPCOptionsUI : MonoBehaviour
         DialogueManager.instance.ForceCloseDialogue();
         questDecisionPanel.SetActive(false);
         CloseAll();
-        Time.timeScale = 1f;
     }
 
     void CloseAll()
