@@ -81,6 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db33cebf680dc7a4f97cab3242ba4b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NightBuff:
+    healthMultiplier: 1.5
+    attackMultiplier: 1.5
+    nightStartTime: 40
   attackDamage: 1
   attackCooldown: 1
 --- !u!1 &6799177878462601676
@@ -99,7 +103,7 @@ GameObject:
   - component: {fileID: 1912335482205324146}
   - component: {fileID: 3750768664356522085}
   m_Layer: 9
-  m_Name: Enemyprefab
+  m_Name: Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,15 +265,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e8e53343d78374bb9e96b396c073c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  nightbuff:
+    healthMultiplier: 1.5
+    attackMultiplier: 1.5
+    nightStartTime: 40
+  maxHP: 1
   moveSpeed: 1.5
-  chaseRange: 0
+  chaseRange: 4
   dropGold: 10
   goldPrefab: {fileID: 1420984807580001495, guid: c3523e0207bdd8c489c4b1e09129b3ab, type: 3}
-  expReward: 100
+  expReward: 1
   floatingTextPrefab: {fileID: 0}
-  floatingTextSpawnPoint: {fileID: 0}
-  defense: 0
+  floatingTextSpawnPoint: {fileID: 2133551516618825362, guid: 13c763a7b636e3e49bf553bc4e3515a5, type: 3}
+  defense: 20
   evade: 5
 --- !u!95 &1912335482205324146
 Animator:
@@ -305,5 +313,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db33cebf680dc7a4f97cab3242ba4b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NightBuff:
+    healthMultiplier: 1.5
+    attackMultiplier: 1.5
+    nightStartTime: 40
   attackDamage: 20
   attackCooldown: 1

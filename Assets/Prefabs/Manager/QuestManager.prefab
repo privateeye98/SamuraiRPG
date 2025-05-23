@@ -109,9 +109,9 @@ RectTransform:
   - {fileID: 6320741127746745008}
   m_Father: {fileID: 5968557910051196990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -15}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &392153776505338859
@@ -286,6 +286,8 @@ GameObject:
   - component: {fileID: 2050016085512557389}
   - component: {fileID: 1113817981773135366}
   - component: {fileID: 1731095829281514570}
+  - component: {fileID: 1134275937434770422}
+  - component: {fileID: 6408629423087311451}
   m_Layer: 5
   m_Name: QuestManager
   m_TagString: Untagged
@@ -392,6 +394,30 @@ MonoBehaviour:
   questButtonPrefab: {fileID: 7492617107833886716, guid: 7567abe546f71204ca88ef1d079009b7, type: 3}
   contentParent: {fileID: 5968557910051196990}
   npcNameText: {fileID: 2305497618680745394}
+--- !u!114 &1134275937434770422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517664058625652582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d24b5d8038e9f964886395f5f5bd4cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6408629423087311451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517664058625652582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d02577d33f0a94f9b847fbe7f1ea68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1899241494996148573
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,8 +773,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8542840729805989625}
   m_HandleRect: {fileID: 7106462577832884174}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.61
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
