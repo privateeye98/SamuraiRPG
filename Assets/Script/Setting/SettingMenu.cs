@@ -104,17 +104,17 @@ public class SettingMenu : MonoBehaviour
     void UpdateSFX(float v) =>
         mixer.SetFloat("SFX", Mathf.Log10(Mathf.Max(v, 0.0001f)) * 20f);
 
-    public void OnClickSave()
+    /*public void OnClickSave()
     {
         if (GameSaveManager.instance != null)
             GameSaveManager.instance.SaveGame();
-    }
+    }*/
 
-    public void OnClickLoad()
+ /*   public void OnClickLoad()
     {
         if (GameSaveManager.instance != null)
             GameSaveManager.instance.LoadGame();
-    }
+    }*/
 
     bool IsInGameScene()
     {

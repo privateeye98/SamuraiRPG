@@ -40,15 +40,15 @@ public class PauseMenuUI : MonoBehaviour
         settingMenuPanel.SetActive(true);
     }
 
-    public void OnClickSave()
+    /*public void OnClickSave()
     {
         GameSaveManager.instance.SaveGame();
-    }
+    }*/
 
-    public void OnClickLoad()
+    /*public void OnClickLoad()
     {
         GameSaveManager.instance.LoadGame();
-    }
+    }*/
 
     public void OnClickQuit()
     {

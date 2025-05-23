@@ -10,7 +10,8 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Maplestory
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 450c2a575f858a04aa638a5d6e408fa0, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

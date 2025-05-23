@@ -142,8 +142,6 @@ public class Enemy : MonoBehaviour, IDamageable
         QuestManager.instance?.UpdateQuestProgress(gameObject.name);
 
         PlayerLevel.instance?.AddExp(expReward);
-        string cleanName = gameObject.name.Replace("(Clone)", "");
-        QuestManager.instance?.UpdateQuestProgress(cleanName);
 
         Destroy(gameObject, 1f);
 

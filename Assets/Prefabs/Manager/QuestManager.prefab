@@ -286,8 +286,6 @@ GameObject:
   - component: {fileID: 2050016085512557389}
   - component: {fileID: 1113817981773135366}
   - component: {fileID: 1731095829281514570}
-  - component: {fileID: 1134275937434770422}
-  - component: {fileID: 6408629423087311451}
   m_Layer: 5
   m_Name: QuestManager
   m_TagString: Untagged
@@ -394,30 +392,6 @@ MonoBehaviour:
   questButtonPrefab: {fileID: 7492617107833886716, guid: 7567abe546f71204ca88ef1d079009b7, type: 3}
   contentParent: {fileID: 5968557910051196990}
   npcNameText: {fileID: 2305497618680745394}
---- !u!114 &1134275937434770422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1517664058625652582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24b5d8038e9f964886395f5f5bd4cf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6408629423087311451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1517664058625652582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20d02577d33f0a94f9b847fbe7f1ea68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1899241494996148573
 GameObject:
   m_ObjectHideFlags: 0

@@ -134,7 +134,7 @@ public class UpgradeUI : MonoBehaviour
             if (item != null)
             {
                 item.level = saved.level;
-                item.statType = saved.statType;
+             //   item.statType = saved.statType;
                 upgradeItems[part] = item;
             }
         }
