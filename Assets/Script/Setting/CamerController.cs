@@ -3,25 +3,39 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [Header("대상")]
-    public Transform target;          // 따라갈 플레이어 Transform
+    public Transform target;
 
     [Header("추가 오프셋")]
     public Vector3 offset = new Vector3(0, 1.5f, -10f);
 
     [Header("부드럽게 따라가기")]
     [Range(0f, 1f)]
-    public float smooth = 0.15f;      // 0 에 가까울수록 카메라가 바로 붙고, 1 에 가까울수록 느리게 이동
+    public float smooth = 0.15f;
 
-    Vector3 _velocity = Vector3.zero; // 내부 계산용
+    [Header("맵 제한")]
+    public Vector2 minPosition;
+    public Vector2 maxPosition;
+
+    Vector3 _velocity = Vector3.zero;
 
     void LateUpdate()
     {
         if (!target) return;
 
-        // 1) 목표 위치 계산 (z 는 고정)
         Vector3 desired = target.position + offset;
 
-        // 2) 부드럽게 보간
+        // 카메라 반지름만큼 Clamp
+        float vertExtent = Camera.main.orthographicSize;
+        float horzExtent = vertExtent * Screen.width / Screen.height;
+
+        float leftBound = minPosition.x + horzExtent;
+        float rightBound = maxPosition.x - horzExtent;
+        float bottomBound = minPosition.y + vertExtent;
+        float topBound = maxPosition.y - vertExtent;
+
+        desired.x = Mathf.Clamp(desired.x, leftBound, rightBound);
+        desired.y = Mathf.Clamp(desired.y, bottomBound, topBound);
+
         transform.position = Vector3.SmoothDamp(transform.position,
                                                 desired,
                                                 ref _velocity,

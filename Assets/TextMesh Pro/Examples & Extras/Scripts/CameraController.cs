@@ -14,6 +14,10 @@ namespace TMPro.Examples
 
         public Transform CameraTarget;
 
+        public Vector2 minPosition; // 좌하단
+        public Vector2 maxposition; // 우상단
+
+
         public float FollowDistance = 30.0f;
         public float MaxFollowDistance = 100.0f;
         public float MinFollowDistance = 2.0f;
@@ -31,7 +35,7 @@ namespace TMPro.Examples
         private bool previousSmoothing;
 
         public float MovementSmoothingValue = 25f;
-        public float RotationSmoothingValue = 5.0f;
+        public float RotationSmoothingValue = 5.0f; 
 
         public float MoveSensitivity = 2.0f;
 
@@ -42,13 +46,12 @@ namespace TMPro.Examples
         private Vector3 moveVector;
         private float mouseWheel;
 
-        // Controls for Touches on Mobile devices
-        //private float prev_ZoomDelta;
-
 
         private const string event_SmoothingValue = "Slider - Smoothing Value";
         private const string event_FollowDistance = "Slider - Camera Zoom";
 
+        private float camHalfwidth;
+        private float camHalfheight;
 
         void Awake()
         {
@@ -62,27 +65,28 @@ namespace TMPro.Examples
 
             cameraTransform = transform;
             previousSmoothing = MovementSmoothing;
+
+
+
         }
 
-
-        // Use this for initialization
         void Start()
         {
             if (CameraTarget == null)
             {
-                // If we don't have a target (assigned by the player, create a dummy in the center of the scene).
                 dummyTarget = new GameObject("Camera Target").transform;
                 CameraTarget = dummyTarget;
             }
+
+            camHalfheight = Camera.main.orthographicSize;
+            camHalfwidth = camHalfheight * Camera.main.aspect;
+
         }
 
-        // Update is called once per frame
+
         void LateUpdate()
         {
             GetPlayerInput();
-
-
-            // Check if we still have a valid target
             if (CameraTarget != null)
             {
                 if (CameraMode == CameraModes.Isometric)
@@ -95,20 +99,25 @@ namespace TMPro.Examples
                 }
                 else
                 {
-                    // Free Camera implementation
                 }
 
                 if (MovementSmoothing == true)
                 {
-                    // Using Smoothing
+                  
                     cameraTransform.position = Vector3.SmoothDamp(cameraTransform.position, desiredPosition, ref currentVelocity, MovementSmoothingValue * Time.fixedDeltaTime);
-                    //cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPosition, Time.deltaTime * 5.0f);
                 }
                 else
                 {
-                    // Not using Smoothing
                     cameraTransform.position = desiredPosition;
                 }
+
+                float camHeight = Camera.main.orthographicSize;
+                float camWidth = camHeight * Camera.main.aspect;
+
+                float clampedX = Mathf.Clamp(cameraTransform.position.x, minPosition.x + camWidth, maxposition.x - camWidth);
+                float clampedY = Mathf.Clamp(cameraTransform.position.y, minPosition.y + camHeight, maxposition.y - camHeight);
+
+                cameraTransform.position = new Vector3(clampedX, clampedY, cameraTransform.position.z);
 
                 if (RotationSmoothing == true)
                     cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.LookRotation(CameraTarget.position - cameraTransform.position), RotationSmoothingValue * Time.deltaTime);
@@ -127,7 +136,6 @@ namespace TMPro.Examples
         {
             moveVector = Vector3.zero;
 
-            // Check Mouse Wheel Input prior to Shift Key so we can apply multiplier on Shift for Scrolling
             mouseWheel = Input.GetAxis("Mouse ScrollWheel");
 
             float touchCount = Input.touchCount;
@@ -146,7 +154,6 @@ namespace TMPro.Examples
                     MovementSmoothing = !MovementSmoothing;
 
 
-                // Check for right mouse button to change camera follow and elevation angle
                 if (Input.GetMouseButton(1))
                 {
                     mouseY = Input.GetAxis("Mouse Y");
@@ -155,7 +162,6 @@ namespace TMPro.Examples
                     if (mouseY > 0.01f || mouseY < -0.01f)
                     {
                         ElevationAngle -= mouseY * MoveSensitivity;
-                        // Limit Elevation angle between min & max values.
                         ElevationAngle = Mathf.Clamp(ElevationAngle, MinElevationAngle, MaxElevationAngle);
                     }
 
@@ -169,21 +175,17 @@ namespace TMPro.Examples
                     }
                 }
 
-                // Get Input from Mobile Device
                 if (touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
                 {
                     Vector2 deltaPosition = Input.GetTouch(0).deltaPosition;
 
-                    // Handle elevation changes
                     if (deltaPosition.y > 0.01f || deltaPosition.y < -0.01f)
                     {
                         ElevationAngle -= deltaPosition.y * 0.1f;
-                        // Limit Elevation angle between min & max values.
                         ElevationAngle = Mathf.Clamp(ElevationAngle, MinElevationAngle, MaxElevationAngle);
                     }
 
 
-                    // Handle left & right 
                     if (deltaPosition.x > 0.01f || deltaPosition.x < -0.01f)
                     {
                         OrbitalAngle += deltaPosition.x * 0.1f;
@@ -195,7 +197,6 @@ namespace TMPro.Examples
 
                 }
 
-                // Check for left mouse button to select a new CameraTarget or to reset Follow position
                 if (Input.GetMouseButton(0))
                 {
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -223,7 +224,6 @@ namespace TMPro.Examples
                 {
                     if (dummyTarget == null)
                     {
-                        // We need a Dummy Target to anchor the Camera
                         dummyTarget = new GameObject("Camera Target").transform;
                         dummyTarget.position = CameraTarget.position;
                         dummyTarget.rotation = CameraTarget.rotation;
@@ -233,7 +233,6 @@ namespace TMPro.Examples
                     }
                     else if (dummyTarget != CameraTarget)
                     {
-                        // Move DummyTarget to CameraTarget
                         dummyTarget.position = CameraTarget.position;
                         dummyTarget.rotation = CameraTarget.rotation;
                         CameraTarget = dummyTarget;
@@ -253,7 +252,6 @@ namespace TMPro.Examples
 
             }
 
-            // Check Pinching to Zoom in - out on Mobile device
             if (touchCount == 2)
             {
                 Touch touch0 = Input.GetTouch(0);
@@ -270,19 +268,16 @@ namespace TMPro.Examples
                 if (zoomDelta > 0.01f || zoomDelta < -0.01f)
                 {
                     FollowDistance += zoomDelta * 0.25f;
-                    // Limit FollowDistance between min & max values.
                     FollowDistance = Mathf.Clamp(FollowDistance, MinFollowDistance, MaxFollowDistance);
                 }
 
 
             }
 
-            // Check MouseWheel to Zoom in-out
             if (mouseWheel < -0.01f || mouseWheel > 0.01f)
             {
 
                 FollowDistance -= mouseWheel * 5.0f;
-                // Limit FollowDistance between min & max values.
                 FollowDistance = Mathf.Clamp(FollowDistance, MinFollowDistance, MaxFollowDistance);
             }
 

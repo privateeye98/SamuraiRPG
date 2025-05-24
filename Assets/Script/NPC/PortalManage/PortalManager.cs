@@ -64,7 +64,7 @@ public class PortalManager : MonoBehaviour
         {
             PlayerPrefs.SetString("SpawnPoint", data.spawnPointName); // 동적 저장
             PlayerPrefs.Save();
-
+            panel.SetActive(false);
             SceneManager.LoadScene(data.sceneName);
         });
 
