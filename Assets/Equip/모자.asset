@@ -21,7 +21,7 @@ MonoBehaviour:
   atk: 0
   hpBonusPerLevel: 50
   mpBonusPerLevel: 10
-  strBonusPerLevel: 10000
+  strBonusPerLevel: 3
   dexBonusPerLevel: 3
   critBonusPerLevel: 1
   id: 0

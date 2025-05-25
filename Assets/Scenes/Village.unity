@@ -47191,7 +47191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8214048223009187299, guid: ceb24e429928dc44d8ad7b34fc458b79, type: 3}
       propertyPath: dropGold
-      value: 1000000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8214048223009187299, guid: ceb24e429928dc44d8ad7b34fc458b79, type: 3}
       propertyPath: dropTable
@@ -55527,7 +55527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1200901024035731079, guid: c0b3b65114d9620458637482cd9a3445, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1388666720279441734, guid: c0b3b65114d9620458637482cd9a3445, type: 3}
       propertyPath: m_SizeDelta.x
@@ -56696,6 +56696,10 @@ PrefabInstance:
     - target: {fileID: 4767668332253398274, guid: c0b3b65114d9620458637482cd9a3445, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 23232
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842657950998302275, guid: c0b3b65114d9620458637482cd9a3445, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5045530356345253335, guid: c0b3b65114d9620458637482cd9a3445, type: 3}
       propertyPath: m_Pivot.x

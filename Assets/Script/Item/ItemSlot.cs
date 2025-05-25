@@ -27,6 +27,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
     {
         Debug.Log($"[ItemSlot] PointerEnter on {currentItem?.itemData.itemName}");
 
+
         if (currentItem == null || currentItem.itemData == null)
             return;
         TooltipUI.instance.Show(currentItem, Input.mousePosition);
