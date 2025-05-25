@@ -265,13 +265,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e8e53343d78374bb9e96b396c073c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropTable: {fileID: 11400000, guid: 7e8127fe317d1b147a636f03db193345, type: 2}
   nightbuff:
     healthMultiplier: 1.5
     attackMultiplier: 1.5
     nightStartTime: 40
   maxHP: 100
   moveSpeed: 1.5
-  chaseRange: 0
+  chaseRange: 7
   dropGold: 10
   goldPrefab: {fileID: 1420984807580001495, guid: c3523e0207bdd8c489c4b1e09129b3ab, type: 3}
   expReward: 100

@@ -424,7 +424,7 @@ MonoBehaviour:
   m_text: 'RESULT '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
-  m_sharedMaterial: {fileID: 6383810527358840008, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
+  m_sharedMaterial: {fileID: -7610944007269910477, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_text: "\uAC15\uD654\uD558\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
-  m_sharedMaterial: {fileID: 6383810527358840008, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
+  m_sharedMaterial: {fileID: -7610944007269910477, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -832,7 +832,7 @@ MonoBehaviour:
   m_text: Upgrade cost
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
-  m_sharedMaterial: {fileID: 6383810527358840008, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
+  m_sharedMaterial: {fileID: -7610944007269910477, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_text: "\uBAA8\uC790"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
-  m_sharedMaterial: {fileID: 6383810527358840008, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
+  m_sharedMaterial: {fileID: -7610944007269910477, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1485,7 +1485,7 @@ MonoBehaviour:
   m_text: ItemNameText
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
-  m_sharedMaterial: {fileID: 6383810527358840008, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
+  m_sharedMaterial: {fileID: -7610944007269910477, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1621,7 +1621,7 @@ MonoBehaviour:
   m_text: LevelText
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
-  m_sharedMaterial: {fileID: 6383810527358840008, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
+  m_sharedMaterial: {fileID: -7610944007269910477, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2180,7 +2180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &998719070249018281
 RectTransform:
   m_ObjectHideFlags: 0

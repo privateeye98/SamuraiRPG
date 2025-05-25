@@ -1,17 +1,17 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class ItemSlot : MonoBehaviour
+using TMPro;
+using UnityEngine.EventSystems;
+
+public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler
 {
     [SerializeField] Image icon;
     [SerializeField] TextMeshProUGUI quantityText;
     ItemData item;
-
     InventoryItem currentItem;
-    void Start()
-    {
-        GetComponent<Button>().onClick.AddListener(OnClickUse);
-    }
+
+    private float lastClickTime = 0f;
+    private const float doubleClickThreshold = 0.3f;
 
     public void SetItem(InventoryItem invItem)
     {
@@ -20,26 +20,61 @@ public class ItemSlot : MonoBehaviour
 
         icon.sprite = invItem.itemData.icon;
         icon.enabled = true;
-
-        Debug.Log($"[SetItem] {invItem.itemData.itemName} ¼ö·®: {invItem.quantity}");
-     
         quantityText.text = $"x{invItem.quantity}";
-        quantityText.color = Color.white; 
+        quantityText.color = Color.white;
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log($"[ItemSlot] PointerEnter on {currentItem?.itemData.itemName}");
+
+        if (currentItem == null || currentItem.itemData == null)
+            return;
+        TooltipUI.instance.Show(currentItem, Input.mousePosition);
+    }
+
+public void OnPointerExit(PointerEventData eventData)
+    {
+        TooltipUI.instance.Hide();
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (item == null) return;
+
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            float time = Time.unscaledTime;
+            if (time - lastClickTime < doubleClickThreshold)
+            {
+                OnClickUse();
+                lastClickTime = 0f;
+            }
+            else
+            {
+                lastClickTime = time;
+            }
+        }
     }
 
     public void OnClickUse()
     {
-        if(item != null)
-      Inventory.instance.UseItem(item);
+        if (item == null) return;
 
+        if (currentItem.itemData.type == ItemType.Equipment)
+        {
+            EquipmentManager.instance.EquipItem(currentItem);
+        }
+        else
+        {
+            Inventory.instance.UseItem(item);
+        }
     }
 
     public void Clear()
     {
+        if (icon == null) return;
         currentItem = null;
         icon.sprite = null;
         icon.enabled = false;
         quantityText.text = "";
     }
-
 }

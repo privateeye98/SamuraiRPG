@@ -64,12 +64,15 @@ public class PlayerStat : MonoBehaviour
         currentMP = maxMP;
     }
 
-    public void ApplyEquipmentStats(Dictionary<ItemPartType, ItemData> items)
+    public void ApplyEquipmentStats(
+     Dictionary<ItemPartType, ItemData> items,
+     Dictionary<ItemPartType, int> levels)
     {
         equippedItems = items;
-        RecalculateStats();
+        RecalculateStats(levels);
     }
 
+    // 기존 코드와 호환 (인자 없는 함수)
     public void RecalculateStats()
     {
         maxHP = BASE_HP + bonusHP;
@@ -83,8 +86,8 @@ public class PlayerStat : MonoBehaviour
             foreach (var pair in equippedItems)
             {
                 var item = pair.Value;
-                int lv = item.level;
-
+                // 기존처럼 레벨 1로 계산 (혹은 item.level이 있으면 그걸로)
+                int lv = 1;
                 maxHP += item.hpBonusPerLevel * lv;
                 maxMP += item.mpBonusPerLevel * lv;
                 strength += item.strBonusPerLevel * lv;
@@ -92,15 +95,41 @@ public class PlayerStat : MonoBehaviour
                 critical += item.critBonusPerLevel * lv;
             }
         }
-
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         currentMP = Mathf.Clamp(currentMP, 0, maxMP);
 
-
         Debug.Log($"[최종 스탯] HP:{maxHP}, MP:{maxMP}, STR:{strength}, DEX:{dexterity}, CRIT:{critical}");
-
         OnStatChanged?.Invoke();
     }
+
+    public void RecalculateStats(Dictionary<ItemPartType, int> levels)
+    {
+        maxHP = BASE_HP + bonusHP;
+        maxMP = BASE_MP + bonusMP;
+        strength = BASE_STR + bonusSTR;
+        dexterity = BASE_DEX + bonusDEX;
+        critical = BASE_CRIT + bonusCRIT;
+
+        if (equippedItems != null)
+        {
+            foreach (var pair in equippedItems)
+            {
+                var item = pair.Value;
+                int lv = levels.ContainsKey(pair.Key) ? levels[pair.Key] : 1;
+                maxHP += item.hpBonusPerLevel * lv;
+                maxMP += item.mpBonusPerLevel * lv;
+                strength += item.strBonusPerLevel * lv;
+                dexterity += item.dexBonusPerLevel * lv;
+                critical += item.critBonusPerLevel * lv;
+            }
+        }
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        currentMP = Mathf.Clamp(currentMP, 0, maxMP);
+
+        Debug.Log($"[최종 스탯] HP:{maxHP}, MP:{maxMP}, STR:{strength}, DEX:{dexterity}, CRIT:{critical}");
+        OnStatChanged?.Invoke();
+    }
+
 
 
     private float GetBaseAttack()
@@ -125,7 +154,6 @@ public class PlayerStat : MonoBehaviour
         if (IsCriticalHit())
         {
             raw *= GetCriticalMultiplier();
-            Debug.Log("crit");
         }
         return Mathf.RoundToInt(raw);
     }

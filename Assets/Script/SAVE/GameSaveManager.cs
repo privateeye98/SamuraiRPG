@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
-
+using System.Collections;
+using System.Collections.Generic;
 public class GameSaveManager : MonoBehaviour
 {
     public static GameSaveManager instance;
@@ -17,7 +18,17 @@ public class GameSaveManager : MonoBehaviour
     {
         SaveData data = new SaveData();
 
-        // 위치 저장 (플레이어 오브젝트는 "Player" 태그로 찾음)
+        foreach (var invItem in Inventory.instance.items)
+        {
+            data.inventoryItems.Add(new ItemSaveInfo
+            {
+                itemId = invItem.itemData.id,
+                level = invItem.level, // 강화레벨
+                amount = invItem.quantity,
+                partType = (int)invItem.itemData.part
+            });
+        }
+
         var player = GameObject.FindWithTag("Player");
         if (player != null)
         {
@@ -85,6 +96,19 @@ public class GameSaveManager : MonoBehaviour
             PlayerLevel.instance.currentExp = data.exp;
             PlayerLevel.instance.maxLevel = data.maxLevel;
         }
+
+        // 인벤토리 복원
+        Inventory.instance.items.Clear();
+        foreach (var saveInfo in data.inventoryItems)
+        {
+            var itemData = ItemDatabase.instance.GetItemById(saveInfo.itemId);
+            if (itemData != null)
+            { 
+
+                Inventory.instance.items.Add(new InventoryItem(itemData, saveInfo.amount));
+            }
+        }
+        Inventory.instance.NotifyItemChanged();
         Debug.Log("게임 로드 완료!");
     }
 }

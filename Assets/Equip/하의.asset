@@ -15,9 +15,10 @@ MonoBehaviour:
   baseSuccessRate: 0.5
   penaltyPerLevel: 0.1
   minSuccessRate: 10
-  level: 0
+  level: 1
   maxLevel: 50
   upgradeCost: 100
+  atk: 0
   hpBonusPerLevel: 50
   mpBonusPerLevel: 10
   strBonusPerLevel: 1
@@ -25,10 +26,12 @@ MonoBehaviour:
   critBonusPerLevel: 1
   id: 1
   itemName: 
-  icon: {fileID: 0}
+  icon: {fileID: 21301732, guid: 4e799e9a72d583c4ebba9f2e35c2a5f4, type: 3}
   type: 0
   healAmount: 0
   part: 2
+  statType: 0
+  isStackable: 0
+  maxStack: 200
   description: 
   price: 0
-  statType: 0

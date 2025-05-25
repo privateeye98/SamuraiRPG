@@ -5,35 +5,30 @@ public class InventoryUI : MonoBehaviour
     public GameObject slotPrefab;
     public Transform slotParent;
     ItemSlot[] slots;
-
+    public static InventoryUI instance;
     void Start()
     {
-        
-            Debug.Log("[InventoryUI] 시작됨");
-        
         if (Inventory.instance == null)
         {
-            Debug.LogWarning("Inventory.instance is null in InventoryUI.cs");
+            Debug.LogWarning("인스턴스가 없습니다.");
             return;
         }
 
         Inventory.instance.OnItemChangedCallback += UpdateUI;
 
         slots = new ItemSlot[Inventory.instance.capacity];
-
         for (int i = 0; i < Inventory.instance.capacity; i++)
         {
             GameObject go = Instantiate(slotPrefab, slotParent);
             slots[i] = go.GetComponent<ItemSlot>();
         }
-
         UpdateUI();
-
     }
 
-
-    void UpdateUI()
+    public void UpdateUI()
     {
+        Debug.Log($"UpdateUI CALLED? items.Count={Inventory.instance.items.Count}");
+
         for (int i = 0; i < slots.Length; i++)
         {
             if (i < Inventory.instance.items.Count)
@@ -41,6 +36,5 @@ public class InventoryUI : MonoBehaviour
             else
                 slots[i].Clear();
         }
-
     }
 }

@@ -1,12 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
     public List<InventoryItem> items = new List<InventoryItem>();
-
     public int capacity = 9;
 
     public delegate void OnItemChanged();
@@ -14,51 +12,50 @@ public class Inventory : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
     }
+
+    public void NotifyItemChanged() => OnItemChangedCallback?.Invoke();
 
     public bool AddItem(ItemData itemData)
     {
-        if(itemData.isStackable)
+        if (itemData.isStackable)
         {
-            foreach(var invItem in items)
+            foreach (var invItem in items)
             {
-                if(invItem.itemData.id == itemData.id && invItem.quantity < itemData.maxStack)
-                    {
+                if (invItem.itemData.id == itemData.id && invItem.quantity < itemData.maxStack)
+                {
                     invItem.quantity++;
-                    OnItemChangedCallback?.Invoke();
+                    NotifyItemChanged();
                     return true;
                 }
             }
         }
         if (items.Count >= capacity)
         {
-            Debug.Log("Not enough room.");
+            Debug.Log("인벤토리 풀");
             return false;
         }
 
-        items.Add(new InventoryItem(itemData));
-        OnItemChangedCallback?.Invoke(); // UI 갱신 호출
+        items.Add(new InventoryItem(itemData, 1, 1));
+        NotifyItemChanged();
         return true;
     }
-    public bool HasRoom()
-    {
-        return items.Count < capacity;
-    }
 
-    public void RemoveItem(ItemData item)
+    public bool HasRoom() => items.Count < capacity;
+
+    public void RemoveItem(ItemData item, int quantity = 1)
     {
         var invItem = items.Find(i => i.itemData == item);
         if (invItem != null)
-            items.Remove(invItem);
+        {
+            invItem.quantity -= quantity;
+            if (invItem.quantity <= 0)
+                items.Remove(invItem);
 
-        OnItemChangedCallback?.Invoke();
+            NotifyItemChanged();
+        }
     }
 
     public void UseItem(ItemData item)
@@ -71,15 +68,14 @@ public class Inventory : MonoBehaviour
             case ItemType.Consumable:
                 PlayerHealth.instance.Heal(item.healAmount);
                 invItem.quantity--;
-
                 if (invItem.quantity <= 0)
                     items.Remove(invItem);
-
-                OnItemChangedCallback?.Invoke();
+                NotifyItemChanged();
                 break;
 
             case ItemType.Equipment:
-                Debug.Log("장비 사용은 아직 구현되지 않음");
+                EquipmentManager.instance.EquipItem(invItem);
+                NotifyItemChanged();
                 break;
 
             case ItemType.Quest:
@@ -87,19 +83,25 @@ public class Inventory : MonoBehaviour
                 break;
         }
     }
-    public void SellItem(ItemData item)
+
+    public void SellItem(ItemData item, int sellQuantity = 1)
     {
         var invItem = items.Find(i => i.itemData == item);
-        if(invItem == null)return;
+        if (invItem == null) return;
 
-        GoldManager.instance.AddGold(item.price);
-        RemoveItem(item);
-        Debug.Log($"{item.itemName}을(를) {item.price}골드에 판매했습니다.");
+        int quantityToSell = Mathf.Min(sellQuantity, invItem.quantity);
+        GoldManager.instance.AddGold(item.price * quantityToSell);
+
+        invItem.quantity -= quantityToSell;
+        if (invItem.quantity <= 0)
+            items.Remove(invItem);
+
+        NotifyItemChanged();
     }
+
     public void Clear()
     {
         items.Clear();
-        OnItemChangedCallback?.Invoke(); // UI 갱신
+        NotifyItemChanged();
     }
-
 }

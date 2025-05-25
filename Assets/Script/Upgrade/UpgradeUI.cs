@@ -36,9 +36,14 @@ public class UpgradeUI : MonoBehaviour
         partDropdown.onValueChanged.RemoveAllListeners();
     }
 
-    public void Open(Dictionary<ItemPartType, ItemData> data)
+    public void Open(Dictionary<ItemPartType, ItemData> data,Dictionary<ItemPartType, int> levels)
     {
         upgradeItems = data;
+        foreach(var kv in levels)
+        {
+            if (upgradeItems.TryGetValue(kv.Key, out var itemData))
+                itemData.level = kv.Value;
+        }
         gameObject.SetActive(true);
         partDropdown.value = 0;
         OnDropdownChanged(0);
@@ -83,15 +88,12 @@ public class UpgradeUI : MonoBehaviour
             resultText.text = "강화할 아이템이 없습니다.";
             return;
         }
-
         if (currentItem.level >= currentItem.maxLevel)
         {
             resultText.text = "이미 최대 레벨입니다.";
             return;
         }
-
         int cost = currentItem.upgradeCost * currentItem.level;
-
         if (!GoldManager.instance.SpendGold(cost))
         {
             resultText.text = "골드가 부족합니다.";
@@ -106,16 +108,33 @@ public class UpgradeUI : MonoBehaviour
             currentItem.level++;
             resultText.text = $"강화 성공! Lv.{currentItem.level}";
 
-            PlayerStat.instance?.ApplyEquipmentStats(upgradeItems);
-            FindObjectOfType<StatUI>()?.UpdateUI();
+
+            foreach(var kv in EquipmentManager.instance.equippedItems)
+            {
+                if (kv.Value.itemData == currentItem)
+                    kv.Value.level = currentItem.level;
+            }
         }
         else
         {
             resultText.text = "강화 실패...";
         }
 
+        var levels = GetLevels(upgradeItems);
+        PlayerStat.instance?.ApplyEquipmentStats(upgradeItems, levels);
+        FindObjectOfType<StatUI>()?.UpdateUI();
+
         OnDropdownChanged(partDropdown.value);
     }
+
+    Dictionary<ItemPartType, int> GetLevels(Dictionary<ItemPartType, ItemData> items)
+    {
+        var levels = new Dictionary<ItemPartType, int>();
+        foreach (var pair in items)
+            levels[pair.Key] = pair.Value.level;
+        return levels;
+    }
+
 
     public void RefreshStatPreview()
     {

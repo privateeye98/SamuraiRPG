@@ -68,7 +68,7 @@ MonoBehaviour:
   m_text: "        \uC0C1  \uC810"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
-  m_sharedMaterial: {fileID: 6383810527358840008, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
+  m_sharedMaterial: {fileID: -7610944007269910477, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_text: "\uBCF4\uC720 \uACE8\uB4DC : 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
-  m_sharedMaterial: {fileID: 6383810527358840008, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
+  m_sharedMaterial: {fileID: -7610944007269910477, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -351,7 +351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2844837165273169655
 RectTransform:
   m_ObjectHideFlags: 0
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1151905075149521417, guid: 32772c544e584a840a2869c77c0982f9, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

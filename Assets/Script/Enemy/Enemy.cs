@@ -4,7 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Enemy : MonoBehaviour, IDamageable
 {
-
+    [Header("드롭 테이블")]
+    public DropTable dropTable;
 
     [Header("밤배수체크")]
     public EnemyNightBuff nightbuff;
@@ -128,20 +129,22 @@ public class Enemy : MonoBehaviour, IDamageable
         _rb.simulated = false;             // Rigidbody2D 시뮬레이션 꺼버리기
         GetComponent<Collider2D>().enabled = false;
 
-        GoldManager.instance?.AddGold(dropGold);
-
         if (goldPrefab != null)
         {
             GameObject gold = Instantiate(goldPrefab, transform.position, Quaternion.identity);
+
             Rigidbody2D rb = gold.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
                 rb.AddForce(new Vector2(Random.Range(-1f, 1f), 1f) * 5f, ForceMode2D.Impulse); // 튀어나오게
             }
         }
-        QuestManager.instance?.UpdateQuestProgress(gameObject.name);
 
+        QuestManager.instance?.UpdateQuestProgress(gameObject.name);
         PlayerLevel.instance?.AddExp(expReward);
+        GoldManager.instance?.AddGold(dropGold);
+
+        TryDropItem();
 
         string cleanName = gameObject.name.Replace("(Clone)", "");
         QuestManager.instance?.UpdateQuestProgress(cleanName);
@@ -149,6 +152,29 @@ public class Enemy : MonoBehaviour, IDamageable
         Destroy(gameObject, 1f);
 
     }
+
+
+    void TryDropItem()
+    {
+        Debug.Log($"[Drop] {name}.TryDropItem() 호출");
+        if (dropTable == null) Debug.LogWarning("DropTable이 할당되지 않음!");
+        if (dropTable.pickupPrefab == null) Debug.LogWarning("pickupPrefab이 할당되지 않음!");
+
+        foreach (var entry in dropTable.entries)
+        {
+            float rnd = Random.value;
+            Debug.Log($"→{entry.itemData.itemName} 확률 {entry.dropChance}, rnd={rnd}");
+            if (rnd < entry.dropChance)
+            {
+                Debug.Log($"→ 드롭 결정: {entry.itemData.itemName}");
+                var go = Instantiate(dropTable.pickupPrefab, transform.position, Quaternion.identity);
+
+                var pickup = go.GetComponent<ItemPickup>();
+                pickup.Initiallize(entry.itemData);
+            }
+        }
+    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {

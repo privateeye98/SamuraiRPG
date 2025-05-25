@@ -11,7 +11,7 @@ public class ItemData : ScriptableObject
     public int level = 1;
     public int maxLevel = 10;
     public int upgradeCost = 100;
-
+    public int atk;
     // -- ∫∏≥ Ω∫ Ω∫≈› 
     public int hpBonusPerLevel;
     public int mpBonusPerLevel;
@@ -27,11 +27,11 @@ public class ItemData : ScriptableObject
 
     public ItemPartType part;
     public StatType statType;
+
+
     //º“∫Ò¡ﬂ√∏
     public bool isStackable = false;
     public int maxStack = 200;
-
-
 
 
     [TextArea]

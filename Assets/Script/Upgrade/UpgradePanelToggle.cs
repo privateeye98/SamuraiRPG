@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 public class UpgradePanelToggle : MonoBehaviour
 {
     [SerializeField] GameObject upgradePanel;
@@ -16,6 +17,20 @@ public class UpgradePanelToggle : MonoBehaviour
     Dictionary<ItemPartType, ItemData> upgradeItems;
     void Start()
     {
+        if(head == null || body == null || leg == null || shoe == null || glove == null || weapon == null)
+        {
+            Debug.LogError("패널에 할당되지 않은것이 있습니다.");
+            return;
+        }
+
+
+        head.level = 1;
+        body.level = 1;
+        leg.level = 1;
+        shoe.level = 1;
+        glove.level = 1;
+        weapon.level = 1;
+
         upgradeItems = new Dictionary<ItemPartType, ItemData>
         {
             [ItemPartType.Head] = head,
@@ -25,22 +40,37 @@ public class UpgradePanelToggle : MonoBehaviour
             [ItemPartType.Glove] = glove,
             [ItemPartType.Weapon] = weapon
         };
-        PlayerStat.instance?.ApplyEquipmentStats(upgradeItems);
+
+        foreach (var pair in upgradeItems)
+        {
+            var invItem = new InventoryItem(pair.Value, qty: 1, lv: pair.Value.level);
+            EquipmentManager.instance.equippedItems[pair.Key] = invItem;
+        }
+
+        EquipmentUI.instance.RefreshUI();
+        InventoryUI.instance.UpdateUI();
+
+        var levels = upgradeItems.ToDictionary(p => p.Key, p => p.Value.level);
+        EquipmentManager.instance.ApplyEquipmentStats(upgradeItems, levels);
     }
-   void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.U))
         {
+            bool isActive = !upgradePanel.activeSelf;
+            upgradePanel.SetActive(isActive);
             if (upgradePanel != null)
             {
-                bool isActive = !upgradePanel.activeSelf;
-                upgradePanel.SetActive(isActive);
+                var equipDict = EquipmentManager.instance.equippedItems;
 
-                // 강화창이 열릴 때만 upgradeItems 전달
-                if (isActive && upgradeUI != null)
-                {
-                    upgradeUI.Open(upgradeItems);
-                }
+                var dataDict = equipDict.ToDictionary(kv => kv.Key, kv => kv.Value.itemData);
+
+                var levelDict = equipDict.ToDictionary(
+                    kv => kv.Key, kv => kv.Value.level
+                    );
+
+                upgradeUI.Open(dataDict, levelDict);
+                
             }
         }
     }
