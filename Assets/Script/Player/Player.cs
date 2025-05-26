@@ -43,12 +43,18 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] float skillAfterImageInterval = 0.05f;
     float lastSkillTime = -999f;
 
+    [Header("Wide Skill Hitbox (광역)")]
     [SerializeField] int wideSkillCost = 500;
     [SerializeField] GameObject skillPortraitUI;
     [SerializeField] float wideSkillCooldown = 5f;
     float lastWideSkillTime = -999f;
     [SerializeField] float wideSkillMultiplier = 1.8f; // 퍼뎀 (180%)
     [SerializeField] int wideSkillBaseDamage = 10;     // 기본값
+
+    [Header("Wide Skill VFX")]
+    [SerializeField] private GameObject wideSkillVfxPrefab;    // 광역 스킬용 VFX 프리팹
+    [SerializeField] private Transform wideSkillVfxPoint;      // 이펙트가 나올 위치(예: 플레이어 중심)
+    [SerializeField] private float wideSkillVfxLifetime = 1f;  // 자동 삭제 시간
 
     public static Player instance;
     void SpawnSkillHitbox()
@@ -188,8 +194,22 @@ public class Player : MonoBehaviour, IDamageable
 
 
                 CameraShake.instance?.StartCoroutine(CameraShake.instance.Shake(0.3f, 0.2f));
+                float dir = GetComponent<SpriteRenderer>().flipX ? -1f : 1f;
 
                 DamageAllEnemies(); //
+                if (wideSkillVfxPrefab != null)
+                {
+                    Vector3 spawnPos = (wideSkillVfxPoint != null)
+                         ? wideSkillVfxPoint.position : transform.position;
+
+                    spawnPos.y += 3f;
+                    spawnPos.x += dir * 1f;
+                    var go = Instantiate(wideSkillVfxPrefab, spawnPos, Quaternion.identity);
+                    Destroy(go, wideSkillVfxLifetime);
+
+                    var s = go.transform.localScale;
+                    go.transform.localScale = new Vector3(Mathf.Abs(s.x) * dir, s.y, s.z);
+                }
 
             }
             else if (!cooldownReady)

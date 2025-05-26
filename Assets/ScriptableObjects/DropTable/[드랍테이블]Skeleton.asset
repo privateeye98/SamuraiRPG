@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - itemData: {fileID: 11400000, guid: 8e1a0a64855137c4e8af75949f63285e, type: 2}
-    dropChance: 0.000001
+    dropChance: 0.001
   - itemData: {fileID: 11400000, guid: 513deb6fea77e6c4baa1a4b584ce4a19, type: 2}
-    dropChance: 0.00001
+    dropChance: 0.001
   pickupPrefab: {fileID: 2379365951086129184, guid: 39ca655cf220b6747a47d2aed3608e7c, type: 3}
