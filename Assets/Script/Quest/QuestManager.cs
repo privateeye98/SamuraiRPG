@@ -4,13 +4,23 @@ using System;
 
 public class QuestManager : MonoBehaviour
 {
+    public static QuestManager instance;
     public static event Action<QuestData> OnQuestAccepted;
     public static event Action<QuestData> OnQuestCompleted;
-    public static QuestManager instance;
+    public static event Action<Quest> OnQuestProgress;
+
+    
     public List<Quest> activeQuests = new List<Quest>();
 
 
-
+    public static void ReportProgress(Quest quest)
+    {
+        OnQuestProgress?.Invoke(quest);
+    }
+    public static void ReportCompleted(QuestData data)
+    {
+        OnQuestCompleted?.Invoke(data);
+    }
     public QuestData GetQuestDataByID(string id)
     {
     

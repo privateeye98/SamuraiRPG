@@ -18,6 +18,9 @@ public class Quest
             currentAmount++;
             Debug.Log($"[퀘스트 진행] {data.questID}: {currentAmount}/{data.requiredAmount}");
 
+            QuestManager.ReportProgress(this);
+
+
             if (currentAmount >= data.requiredAmount)
             {
                 Complete();
@@ -30,15 +33,13 @@ public class Quest
 
         Debug.Log($"[퀘스트 완료] {data.questTitle}");
 
-        //
-        // 골드 보상
+
         if (data.rewardGold > 0)
         {
             GoldManager.instance?.AddGold(data.rewardGold);
             Debug.Log($"+{data.rewardGold} 골드 획득");
         }
 
-        // 아이템 보상
         if (data.rewardItemId != 0)
         {
             ItemData rewardItem = ItemDatabase.instance.GetItemById(data.rewardItemId);
