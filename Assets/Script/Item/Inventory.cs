@@ -18,30 +18,51 @@ public class Inventory : MonoBehaviour
 
     public void NotifyItemChanged() => OnItemChangedCallback?.Invoke();
 
-    public bool AddItem(ItemData itemData)
+    public bool AddItem(ItemData itemData, int amount)
     {
         if (itemData.isStackable)
         {
-            foreach (var invItem in items)
+            int remaining = amount;
+
+            foreach (var inv in items)
             {
-                if (invItem.itemData.id == itemData.id && invItem.quantity < itemData.maxStack)
+                if (inv.itemData.id == itemData.id)
                 {
-                    invItem.quantity++;
-                    NotifyItemChanged();
-                    return true;
+                    int space = itemData.maxStack - inv.quantity;
+                    int toAdd = Mathf.Min(space, remaining);
+                    inv.quantity += toAdd;
+                    remaining -= toAdd;
+                    if (remaining <= 0) break;
                 }
             }
+
+            while (remaining > 0 && items.Count < capacity)
+            {
+                int toAdd = Mathf.Min(itemData.maxStack, remaining);
+                items.Add(new InventoryItem(itemData, toAdd, 1));
+                remaining -= toAdd;
+            }
+
+            if (remaining > 0)
+                return false; 
         }
-        if (items.Count >= capacity)
+        else
         {
-            Debug.Log("인벤토리 풀");
-            return false;
+            if (items.Count + amount > capacity)
+                return false;
+
+            for (int i = 0; i < amount; i++)
+                items.Add(new InventoryItem(itemData, 1, 1));
         }
 
-        items.Add(new InventoryItem(itemData, 1, 1));
         NotifyItemChanged();
         return true;
     }
+    public bool AddItem(ItemData itemData)
+    {
+        return AddItem(itemData, 1);
+    }
+
 
     public bool HasRoom() => items.Count < capacity;
 

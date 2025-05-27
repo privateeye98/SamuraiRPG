@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      VFX8_GIF_0: -6648696376088950189
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

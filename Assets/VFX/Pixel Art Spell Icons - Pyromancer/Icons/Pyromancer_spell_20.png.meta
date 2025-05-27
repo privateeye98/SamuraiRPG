@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pyromancer_spell_20_0: -3524629210544116254
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

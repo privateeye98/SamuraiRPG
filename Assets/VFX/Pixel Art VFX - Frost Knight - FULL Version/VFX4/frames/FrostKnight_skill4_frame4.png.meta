@@ -247,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FrostKnight_skill4_frame4_0: 3179025718400545805
+      FrostKnight_skill4_frame4_1: -2663549526430068009
+      FrostKnight_skill4_frame4_2: -4347908243587225009
+      FrostKnight_skill4_frame4_3: 8039886769027678932
+      FrostKnight_skill4_frame4_4: 9128870712156310931
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

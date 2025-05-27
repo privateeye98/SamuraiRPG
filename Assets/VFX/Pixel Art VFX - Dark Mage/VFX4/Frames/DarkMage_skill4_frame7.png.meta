@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DarkMage_skill4_frame7_0: -3968917961780846777
+      DarkMage_skill4_frame7_1: -3490945174082428269
+      DarkMage_skill4_frame7_2: -2477329165339691993
+      DarkMage_skill4_frame7_3: 2547393039419730173
+      DarkMage_skill4_frame7_4: 6495948797116484846
+      DarkMage_skill4_frame7_5: -6533312159361022122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

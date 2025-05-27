@@ -8,6 +8,7 @@ public class EnemyStats : ScriptableObject
     public int baseMaxAtk;
     public int baseDefense;
     public int baseEvade;
+    public int level;
 
     [Tooltip("레벨당 증가량")]
     public float hpPerLevel;

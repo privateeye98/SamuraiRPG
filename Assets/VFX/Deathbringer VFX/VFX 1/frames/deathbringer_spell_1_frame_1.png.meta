@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      deathbringer_spell_1_frame_1_0: 3381308352441821470
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -522,7 +522,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FrostMage_skill_6_frame_7_0: 7971245476492975325
+      FrostMage_skill_6_frame_7_1: 5472768221483930340
+      FrostMage_skill_6_frame_7_10: 4471130220003815807
+      FrostMage_skill_6_frame_7_11: 4295990941033461866
+      FrostMage_skill_6_frame_7_12: -8836986075730613055
+      FrostMage_skill_6_frame_7_13: -1797837151940704761
+      FrostMage_skill_6_frame_7_14: -3990152138047316195
+      FrostMage_skill_6_frame_7_15: 7282059070478806942
+      FrostMage_skill_6_frame_7_2: 2722016735037565723
+      FrostMage_skill_6_frame_7_3: -2636077799932733650
+      FrostMage_skill_6_frame_7_4: -2776381431298428810
+      FrostMage_skill_6_frame_7_5: -9083755812301924958
+      FrostMage_skill_6_frame_7_6: 4386796785693093373
+      FrostMage_skill_6_frame_7_7: -1082222685567443484
+      FrostMage_skill_6_frame_7_8: 6751970330414262023
+      FrostMage_skill_6_frame_7_9: 5294084309186509338
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

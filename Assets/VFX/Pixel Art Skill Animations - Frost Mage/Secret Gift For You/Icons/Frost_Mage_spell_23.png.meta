@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Frost_Mage_spell_23_0: -2747926855174206623
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

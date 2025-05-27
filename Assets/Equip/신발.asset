@@ -25,13 +25,13 @@ MonoBehaviour:
   dexBonusPerLevel: 1
   critBonusPerLevel: 1
   id: 1
-  itemName: 
+  itemName: "\uCD08\uBCF4\uC790\uC2E0\uBC1C"
   icon: {fileID: 21300000, guid: f9cbaceb065433e4f8d1f40795c38d85, type: 3}
   type: 0
   healAmount: 0
   part: 3
   statType: 0
   isStackable: 0
-  maxStack: 200
+  maxStack: 1
   description: 
   price: 0

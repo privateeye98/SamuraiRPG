@@ -297,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      blood-knight_skill_3_frame_5_0: 5422106614231452863
+      blood-knight_skill_3_frame_5_1: -1364374644707578088
+      blood-knight_skill_3_frame_5_2: -1775060993460254206
+      blood-knight_skill_3_frame_5_3: -2813363876354770259
+      blood-knight_skill_3_frame_5_4: 6829708344257028035
+      blood-knight_skill_3_frame_5_5: 2601826546088354199
+      blood-knight_skill_3_frame_5_6: 6644264709153282667
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1022,7 +1022,43 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Slime_vfx5_frame10_0: -1399037563914630856
+      Slime_vfx5_frame10_1: 8893301359567467525
+      Slime_vfx5_frame10_10: -1126622522426308384
+      Slime_vfx5_frame10_11: -6574227287850034076
+      Slime_vfx5_frame10_12: 4877983121549361341
+      Slime_vfx5_frame10_13: -770088113136273447
+      Slime_vfx5_frame10_14: -7864635914472943991
+      Slime_vfx5_frame10_15: -9191068681014290846
+      Slime_vfx5_frame10_16: 9076145066858359006
+      Slime_vfx5_frame10_17: -8574485613190006171
+      Slime_vfx5_frame10_18: -1408066990681608264
+      Slime_vfx5_frame10_19: -1169366079821054936
+      Slime_vfx5_frame10_2: 6890428899004087456
+      Slime_vfx5_frame10_20: -6836808368964223304
+      Slime_vfx5_frame10_21: -2494311046303184013
+      Slime_vfx5_frame10_22: 2292391676956221289
+      Slime_vfx5_frame10_23: -6037194703460475925
+      Slime_vfx5_frame10_24: 4114681108664213335
+      Slime_vfx5_frame10_25: 9151694466669338859
+      Slime_vfx5_frame10_26: -429722792702265307
+      Slime_vfx5_frame10_27: 6998234273592742986
+      Slime_vfx5_frame10_28: -6839870556677535284
+      Slime_vfx5_frame10_29: 5284556977230300596
+      Slime_vfx5_frame10_3: 2666923056991767777
+      Slime_vfx5_frame10_30: -2213974691594240546
+      Slime_vfx5_frame10_31: -2028539393750542896
+      Slime_vfx5_frame10_32: 2657007405545389545
+      Slime_vfx5_frame10_33: -7139872836798449104
+      Slime_vfx5_frame10_34: -2011794613874506387
+      Slime_vfx5_frame10_35: -3644416202488086421
+      Slime_vfx5_frame10_4: -706667099560487298
+      Slime_vfx5_frame10_5: -3472779370211370400
+      Slime_vfx5_frame10_6: 2578479199485175416
+      Slime_vfx5_frame10_7: 3300158309060884708
+      Slime_vfx5_frame10_8: -3990158185359972548
+      Slime_vfx5_frame10_9: -655173435180850063
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BloodKnight_spell_7_0: 1699643538937290834
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FrostKnight_skill9_frame2_0: -332026805589500973
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -38,9 +38,15 @@ public class ItemData : ScriptableObject
     public string description;
     public int price;
 
+    [Header("상점 되팔기 설정")]
+    [Range(0f, 1f)] public float sellRatio = 0.5f;
     public float GetSuccessRate()
     {
         float rate = baseSuccessRate - (level * penaltyPerLevel);
         return Mathf.Clamp(rate, minSuccessRate, 1f);
+    }
+    public int SellPrice
+    {
+        get { return Mathf.FloorToInt(price * sellRatio); }
     }
 }

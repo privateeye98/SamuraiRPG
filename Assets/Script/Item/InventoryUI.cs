@@ -6,6 +6,17 @@ public class InventoryUI : MonoBehaviour
     public Transform slotParent;
     ItemSlot[] slots;
     public static InventoryUI instance;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
+
     void Start()
     {
         if (Inventory.instance == null)

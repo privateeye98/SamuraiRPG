@@ -174,7 +174,7 @@ public class PlayerStat : MonoBehaviour
     }
     public float GetCriticalMultiplier()
     {
-        return 1.5f;
+        return 1.2f;
     }
     public void NotifyStatChanged()
     {

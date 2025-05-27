@@ -597,7 +597,26 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DarkMage_skill4_frame8_0: -562664366510391726
+      DarkMage_skill4_frame8_1: -2110518914264462967
+      DarkMage_skill4_frame8_10: 7834966146428189587
+      DarkMage_skill4_frame8_11: -1869249756379341283
+      DarkMage_skill4_frame8_12: -6437512276389072511
+      DarkMage_skill4_frame8_13: 885109820598238901
+      DarkMage_skill4_frame8_14: 3188195859647817566
+      DarkMage_skill4_frame8_15: -1042412414132336691
+      DarkMage_skill4_frame8_16: -1316973557217917711
+      DarkMage_skill4_frame8_17: -1735949733519686183
+      DarkMage_skill4_frame8_18: -5896725546186350711
+      DarkMage_skill4_frame8_2: -4020939279801122662
+      DarkMage_skill4_frame8_3: 2530544866771702021
+      DarkMage_skill4_frame8_4: 3754171632703961916
+      DarkMage_skill4_frame8_5: 1396047656629668318
+      DarkMage_skill4_frame8_6: -4294079980849166168
+      DarkMage_skill4_frame8_7: -9097326584991265617
+      DarkMage_skill4_frame8_8: 3472293151299692521
+      DarkMage_skill4_frame8_9: 4822666981026820668
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

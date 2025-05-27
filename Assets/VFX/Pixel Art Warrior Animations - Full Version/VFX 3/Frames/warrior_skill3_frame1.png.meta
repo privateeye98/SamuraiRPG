@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      warrior_skill3_frame1_0: 3899822350262438454
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

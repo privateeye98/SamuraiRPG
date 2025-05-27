@@ -176,31 +176,27 @@ public class ShopManager : MonoBehaviour
     }
     public void ConfirmBuy()
     {
-        if (selectedItem == null) return;
-
         if (!int.TryParse(amountInput.text, out int amount) || amount <= 0)
+            return;
+
+        int totalCost = selectedItem.price * amount;
+        if (!GoldManager.instance.SpendGold(totalCost))
         {
-            Debug.Log("잘못된 수량 입력!");
+            Debug.Log("골드가 부족합니다!");
             return;
         }
-        int totalCost = selectedItem.price * amount;
-
-        if (GoldManager.instance.SpendGold(totalCost))
-        {
-            for (int i = 0; i < amount; i++)
-            {
-                Inventory.instance.AddItem(selectedItem);
-            }
-            Debug.Log($"{selectedItem.itemName}을(를) {amount}개 구매했습니다.");
-        }
+        bool added = Inventory.instance.AddItem(selectedItem, amount);
+        if (!added)
+            Debug.LogWarning("인벤토리에 공간이 부족합니다!");
         else
-        {
-            Debug.Log("골드 부족!");
-        }
+            Debug.Log($"{selectedItem.itemName}을(를) {amount}개 구매했습니다.");
 
         buyPopup.SetActive(false);
+
+        UpdateUI();
     }
-    public void CancelBuy()
+
+public void CancelBuy()
     {
         selectedItem = null;
         buyPopup.SetActive(false);

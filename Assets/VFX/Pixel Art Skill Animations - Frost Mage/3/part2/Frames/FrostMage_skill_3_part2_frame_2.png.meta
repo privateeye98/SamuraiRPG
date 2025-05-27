@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FrostMage_skill_3_part2_frame_2_0: 185500480341680050
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

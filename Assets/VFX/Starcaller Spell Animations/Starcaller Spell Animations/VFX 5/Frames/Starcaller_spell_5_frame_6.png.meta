@@ -422,7 +422,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Starcaller_spell_5_frame_6_0: 6452811356307556456
+      Starcaller_spell_5_frame_6_1: 546543905604357759
+      Starcaller_spell_5_frame_6_10: 1341193568330801363
+      Starcaller_spell_5_frame_6_11: -5485190662684009618
+      Starcaller_spell_5_frame_6_2: 4933206653644328358
+      Starcaller_spell_5_frame_6_3: 917079489928631161
+      Starcaller_spell_5_frame_6_4: 7719074030325445976
+      Starcaller_spell_5_frame_6_5: -214594487946561054
+      Starcaller_spell_5_frame_6_6: -3919330907422710878
+      Starcaller_spell_5_frame_6_7: -8174127424316775657
+      Starcaller_spell_5_frame_6_8: -2205497791679207329
+      Starcaller_spell_5_frame_6_9: 1986453666078001166
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

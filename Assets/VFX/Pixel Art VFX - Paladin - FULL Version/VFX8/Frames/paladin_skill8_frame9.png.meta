@@ -247,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      paladin_skill8_frame9_0: 5574409822591657464
+      paladin_skill8_frame9_1: 2216743082754372930
+      paladin_skill8_frame9_2: 8509159072712942666
+      paladin_skill8_frame9_3: 2814435241190271976
+      paladin_skill8_frame9_4: -4636085672582213416
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

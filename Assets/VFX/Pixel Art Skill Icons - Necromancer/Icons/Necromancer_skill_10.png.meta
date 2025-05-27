@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Necromancer_skill_10_0: -6625633069447309204
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

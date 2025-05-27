@@ -1172,7 +1172,49 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sprite-sheet_0: 7773031391787181946
+      sprite-sheet_1: -1426790471357470633
+      sprite-sheet_10: -7328016140542092180
+      sprite-sheet_11: 573168479056981123
+      sprite-sheet_12: -2052979034590239150
+      sprite-sheet_13: -599754731956233123
+      sprite-sheet_14: 8364850724636403409
+      sprite-sheet_15: -6650122099543898603
+      sprite-sheet_16: -4952747364788223248
+      sprite-sheet_17: -4558533973277291694
+      sprite-sheet_18: 192454500139917738
+      sprite-sheet_19: -3988586098559631296
+      sprite-sheet_2: -2506210909196879853
+      sprite-sheet_20: 4585784099227081989
+      sprite-sheet_21: 7910205142894628472
+      sprite-sheet_22: -5453835138508083989
+      sprite-sheet_23: 1334599240327533485
+      sprite-sheet_24: -6627865198301778148
+      sprite-sheet_25: -260948941826079365
+      sprite-sheet_26: 7410530569769358565
+      sprite-sheet_27: -576870600854793513
+      sprite-sheet_28: -4818556106472641470
+      sprite-sheet_29: -2579015654255774944
+      sprite-sheet_3: -8907015550746980148
+      sprite-sheet_30: -5849064155817607363
+      sprite-sheet_31: -7150693180217069502
+      sprite-sheet_32: 8586753166698750598
+      sprite-sheet_33: -1881072028268831973
+      sprite-sheet_34: 3323518892673604388
+      sprite-sheet_35: 4358674376539340698
+      sprite-sheet_36: -5415372385674030642
+      sprite-sheet_37: -8377541152210016672
+      sprite-sheet_38: -9057413479102639183
+      sprite-sheet_39: -666522333043579535
+      sprite-sheet_4: -3085487725770422062
+      sprite-sheet_40: -6367429555072558050
+      sprite-sheet_41: -2555984197896547298
+      sprite-sheet_5: -7371053094594084745
+      sprite-sheet_6: -3062665138650254500
+      sprite-sheet_7: -1924591734268745998
+      sprite-sheet_8: 2940483688060090369
+      sprite-sheet_9: 4123475054659131201
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

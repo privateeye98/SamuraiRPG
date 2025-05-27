@@ -297,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Slime_vfx5_frame9_0: -5481775947803332770
+      Slime_vfx5_frame9_1: 1962911745649712838
+      Slime_vfx5_frame9_2: -1694953937633256913
+      Slime_vfx5_frame9_3: 6237342572589978123
+      Slime_vfx5_frame9_4: 1057933694247035853
+      Slime_vfx5_frame9_5: 215077107085383698
+      Slime_vfx5_frame9_6: 7265558099199123311
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

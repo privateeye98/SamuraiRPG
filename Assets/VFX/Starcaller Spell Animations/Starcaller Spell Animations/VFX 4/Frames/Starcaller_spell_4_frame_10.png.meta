@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Starcaller_spell_4_frame_10_0: -9146627392509329717
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

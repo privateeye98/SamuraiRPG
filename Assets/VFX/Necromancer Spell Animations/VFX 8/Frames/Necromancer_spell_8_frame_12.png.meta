@@ -522,7 +522,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Necromancer_spell_8_frame_12_0: -2703507016828940429
+      Necromancer_spell_8_frame_12_1: -6223325506059536883
+      Necromancer_spell_8_frame_12_10: 483120292856725004
+      Necromancer_spell_8_frame_12_11: -4181384103414445710
+      Necromancer_spell_8_frame_12_12: 7111514827563723001
+      Necromancer_spell_8_frame_12_13: 8816740750029426294
+      Necromancer_spell_8_frame_12_14: -913192971140887690
+      Necromancer_spell_8_frame_12_15: -9199345007268768380
+      Necromancer_spell_8_frame_12_2: -4051266107771518090
+      Necromancer_spell_8_frame_12_3: -3620659610176417267
+      Necromancer_spell_8_frame_12_4: 7998896885290174434
+      Necromancer_spell_8_frame_12_5: 4459610654563376249
+      Necromancer_spell_8_frame_12_6: -4697750688736783251
+      Necromancer_spell_8_frame_12_7: 5319809510669207106
+      Necromancer_spell_8_frame_12_8: 355678101192409301
+      Necromancer_spell_8_frame_12_9: -3758795806233894440
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
