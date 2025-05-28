@@ -57,6 +57,7 @@ public class PlayerAttack : MonoBehaviour
         hitbox.gameObject.SetActive(true);
 
         int lvl = PlayerLevel.instance.currentLevel;
+
         if (lvl >= 10)
         {
             // 2) 해당 콤보 단계 VFX 스폰

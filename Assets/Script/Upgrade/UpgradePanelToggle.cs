@@ -17,7 +17,9 @@ public class UpgradePanelToggle : MonoBehaviour
     Dictionary<ItemPartType, ItemData> upgradeItems;
     void Start()
     {
-        if(head == null || body == null || leg == null || shoe == null || glove == null || weapon == null)
+        
+
+        if (head == null || body == null || leg == null || shoe == null || glove == null || weapon == null)
         {
             Debug.LogError("패널에 할당되지 않은것이 있습니다.");
             return;
