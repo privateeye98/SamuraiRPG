@@ -4,6 +4,7 @@ using System.Collections;
 
 public class SpawnPoint : MonoBehaviour
 {
+
     [Header("스폰 설정")]
     public GameObject enemyPrefab;
     public int maxSpawnCount = 3;

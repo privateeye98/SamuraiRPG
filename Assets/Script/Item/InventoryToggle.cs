@@ -6,7 +6,10 @@ public class InventoryToggle : MonoBehaviour
     public Vector2 centerPosition = Vector2.zero;
     public Vector2 shopOpenPosition = new Vector2(400f, 0f);
     public bool isShopOpen = false;
-
+    void Awake()
+    {
+        DontDestroyOnLoad(inventoryUI); 
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))

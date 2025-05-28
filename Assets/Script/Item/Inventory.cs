@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
     void Awake()
     {
         if (instance == null) instance = this;
-        else Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     public void NotifyItemChanged() => OnItemChangedCallback?.Invoke();
