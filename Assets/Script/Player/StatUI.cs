@@ -25,7 +25,7 @@ public class StatUI : MonoBehaviour
         if (playerStat != null)
             playerStat.OnStatChanged += UpdateUI;
 
-        UpdateUI();  // 초기 1회
+        UpdateUI(); 
     }
 
     void OnDisable()

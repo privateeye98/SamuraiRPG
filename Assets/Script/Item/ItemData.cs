@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewItem", menuName = "Iventory/Item")]
@@ -40,6 +41,29 @@ public class ItemData : ScriptableObject
 
     [Header("상점 되팔기 설정")]
     [Range(0f, 1f)] public float sellRatio = 0.5f;
+
+    [Header("착용 최소 레벨 설정")]
+    public int requiredLevel = 1;
+    [Header("착용 최소 스탯")]
+    public StatRequirement[] requiredStats;
+    [Header("장비 보너스 스탯")]
+    public StatModifier[] bonusStats;
+
+    [Serializable]
+    public struct StatRequirement
+    {
+        public StatType stat;
+        public int value;
+    }
+
+    [Serializable]
+    public struct StatModifier
+    {
+        public StatType stat;
+        public int amount;
+    }
+
+
     public float GetSuccessRate()
     {
         float rate = baseSuccessRate - (level * penaltyPerLevel);

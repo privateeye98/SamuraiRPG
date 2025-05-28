@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Village.unity
+    path: Assets/Scenes/0.Village.unity
     guid: 5227243b27c69644b882f8529799ef6b
   - enabled: 1
-    path: "Assets/Scenes/\uC0AC\uB0E5\uD130 1-1.unity"
+    path: "Assets/Scenes/1.\uC0AC\uB0E5\uD130 1-1.unity"
     guid: c4f4f7d1c563e7947afefba351ed15f1
+  - enabled: 1
+    path: "Assets/Scenes/2.\uC9C0\uD558\uC218\uB85C.unity"
+    guid: 16a074108c8d91e4a9fc6d73e0b40ae4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -1,23 +1,22 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+
 public class PlayerStat : MonoBehaviour
 {
     public static PlayerStat instance;
 
-    // 전투력
     public int MinDamage => Mathf.RoundToInt(GetBaseAttack() * 0.9f);
     public int MaxDamage => Mathf.RoundToInt(GetBaseAttack() * 1.1f);
 
-
-    // 기본값
     private const int BASE_HP = 100;
     private const int BASE_MP = 50;
     private const int BASE_STR = 10;
     private const int BASE_DEX = 5;
     private const int BASE_CRIT = 1;
+
     public float expMultiplier = 1f;
-    // 최종 적용된 스탯
+
     public int maxHP;
     public int maxMP;
     public int strength;
@@ -27,24 +26,26 @@ public class PlayerStat : MonoBehaviour
     public int currentHP;
     public int currentMP;
 
-    // 레벨업 보너스 누적 값
-    private int bonusHP = 0, bonusMP = 0;
-    private int bonusSTR = 0, bonusDEX = 0, bonusCRIT = 0;
+    private int bonusHP = 0;
+    private int bonusMP = 0;
+    private int bonusSTR = 0;
+    private int bonusDEX = 0;
+    private int bonusCRIT = 0;
 
-    // 장비 적용용
     private Dictionary<ItemPartType, ItemData> equippedItems;
+
+    private Dictionary<StatType, int> equipmentBonuses = new Dictionary<StatType, int>();
+
     public event Action OnStatChanged;
+
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // 계속 유지
+            DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject); // 새로 생긴 거 파괴
-        }
+        else Destroy(gameObject);
     }
 
     public void LevelUpBonus(int level)
@@ -53,26 +54,51 @@ public class PlayerStat : MonoBehaviour
         bonusMP += 5;
         bonusSTR += 2;
         bonusDEX += 1;
+        if (level % 3 == 0) bonusCRIT += 1;
 
-        if (level % 3 == 0)
-            bonusCRIT += 1;
-
-        Debug.Log($"[레벨업 보너스] HP+10, STR+2, DEX+1, (Lv%3→CRIT+1)");
+        Debug.Log($"[레벨업 보너스] HP+10, MP+5, STR+2, DEX+1, (Lv%3→CRIT+1)");
 
         RecalculateStats();
         currentHP = maxHP;
         currentMP = maxMP;
     }
-
     public void ApplyEquipmentStats(
-     Dictionary<ItemPartType, ItemData> items,
-     Dictionary<ItemPartType, int> levels)
+        Dictionary<ItemPartType, ItemData> items,
+        Dictionary<ItemPartType, int> levels)
     {
         equippedItems = items;
         RecalculateStats(levels);
     }
 
-    // 기존 코드와 호환 (인자 없는 함수)
+
+    public void ResetEquipmentBonuses()
+    {
+        equipmentBonuses.Clear();
+    }
+
+    public void AddEquipmentBonus(StatType stat, int amount)
+    {
+        if (!equipmentBonuses.ContainsKey(stat))
+            equipmentBonuses[stat] = 0;
+        equipmentBonuses[stat] += amount;
+    }
+
+    public int GetStat(StatType stat)
+    {
+        int baseValue = stat switch
+        {
+            StatType.HP => BASE_HP + bonusHP,
+            StatType.MP => BASE_MP + bonusMP,
+            StatType.STR => BASE_STR + bonusSTR,
+            StatType.DEX => BASE_DEX + bonusDEX,
+            StatType.CRIT => BASE_CRIT + bonusCRIT,
+            _ => 0
+        };
+        equipmentBonuses.TryGetValue(stat, out int bonus);
+        return baseValue + bonus;
+    }
+
+
     public void RecalculateStats()
     {
         maxHP = BASE_HP + bonusHP;
@@ -86,7 +112,6 @@ public class PlayerStat : MonoBehaviour
             foreach (var pair in equippedItems)
             {
                 var item = pair.Value;
-                // 기존처럼 레벨 1로 계산 (혹은 item.level이 있으면 그걸로)
                 int lv = 1;
                 maxHP += item.hpBonusPerLevel * lv;
                 maxMP += item.mpBonusPerLevel * lv;
@@ -95,6 +120,7 @@ public class PlayerStat : MonoBehaviour
                 critical += item.critBonusPerLevel * lv;
             }
         }
+
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         currentMP = Mathf.Clamp(currentMP, 0, maxMP);
 
@@ -123,14 +149,13 @@ public class PlayerStat : MonoBehaviour
                 critical += item.critBonusPerLevel * lv;
             }
         }
+
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         currentMP = Mathf.Clamp(currentMP, 0, maxMP);
 
         Debug.Log($"[최종 스탯] HP:{maxHP}, MP:{maxMP}, STR:{strength}, DEX:{dexterity}, CRIT:{critical}");
         OnStatChanged?.Invoke();
     }
-
-
 
     private float GetBaseAttack()
     {
@@ -139,7 +164,8 @@ public class PlayerStat : MonoBehaviour
         float dexBonus = dexterity * 1.2f;
         float weaponbonus = 0f;
 
-        if(equippedItems != null && equippedItems.TryGetValue(ItemPartType.Weapon,out var weapon))
+        if (equippedItems != null &&
+            equippedItems.TryGetValue(ItemPartType.Weapon, out var weapon))
         {
             weaponbonus += weapon.strBonusPerLevel * weapon.level;
             weaponbonus += weapon.dexBonusPerLevel * weapon.level;
@@ -147,14 +173,11 @@ public class PlayerStat : MonoBehaviour
         return baseatk + strBonus + dexBonus + weaponbonus;
     }
 
-
     public int GetAttackDamage()
     {
         float raw = UnityEngine.Random.Range(MinDamage, MaxDamage + 1);
         if (IsCriticalHit())
-        {
             raw *= GetCriticalMultiplier();
-        }
         return Mathf.RoundToInt(raw);
     }
 
@@ -162,6 +185,7 @@ public class PlayerStat : MonoBehaviour
     {
         return UnityEngine.Random.Range(0f, 100f) < critical;
     }
+
     public bool UseMana(int amount)
     {
         if (currentMP >= amount)
@@ -172,18 +196,14 @@ public class PlayerStat : MonoBehaviour
         }
         return false;
     }
-    public float GetCriticalMultiplier()
-    {
-        return 1.2f;
-    }
-    public void NotifyStatChanged()
-    {
-        OnStatChanged?.Invoke();
-    }
+
+    public float GetCriticalMultiplier() => 1.2f;
+
     public void RecoverMana(int amount)
     {
         currentMP = Mathf.Min(currentMP + amount, maxMP);
-        NotifyStatChanged();
+        OnStatChanged?.Invoke();
     }
-}
 
+    public void NotifyStatChanged() => OnStatChanged?.Invoke();
+}
