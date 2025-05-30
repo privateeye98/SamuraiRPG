@@ -18,6 +18,7 @@ MonoBehaviour:
   level: 1
   maxLevel: 10
   upgradeCost: 100
+  atk: 0
   hpBonusPerLevel: 0
   mpBonusPerLevel: 0
   strBonusPerLevel: 0
@@ -28,9 +29,15 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 02182d30b3632f74682bfbf3851fbdcc, type: 3}
   type: 1
   healAmount: 100
+  ManaAmount: 50
   part: 0
-  statType: 0
+  statType: 4
   isStackable: 1
   maxStack: 200
-  description: "\uC544\uC8FC \uD6A8\uB2A5\uC774 \uC88B\uC740 \uB3C4\uD1A0\uB9AC\uB2E4."
+  description: "\uC544\uC8FC \uD6A8\uB2A5\uC774 \uC88B\uC740 \uB3C4\uD1A0\uB9AC\uB2E4.\n\uCCB4\uB825
+    : 100 \uB9C8\uB098 : 50\n"
   price: 50
+  sellRatio: 0.5
+  requiredLevel: 1
+  requiredStats: []
+  bonusStats: []

@@ -176,11 +176,9 @@ public class Enemy : MonoBehaviour, IDamageable
         _rb.simulated = false;
         GetComponent<Collider2D>().enabled = false;
 
-        // 경험치·골드 보상
         PlayerLevel.instance?.AddExp(expReward);
         GoldManager.instance?.AddGold(goldReward);
 
-        // 드롭 처리 (아이템 + 골드)
         TryDropItems();
         onDeath?.Invoke();
         Destroy(gameObject, 1f);
@@ -190,11 +188,25 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         Collider2D enemyCol = GetComponent<Collider2D>();
 
-        // 아이템 드롭
         if (dropTable != null)
         {
             foreach (var entry in dropTable.entries)
             {
+                if (entry.itemData.type == ItemType.Quest)
+                {
+                    var quest = QuestManager.instance.activeQuests.Find(q =>
+                        q.data.conditionType == QuestConditionType.CollectItem &&
+                        q.data.targetName == entry.itemData.itemName &&
+                        q.state == QuestState.InProgress);
+
+                    if (quest == null)
+                        continue; 
+
+                    int owned = Inventory.instance.GetItemCount(entry.itemData.itemName);
+                    if (owned >= quest.data.requiredAmount)
+                        continue;
+                }
+
                 if (UnityEngine.Random.value < entry.dropChance)
                 {
                     var go = Instantiate(dropTable.pickupPrefab,
@@ -204,28 +216,22 @@ public class Enemy : MonoBehaviour, IDamageable
                 }
             }
         }
-        // 골드 드롭: 겹치지 않도록 랜덤 오프셋
         if (goldPrefab != null)
         {
-            // 1) 약간의 랜덤 X 오프셋
             Vector2 rndOffset = UnityEngine.Random.insideUnitCircle * 0.3f;
 
-            // 2) 골드 인스턴스화
             var g = Instantiate(
                 goldPrefab,
                 (Vector2)transform.position + rndOffset,
                 Quaternion.identity);
 
-            // 3) 충돌 무시: 몬스터와 골드
             Collider2D goldCol = g.GetComponent<Collider2D>();
             if (enemyCol != null && goldCol != null)
                 Physics2D.IgnoreCollision(enemyCol, goldCol);
 
-            // 4) 물리 속성
             var rbG = g.GetComponent<Rigidbody2D>();
             if (rbG)
             {
-                // 위쪽으로 튕기고 랜덤 좌우 방향
                 Vector2 impulseDir = new Vector2(
                     UnityEngine.Random.Range(-0.5f, 0.5f),
                     1f).normalized;
@@ -237,7 +243,6 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    // 디버그용 깃발 범위 그리기
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

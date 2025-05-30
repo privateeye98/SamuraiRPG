@@ -37,5 +37,20 @@ public class NPCQuestGiver : MonoBehaviour
     public void Interact()
     {
         QuestSelectionUI.instance.Open(this);
+
+        foreach (var quest in QuestManager.instance.activeQuests)
+        {
+            if (quest.data.conditionType == QuestConditionType.CollectItem &&
+                quest.data.npcName == this.name && // 이 NPC가 목표 NPC
+                quest.state == QuestState.InProgress)
+            {
+                int count = Inventory.instance.GetItemCount(quest.data.targetName);
+                if (count >= quest.data.requiredAmount)
+                {
+                    Inventory.instance.RemoveItemByName(quest.data.targetName, quest.data.requiredAmount);
+                    quest.Complete();
+                }
+            }
+        }
     }
 }

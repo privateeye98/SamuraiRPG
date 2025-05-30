@@ -9,22 +9,32 @@ public class Quest
     {
         this.data = data;
     }
-    public void Progress(string target)
+    public void Progress(string target = null)
     {
-        if (state != QuestState.InProgress) return;
-
-        if (target == data.targetName)
+        switch (data.conditionType)
         {
-            currentAmount++;
-            Debug.Log($"[퀘스트 진행] {data.questID}: {currentAmount}/{data.requiredAmount}");
+            case QuestConditionType.KillTarget:
+                if (target == data.targetName)
+                {
+                    currentAmount++;
+                    if (currentAmount >= data.requiredAmount) Complete();
+                }
+                break;
 
-            QuestManager.ReportProgress(this);
+            case QuestConditionType.CollectItem:
+                int invCount = Inventory.instance.GetItemCount(data.targetName);
+                currentAmount = invCount;
+                if (currentAmount >= data.requiredAmount)
+                {
+                    Inventory.instance.RemoveItemByName(data.targetName, data.requiredAmount);
+                    Complete();
+                }
+                break;
 
-
-            if (currentAmount >= data.requiredAmount)
-            {
-                Complete();
-            }
+            case QuestConditionType.TalkToNPC:
+                if (target == data.targetName)
+                    Complete();
+                break;
         }
     }
     public void Complete()

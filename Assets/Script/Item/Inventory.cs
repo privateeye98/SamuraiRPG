@@ -94,7 +94,12 @@ public class Inventory : MonoBehaviour
         switch (item.type)
         {
             case ItemType.Consumable:
-                PlayerHealth.instance.Heal(item.healAmount);
+                if (item.healAmount > 0)
+                    PlayerHealth.instance.Heal(item.healAmount);
+
+                if (item.ManaAmount > 0)
+                    PlayerStat.instance.RecoverMana(item.ManaAmount);
+
                 invItem.quantity--;
                 if (invItem.quantity <= 0)
                     items.Remove(invItem);
@@ -124,6 +129,34 @@ public class Inventory : MonoBehaviour
         if (invItem.quantity <= 0)
             items.Remove(invItem);
 
+        NotifyItemChanged();
+    }
+    public int GetItemCount(string itemName)
+    {
+        int count = 0;
+        foreach (var item in items)
+        {
+            if (item.itemData.itemName == itemName)
+                count += item.quantity;
+        }
+        return count;
+    }
+    public void RemoveItemByName(string itemName, int count)
+    {
+        foreach (var item in items.ToArray()) // 수정 중 컬렉션 에러 방지
+        {
+            if (item.itemData.itemName == itemName)
+            {
+                int remove = Mathf.Min(count, item.quantity);
+                item.quantity -= remove;
+                count -= remove;
+
+                if (item.quantity <= 0)
+                    items.Remove(item);
+
+                if (count <= 0) break;
+            }
+        }
         NotifyItemChanged();
     }
 

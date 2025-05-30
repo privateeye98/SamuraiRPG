@@ -25,7 +25,7 @@ public class ItemData : ScriptableObject
     public Sprite icon;
     public ItemType type;
     public int healAmount;
-
+    public int ManaAmount;
     public ItemPartType part;
     public StatType statType;
 
