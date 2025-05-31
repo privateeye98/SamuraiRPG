@@ -18,7 +18,6 @@ public class NPCOptionsUI : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
         Debug.Log($"NPCOptionsUI Awake – ID:{GetInstanceID()}");
 
     }

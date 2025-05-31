@@ -7,8 +7,13 @@ public class InventoryUI : MonoBehaviour
     ItemSlot[] slots;
     public static InventoryUI instance;
 
-    private void Awake()
+    void Awake()
     {
+       if(instance != null && instance != this)
+        {
+            Destroy(instance);
+            return;
+        }
         instance = this;
     }
 
@@ -16,7 +21,18 @@ public class InventoryUI : MonoBehaviour
     {
         if (Inventory.instance == null)
         {
-            Debug.LogWarning("인스턴스가 없습니다.");
+            Debug.LogWarning("InventoryUI.Start: Inventory.instance가 null입니다.");
+            return;
+        }
+
+        if (slotPrefab == null)
+        {
+            Debug.LogError("InventoryUI.Start: slotPrefab이 할당되지 않았습니다!");
+            return;
+        }
+        if (slotParent == null)
+        {
+            Debug.LogError("InventoryUI.Start: slotParent가 할당되지 않았습니다!");
             return;
         }
 
@@ -33,7 +49,21 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        Debug.Log($"UpdateUI CALLED? items.Count={Inventory.instance.items.Count}");
+        if (slots == null)
+        {
+            Debug.LogWarning("InventoryUI.UpdateUI: slots가 아직 초기화되지 않았습니다.");
+            return;
+        }
+        if (Inventory.instance == null)
+        {
+            Debug.LogWarning("InventoryUI.UpdateUI: Inventory.instance가 null입니다.");
+            return;
+        }
+        if (Inventory.instance.items == null)
+        {
+            Debug.LogWarning("InventoryUI.UpdateUI: Inventory.instance.items 리스트가 null입니다.");
+            return;
+        }
 
         for (int i = 0; i < slots.Length; i++)
         {

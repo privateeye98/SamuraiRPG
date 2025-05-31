@@ -44,10 +44,20 @@ public class BuffManager : MonoBehaviour
         ApplyStat(type, value);
         currentType = type;
 
-        Sprite icon = GetIcon(type);
-        currentUI = Instantiate(buffUIPrefab, buffUIParent);
-        BuffUI ui = currentUI.GetComponent<BuffUI>();
-        ui.Setup(icon, duration);
+        Sprite iconSprite = GetIcon(type);
+
+        GameObject icon = Instantiate(buffUIPrefab);
+
+        icon.transform.SetParent(buffUIParent, worldPositionStays: false);
+
+        BuffUI ui = icon.GetComponent<BuffUI>();
+        ui.Setup(iconSprite, duration);
+
+        RectTransform rt = icon.GetComponent<RectTransform>();
+        rt.anchoredPosition = Vector2.zero;    
+        rt.localScale = Vector3.one;           
+
+        currentUI = icon;
 
         float elapsed = 0f;
         while (elapsed < duration)

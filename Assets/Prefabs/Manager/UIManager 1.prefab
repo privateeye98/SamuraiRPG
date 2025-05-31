@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 748889111172911903}
   - component: {fileID: 6804400691595559261}
-  - component: {fileID: 8970473270345062477}
   m_Layer: 0
   m_Name: UIManager 1
   m_TagString: Untagged
@@ -49,15 +48,3 @@ MonoBehaviour:
   optionPanel: {fileID: 0}
   shopPanel: {fileID: 0}
   shopInventory: {fileID: 0}
---- !u!114 &8970473270345062477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6886569627177320231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20d02577d33f0a94f9b847fbe7f1ea68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

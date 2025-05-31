@@ -18,7 +18,7 @@ public class DamageTextSpawner : MonoBehaviour
         }
 
         I = this;
-        DontDestroyOnLoad(gameObject);
+        
 
     }
     public void Spawn(int damage, Vector3 worldPos, bool isCritical)

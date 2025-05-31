@@ -13,6 +13,5 @@ public class MainCameraSingleton : MonoBehaviour
         }
 
         instance = this;
-        DontDestroyOnLoad(gameObject); // 유지
     }
 }

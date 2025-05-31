@@ -17,14 +17,14 @@ public class GameInitializer : MonoBehaviour
         }
 
         initialized = true;
-        DontDestroyOnLoad(gameObject);
+
 
         // Player (Tag: "Player" 지정 필요)
         if (GameObject.FindGameObjectWithTag("Player") == null)
         {
             var player = Instantiate(playerPrefab);
             player.name = "Player";
-            DontDestroyOnLoad(player);
+
         }
 
         // UI Canvas (Tag: "Canvas" 지정 필요)
@@ -32,7 +32,7 @@ public class GameInitializer : MonoBehaviour
         {
             var canvas = Instantiate(uiCanvasPrefab);
             canvas.name = "Canvas";
-            DontDestroyOnLoad(canvas);
+
         }
 
         // Manager Prefabs
@@ -43,7 +43,7 @@ public class GameInitializer : MonoBehaviour
             {
                 var obj = Instantiate(prefab);
                 obj.name = prefab.name;
-                DontDestroyOnLoad(obj);
+
             }
         }
     }

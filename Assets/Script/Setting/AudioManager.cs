@@ -13,7 +13,6 @@ public class AudioManager : MonoBehaviour
     {
         if (I) { Destroy(gameObject); return; }
         I = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void PlaySFX(AudioClip clip)

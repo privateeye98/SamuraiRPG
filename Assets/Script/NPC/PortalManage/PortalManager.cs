@@ -37,7 +37,6 @@ public class PortalManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         panel.SetActive(false);
     }

@@ -17,7 +17,23 @@ public class UpgradePanelToggle : MonoBehaviour
     Dictionary<ItemPartType, ItemData> upgradeItems;
     void Start()
     {
-        
+        if (EquipmentManager.instance == null)
+        {
+            Debug.LogError("UpgradePanelToggle.Start: EquipmentManager.instance가 null입니다.");
+            return;
+        }
+        if (EquipmentUI.instance == null)
+        {
+            Debug.LogError("UpgradePanelToggle.Start: EquipmentUI.instance가 null입니다.");
+            return;
+        }
+
+        if (InventoryUI.instance == null)
+        {
+            Debug.LogError("UpgradePanelToggle.Start: InventoryUI.instance가 null입니다. InventoryUI가 씬에 배치되어 있는지, Awake()에서 instance가 설정되는지 확인하세요.");
+            return;
+        }
+
 
         if (head == null || body == null || leg == null || shoe == null || glove == null || weapon == null)
         {

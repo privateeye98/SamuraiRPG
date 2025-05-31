@@ -21,6 +21,5 @@ public class OptionLoader : MonoBehaviour
         Screen.SetResolution(list[resIdx].width, list[resIdx].height, fScreen);
 
         // 품질(Quality) 옵션 추가했다면 여기서 QualitySettings.SetQualityLevel()
-        DontDestroyOnLoad(gameObject);
     }
 }

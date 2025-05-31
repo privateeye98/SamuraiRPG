@@ -41,7 +41,6 @@ public class QuestManager : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
     public void AcceptQuest(QuestData data)
     {

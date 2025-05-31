@@ -1,27 +1,39 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.EventSystems;
 
 
 public class DraggableUI : MonoBehaviour, IDragHandler
 {
-    private RectTransform _rect;
-    private Canvas _canvas;
+     RectTransform _rect;
+     Canvas _canvas;
 
     void Awake()
     {
         _rect = GetComponent<RectTransform>();
+
+        Transform t = transform;
+        Canvas found = null;
+        Debug.Log($"[DraggableUI] Awake ì‹œì‘: GameObject = {gameObject.name}");
+        while (t != null)
+        {
+            Canvas c = t.GetComponent<Canvas>();
+            Debug.Log($"  ë¶€ëª¨ ê³„ì¸µ í™•ì¸: '{t.name}' (Active={t.gameObject.activeInHierarchy}) ì— Canvas={(c != null ? "ìˆìŒ" : "ì—†ìŒ")}");
+            if (c != null) found = c;
+            t = t.parent;
+        }
+
         _canvas = GetComponentInParent<Canvas>();
         if (_canvas == null)
-            Debug.LogError("DragWindow: Canvas°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogError("DragWindow: Canvasê°€ ì—†ìŠµë‹ˆë‹¤.");
     }
 
-    // ¸¶¿ì½º¸¦ µå·¡±×ÇÒ ¶§¸¶´Ù È£Ãâ
+    // ë§ˆìš°ìŠ¤ë¥¼ ë“œë˜ê·¸í•  ë•Œë§ˆë‹¤ í˜¸ì¶œ
     public void OnDrag(PointerEventData eventData)
     {
         if (_canvas == null) return;
-        // Äµ¹ö½º ½ºÄÉÀÏ º¸Á¤
+        // ìº”ë²„ìŠ¤ ìŠ¤ì¼€ì¼ ë³´ì •
         float scale = _canvas.scaleFactor;
-        // delta¸¦ anchoredPosition¿¡ ´õÇØ ºÎµå·´°Ô ÀÌµ¿
+        // deltaë¥¼ anchoredPositionì— ë”í•´ ë¶€ë“œëŸ½ê²Œ ì´ë™
         _rect.anchoredPosition += eventData.delta / scale;
     }
 }

@@ -18,14 +18,14 @@ public class GameBootstrap : MonoBehaviour
         }
 
         initialized = true;
-        DontDestroyOnLoad(gameObject);
+
 
         // Player
         if (GameObject.FindWithTag("Player") == null && playerPrefab != null)
         {
             var player = Instantiate(playerPrefab);
             player.name = "Player";
-            DontDestroyOnLoad(player);
+
         }
 
         // Camera
@@ -33,7 +33,7 @@ public class GameBootstrap : MonoBehaviour
         {
             var cam = Instantiate(cameraPrefab);
             cam.name = "Main Camera";
-            DontDestroyOnLoad(cam);
+
         }
 
         // UI
@@ -41,7 +41,7 @@ public class GameBootstrap : MonoBehaviour
         {
             var ui = Instantiate(uiPrefab);
             ui.name = "Canvas";
-            DontDestroyOnLoad(ui);
+
         }
 
         // 기타 매니저들
@@ -51,7 +51,7 @@ public class GameBootstrap : MonoBehaviour
             {
                 var manager = Instantiate(prefab);
                 manager.name = prefab.name;
-                DontDestroyOnLoad(manager);
+   
             }
         }
     }

@@ -5,16 +5,14 @@ public class GoldManager : MonoBehaviour
     public static GoldManager instance;
     public int currentGold = 0;
     
-    private void Awake()
-    {
+     void Awake()
+    { 
         if(instance != null && instance !=this)
         {
             Destroy(gameObject);
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
-
           }
 
     public void AddGold(int amount)

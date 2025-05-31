@@ -10,7 +10,6 @@ public class InventoryBootstrap : MonoBehaviour
         {
             GameObject go = Instantiate(inventoryPrefab);
             go.name = "InventoryManager";
-            DontDestroyOnLoad(go);
         }
     }
 }

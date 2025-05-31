@@ -10,7 +10,6 @@ public class InventoryToggle : MonoBehaviour
     {
         if (inventoryUI.transform.parent != null)
             inventoryUI.transform.SetParent(null);
-        DontDestroyOnLoad(inventoryUI);
     }
     void Update()
     {
