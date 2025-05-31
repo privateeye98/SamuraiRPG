@@ -8,7 +8,9 @@ public class InventoryToggle : MonoBehaviour
     public bool isShopOpen = false;
     void Awake()
     {
-        DontDestroyOnLoad(inventoryUI); 
+        if (inventoryUI.transform.parent != null)
+            inventoryUI.transform.SetParent(null);
+        DontDestroyOnLoad(inventoryUI);
     }
     void Update()
     {

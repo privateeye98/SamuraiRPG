@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3052313789266505741}
   - component: {fileID: 6627995176143630048}
+  - component: {fileID: 5910338447387246360}
   m_Layer: 0
   m_Name: DamageTextSpawner
   m_TagString: Untagged
@@ -46,3 +47,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageTextPrefab: {fileID: 6900372073469435726, guid: f7a087e09cf6de64c9c7f0f87a701d24, type: 3}
   canvas: {fileID: 6552099500967534183, guid: 57192176c1df4584485213599c9842d8, type: 3}
+--- !u!114 &5910338447387246360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5575648501220650077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d02577d33f0a94f9b847fbe7f1ea68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

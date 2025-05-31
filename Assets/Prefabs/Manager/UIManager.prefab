@@ -533,6 +533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3973454435036183839}
   - component: {fileID: 2447151790766809442}
+  - component: {fileID: 2174727148198019553}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -574,6 +575,18 @@ MonoBehaviour:
   hpSlider: {fileID: 1839532452193255575}
   mpSlider: {fileID: 8846680425009426788}
   expSlider: {fileID: 0}
+--- !u!114 &2174727148198019553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361819764154775778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d02577d33f0a94f9b847fbe7f1ea68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5490242525271958153
 GameObject:
   m_ObjectHideFlags: 0

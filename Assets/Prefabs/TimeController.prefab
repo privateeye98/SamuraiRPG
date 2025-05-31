@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8994070531800770530}
   - component: {fileID: 6421295268349619226}
-  - component: {fileID: 1998583780775085673}
+  - component: {fileID: 8920224844905942722}
   m_Layer: 0
   m_Name: TimeController
   m_TagString: Untagged
@@ -113,7 +113,7 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     renderers: []
---- !u!114 &1998583780775085673
+--- !u!114 &8920224844905942722
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

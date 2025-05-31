@@ -193,7 +193,7 @@ public class Player : MonoBehaviour, IDamageable
                 lastWideSkillTime = Time.time;
 
 
-                CameraShake.instance?.StartCoroutine(CameraShake.instance.Shake(0.3f, 0.2f));
+                CameraShake.instance?.StartCoroutine(CameraShake.instance.Shake(0.3f, 0.2f));   
                 float dir = GetComponent<SpriteRenderer>().flipX ? -1f : 1f;
 
                 DamageAllEnemies(); //
