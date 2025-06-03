@@ -8,8 +8,8 @@ public class InventoryToggle : MonoBehaviour
     public bool isShopOpen = false;
     void Awake()
     {
-        if (inventoryUI.transform.parent != null)
-            inventoryUI.transform.SetParent(null);
+        //if (inventoryUI.transform.parent != null)
+          //  inventoryUI.transform.SetParent(null);
     }
     void Update()
     {

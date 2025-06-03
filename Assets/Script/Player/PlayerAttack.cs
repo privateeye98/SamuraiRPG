@@ -46,12 +46,10 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    // 애니메이션 이벤트에 연결 ▶ 타격 판정 + VFX
     public void EnableHitBox()
     {
         if (hitbox == null || spriteRenderer == null) return;
 
-        // 1) 히트박스 위치 조정 & 활성화
         float dir = spriteRenderer.flipX ? -1f : 1f;
         hitbox.transform.localPosition = new Vector2(baseOffset.x * dir, baseOffset.y);
         hitbox.gameObject.SetActive(true);
@@ -60,13 +58,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (lvl >= 10)
         {
-            // 2) 해당 콤보 단계 VFX 스폰
             int idx = comboStep - 1;
             if (idx < 0 || idx >= hitVFXPrefabs.Length || hitVFXPrefabs[idx] == null)
                 return;
             GameObject prefab = hitVFXPrefabs[idx];
 
-            // 2) 좌우 반전 보정된 위치 계산
             Vector3 basePos = transform.position;
             Vector3 localOffset = weaponVfxPoint != null
                 ? weaponVfxPoint.localPosition
@@ -75,13 +71,10 @@ public class PlayerAttack : MonoBehaviour
             Vector3 worldOffset = new Vector3(localOffset.x * dir, localOffset.y, 0f);
             Vector3 spawnPos = basePos + worldOffset;
 
-            // 3) Z 오프셋으로 카메라 쪽으로 살짝 당기기
             spawnPos.z -= 0.1f;
 
-            // 4) VFX 인스턴스화
             var go = Instantiate(prefab, spawnPos, Quaternion.identity);
 
-            // 5) 스프라이트 렌더러 정렬 순서 올리기
             var spr = go.GetComponent<Renderer>();
             if (spr != null)
             {
@@ -89,7 +82,6 @@ public class PlayerAttack : MonoBehaviour
                 spr.sortingOrder = spriteRenderer.sortingOrder + 1;
             }
 
-            // 6) 좌우 반전된 스프라이트가 필요하다면
             if (spriteRenderer.flipX)
             {
                 var spriteR = go.GetComponent<SpriteRenderer>();
@@ -101,14 +93,12 @@ public class PlayerAttack : MonoBehaviour
         }
         }
     
-    // 애니메이션 이벤트에 연결 ▶ 히트박스 끄기
     public void DisableHitBox()
     {
         if (hitbox != null)
             hitbox.gameObject.SetActive(false);
     }
 
-    // 애니메이션 끝 프레임 이벤트로 연결 ▶ 히트박스 보장 비활성화
     public void OnAttackAnimEnd()
     {
         DisableHitBox();

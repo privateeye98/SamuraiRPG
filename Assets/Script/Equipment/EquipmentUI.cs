@@ -6,7 +6,10 @@ public class EquipmentUI : MonoBehaviour
     public EquipmentSlot[] slots;
 
     void Awake() => instance = this;
-
+     void Start()
+    {
+        RefreshUI();
+    }
     public void RefreshUI()
     {
         foreach (var slot in slots)

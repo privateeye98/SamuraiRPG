@@ -9,7 +9,18 @@ public class CameraShake : MonoBehaviour
 
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    void OnDestroy()
+    {
+        if (instance == this)
+            instance = null;
     }
 
     public IEnumerator Shake(float duration, float magnitude)

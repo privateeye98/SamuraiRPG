@@ -11,10 +11,11 @@ public class InventoryUI : MonoBehaviour
     {
        if(instance != null && instance != this)
         {
-            Destroy(instance);
+            Destroy(gameObject);
             return;
         }
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -41,7 +42,7 @@ public class InventoryUI : MonoBehaviour
         slots = new ItemSlot[Inventory.instance.capacity];
         for (int i = 0; i < Inventory.instance.capacity; i++)
         {
-            GameObject go = Instantiate(slotPrefab, slotParent);
+            GameObject go = Instantiate(slotPrefab, slotParent,false);
             slots[i] = go.GetComponent<ItemSlot>();
         }
         UpdateUI();

@@ -8,10 +8,10 @@ public class MainCameraSingleton : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(gameObject); // 중복 카메라 제거
+            Destroy(gameObject); 
             return;
         }
-
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 }

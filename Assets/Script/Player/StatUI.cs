@@ -15,9 +15,15 @@ public class StatUI : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+
         instance = this;
         if (playerStat == null)
             playerStat = PlayerStat.instance;
+
     }
 
     void OnEnable()

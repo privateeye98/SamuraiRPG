@@ -94,7 +94,15 @@ public class Player : MonoBehaviour, IDamageable
 
     void Awake()
     {
+
+        if(instance != null && instance != this )
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
+        DontDestroyOnLoad(gameObject);
+
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();

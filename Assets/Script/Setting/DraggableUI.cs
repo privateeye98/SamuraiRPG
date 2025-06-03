@@ -31,9 +31,7 @@ public class DraggableUI : MonoBehaviour, IDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         if (_canvas == null) return;
-        // 캔버스 스케일 보정
         float scale = _canvas.scaleFactor;
-        // delta를 anchoredPosition에 더해 부드럽게 이동
         _rect.anchoredPosition += eventData.delta / scale;
     }
 }

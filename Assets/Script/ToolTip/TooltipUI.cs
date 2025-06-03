@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class TooltipUI : MonoBehaviour
 {
     public static TooltipUI instance;
+    public GameObject tooltipGameObject;
 
     [Header("UI References")]
     public GameObject tooltipPanel;
@@ -20,8 +21,10 @@ public class TooltipUI : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
-        tooltipPanel.SetActive(false);
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
     }
 
     public void Show(InventoryItem invItem, Vector2 pos)
@@ -69,7 +72,13 @@ public class TooltipUI : MonoBehaviour
 
     public void Hide()
     {
-        tooltipPanel.SetActive(false);
+        if (tooltipPanel == null)
+        {
+            Debug.LogWarning("TooltipUI.Hide: tooltipPanel이 할당되지 않았습니다.");
+            return;
+        }
+         if (tooltipPanel.activeSelf)
+            tooltipPanel.SetActive(false);
     }
 }
 
