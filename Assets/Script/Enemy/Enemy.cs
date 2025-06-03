@@ -41,6 +41,11 @@ public class Enemy : MonoBehaviour, IDamageable
     [Header("낙사 임계치")]
     public float yDeathLimit = -20f;
 
+
+    [Header("아이템 드랍테이블")]
+    public ItemData DropItemData;
+    public int dropQuantity = 1;
+
     // 내부 계산된 값
     private int maxHP;
     private int currentHP;
@@ -168,7 +173,7 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     #endregion
 
-    private void Die()
+     void Die()
     {
         currentState = State.Dead;
         _anim?.SetTrigger("Die");
@@ -184,7 +189,7 @@ public class Enemy : MonoBehaviour, IDamageable
         Destroy(gameObject, 1f);
     }
 
-    private void TryDropItems()
+     void TryDropItems()
     {
         Collider2D enemyCol = GetComponent<Collider2D>();
 

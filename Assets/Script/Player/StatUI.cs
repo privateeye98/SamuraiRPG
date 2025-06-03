@@ -16,13 +16,26 @@ public class StatUI : MonoBehaviour
     void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+        }
         else if (instance != this)
+        {
             Destroy(gameObject);
+            return;
+        }
 
-        instance = this;
+        // 인스펙터에 playerStat가 할당되지 않았다면 PlayerStat.instance 가져오기
         if (playerStat == null)
+        {
             playerStat = PlayerStat.instance;
+        }
+
+        // playerStat이 유효하면 Stat 변경 이벤트를 통해 UI를 갱신하도록 구독
+        if (playerStat != null)
+        {
+            playerStat.OnStatChanged += UpdateUI;
+        }
 
     }
 

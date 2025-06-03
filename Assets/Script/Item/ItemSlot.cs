@@ -58,7 +58,8 @@ public void OnPointerExit(PointerEventData eventData)
 
     public void OnClickUse()
     {
-        if (item == null) return;
+        if (currentItem == null)
+            return;
 
         if (currentItem.itemData.type == ItemType.Equipment)
         {
@@ -74,6 +75,7 @@ public void OnPointerExit(PointerEventData eventData)
     {
         if (icon == null) return;
         currentItem = null;
+        item = null;
         icon.sprite = null;
         icon.enabled = false;
         quantityText.text = "";

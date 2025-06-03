@@ -1,165 +1,155 @@
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeUI : MonoBehaviour
 {
-    [Header("UI Components")]
-    public TMP_Dropdown partDropdown;
-    public TextMeshProUGUI itemNameText;
-    public TextMeshProUGUI levelText;
-    public TextMeshProUGUI costText;
-    public TextMeshProUGUI resultText;
-    public Button upgradeButton;
+    [Header("UI References")]
+    [SerializeField] private TMP_Dropdown partDropdown;
+    [SerializeField] private TextMeshProUGUI itemNameText;
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private TextMeshProUGUI costText;
+    [SerializeField] private TextMeshProUGUI resultText;
+    [SerializeField] private Button upgradeButton;
+
+    private Dictionary<ItemPartType, InventoryItem> upgradeItems;
+    private int currentDropdownIndex = 0;
 
     public static UpgradeUI instance;
 
-    // 외부 접근 허용을 위해 public으로 변경
-    public Dictionary<ItemPartType, ItemData> upgradeItems;
-    private ItemData currentItem;
-
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+
+
     }
 
     void OnEnable()
     {
-        upgradeButton.onClick.AddListener(() => TryUpgrade());
+        // 드롭다운 값이 바뀔 때 콜백 연결
+        partDropdown.onValueChanged.RemoveAllListeners();
         partDropdown.onValueChanged.AddListener(OnDropdownChanged);
+
+        // 강화 버튼 클릭 시 콜백 연결
+        upgradeButton.onClick.RemoveAllListeners();
+        upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
     }
 
     void OnDisable()
     {
-        upgradeButton.onClick.RemoveAllListeners();
         partDropdown.onValueChanged.RemoveAllListeners();
+        upgradeButton.onClick.RemoveAllListeners();
     }
 
-    public void Open(Dictionary<ItemPartType, ItemData> data,Dictionary<ItemPartType, int> levels)
+    /// <summary>
+    /// 강화창을 처음 열 때 호출합니다.
+    /// </summary>
+    public void Open(Dictionary<ItemPartType, InventoryItem> items)
     {
-        upgradeItems = data;
-        foreach(var kv in levels)
-        {
-            if (upgradeItems.TryGetValue(kv.Key, out var itemData))
-                itemData.level = kv.Value;
-        }
+        upgradeItems = items;
         gameObject.SetActive(true);
+
+        // 드롭다운 초기화
+        partDropdown.ClearOptions();
+        var options = System.Enum.GetNames(typeof(ItemPartType)).ToList();
+        partDropdown.AddOptions(options);
+
+        // 드롭다운 첫 항목 선택(인덱스 0)
         partDropdown.value = 0;
+        partDropdown.RefreshShownValue();
+
         OnDropdownChanged(0);
     }
 
-    void OnDropdownChanged(int index)
+    /// <summary>
+    /// 장비가 바뀐 경우, 강화창이 열려 있을 때 외부에서 호출하여 화면을 갱신합니다.
+    /// </summary>
+    public void Refresh(Dictionary<ItemPartType, InventoryItem> items)
     {
-        if (upgradeItems == null)
-        {
-            Debug.LogWarning("upgradeItems가 초기화되지 않았습니다.");
-            return;
-        }
+        upgradeItems = items;
+        OnDropdownChanged(currentDropdownIndex);
+    }
 
-        if (!System.Enum.IsDefined(typeof(ItemPartType), index))
-        {
-            Debug.LogWarning("잘못된 파트 인덱스입니다.");
+    private void OnDropdownChanged(int index)
+    {
+        currentDropdownIndex = index;
+
+        if (upgradeItems == null)
             return;
-        }
+        if (!System.Enum.IsDefined(typeof(ItemPartType), index))
+            return;
 
         ItemPartType selectedPart = (ItemPartType)index;
 
-        if (upgradeItems.TryGetValue(selectedPart, out var item) && item != null)
+        if (!upgradeItems.TryGetValue(selectedPart, out var invItem) || invItem == null)
         {
-            currentItem = item;
-            itemNameText.text = item.itemName;
-            levelText.text = $"Lv.{item.level}/{item.maxLevel}";
-            costText.text = $"{item.upgradeCost * item.level} Gold";
-        }
-        else
-        {
-            currentItem = null;
+            // 해당 파트에 장착된 아이템이 없을 때
             itemNameText.text = "해당 아이템 없음";
             levelText.text = "-";
             costText.text = "-";
+            resultText.text = string.Empty;
+            upgradeButton.interactable = false;
+            return;
         }
+
+        // 장착 중인 아이템 정보 화면에 반영
+        itemNameText.text = invItem.itemData.itemName;
+        levelText.text = $"Lv. {invItem.level} / {invItem.itemData.maxLevel}";
+        int cost = invItem.itemData.upgradeCost * invItem.level;
+        costText.text = $"{cost} Gold";
+        resultText.text = string.Empty;
+        upgradeButton.interactable = (invItem.level < invItem.itemData.maxLevel);
     }
 
-    void TryUpgrade()
+    private void OnUpgradeButtonClicked()
     {
-        if (currentItem == null)
+        if (upgradeItems == null)
         {
             resultText.text = "강화할 아이템이 없습니다.";
             return;
         }
-        if (currentItem.level >= currentItem.maxLevel)
+        if (!System.Enum.IsDefined(typeof(ItemPartType), currentDropdownIndex))
+            return;
+
+        ItemPartType selectedPart = (ItemPartType)currentDropdownIndex;
+        if (!upgradeItems.TryGetValue(selectedPart, out var invItem) || invItem == null)
+        {
+            resultText.text = "해당 아이템 없음";
+            return;
+        }
+
+        if (invItem.level >= invItem.itemData.maxLevel)
         {
             resultText.text = "이미 최대 레벨입니다.";
             return;
         }
-        int cost = currentItem.upgradeCost * currentItem.level;
+
+        int cost = invItem.itemData.upgradeCost * invItem.level;
         if (!GoldManager.instance.SpendGold(cost))
         {
             resultText.text = "골드가 부족합니다.";
             return;
         }
 
-        float successRate = currentItem.GetSuccessRate();
+        float successRate = invItem.itemData.GetSuccessRate(invItem.level);
         float roll = Random.value;
-
         if (roll < successRate)
         {
-            currentItem.level++;
-            resultText.text = $"강화 성공! Lv.{currentItem.level}";
-
-
-            foreach(var kv in EquipmentManager.instance.equippedItems)
-            {
-                if (kv.Value.itemData == currentItem)
-                    kv.Value.level = currentItem.level;
-            }
+            invItem.level++;
+            resultText.text = $"강화 성공! Lv. {invItem.level}";
         }
         else
         {
             resultText.text = "강화 실패...";
         }
 
-        var levels = GetLevels(upgradeItems);
-        PlayerStat.instance?.ApplyEquipmentStats(upgradeItems, levels);
-        FindObjectOfType<StatUI>()?.UpdateUI();
-
-        OnDropdownChanged(partDropdown.value);
+        // 강화 후 화면 갱신
+        OnDropdownChanged(currentDropdownIndex);
+        EquipmentManager.instance.ApplyEquipmentEffects();
     }
-
-    Dictionary<ItemPartType, int> GetLevels(Dictionary<ItemPartType, ItemData> items)
-    {
-        var levels = new Dictionary<ItemPartType, int>();
-        foreach (var pair in items)
-            levels[pair.Key] = pair.Value.level;
-        return levels;
-    }
-
-
-    public void RefreshStatPreview()
-    {
-        OnDropdownChanged(partDropdown.value);
-    }
-
-    public void LoadUpgrades(List<SavedItem> savedItems)
-    {
-        upgradeItems = new Dictionary<ItemPartType, ItemData>();
-
-        foreach (var saved in savedItems)
-        {
-            if (!System.Enum.TryParse(saved.part, out ItemPartType part)) continue;
-
-            ItemData item = ItemDatabase.instance.GetItemById(saved.itemId);
-            if (item != null)
-            {
-                item.level = saved.level;
-             //   item.statType = saved.statType;
-                upgradeItems[part] = item;
-            }
-        }
-
-        RefreshStatPreview();
-    }
-
-
 }

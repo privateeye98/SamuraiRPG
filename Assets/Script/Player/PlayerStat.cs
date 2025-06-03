@@ -43,6 +43,7 @@ public class PlayerStat : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            Debug.Log("PlayerStat Awake: instance วาด็ตส");
         }
         else Destroy(gameObject);
     }

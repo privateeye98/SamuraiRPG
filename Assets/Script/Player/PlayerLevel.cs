@@ -21,11 +21,18 @@ public class PlayerLevel : MonoBehaviour
 
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         instance = this;
+        DontDestroyOnLoad(gameObject);
+
         stat = FindObjectOfType<PlayerStat>();
         UpdateUI();
     }
-
 
     public void AddExp(int baseAmount)
     {
