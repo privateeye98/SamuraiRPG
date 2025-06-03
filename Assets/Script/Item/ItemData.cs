@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
-using TMPro;
 
 [CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
 public class ItemData : ScriptableObject
 {
-    // ───────────────────────────────────────────────────────────────────────────────
-    // 기본 정보
-    // ───────────────────────────────────────────────────────────────────────────────
+    // ────────────────────────────────────────────────────────────────
+    // 1) 기본 정보
+    // ────────────────────────────────────────────────────────────────
     [Header("── 기본 정보 ──")]
     [Tooltip("아이템 고유 ID")]
     public int id;
@@ -15,37 +14,36 @@ public class ItemData : ScriptableObject
     [Tooltip("인벤토리에 표시될 이름")]
     public string itemName;
 
-    [Tooltip("인벤토리 및 툴팁에 쓸 아이콘 스프라이트")]
+    [Tooltip("인벤토리 및 툴팁에 사용할 아이콘 스프라이트")]
     public Sprite icon;
 
-    [Tooltip("아이템 타입 : 소비용, 장비용 등")]
+    [Tooltip("아이템 타입 (Consumable, Equipment, Quest 등)")]
     public ItemType type;
 
-    [Tooltip("장비 파트(Head, Body, Weapon 등)")]
+    [Tooltip("장비 파트 (Head, Body, Weapon 등)")]
     public ItemPartType part;
 
-    [Tooltip("툴팁에 기본 설명 문구(예: '강화를 통해 스탯을 높일 수 있습니다.')")]
     [TextArea(2, 5)]
+    [Tooltip("툴팁 상에 보여줄 설명 문구")]
     public string description;
 
-    [Tooltip("인벤토리에 쌓을 수 있는 최대 갯수(소비 아이템인 경우)")]
+    [Tooltip("인벤토리에 쌓을 수 있는지 여부 (소비 아이템만)")]
     public bool isStackable = false;
 
-    [Tooltip("최대 스택 수(예: 포션이라면 200개까지 쌓인다 등)")]
+    [Tooltip("최대 스택 수 (예: 포션 200개까지)")]
     public int maxStack = 1;
 
-    [Tooltip("판매 시 획득 골드 비율(0.0 ~ 1.0)")]
+    [Tooltip("상점에서 판매 시 회수할 골드 비율 (0.0 ~ 1.0)")]
     [Range(0f, 1f)]
     public float sellRatio = 0.5f;
 
     [Tooltip("상점에서 구매 시 기본 가격")]
     public int price;
 
-
     [Space(10)]
-    // ───────────────────────────────────────────────────────────────────────────────
-    // 착용 최소 조건
-    // ───────────────────────────────────────────────────────────────────────────────
+    // ────────────────────────────────────────────────────────────────
+    // 2) 착용 최소 조건
+    // ────────────────────────────────────────────────────────────────
     [Header("── 착용 최소 조건 ──")]
     [Tooltip("착용 가능한 최소 레벨")]
     public int requiredLevel = 1;
@@ -58,61 +56,86 @@ public class ItemData : ScriptableObject
     {
         [Tooltip("필요한 스탯 종류 (STR, DEX, CRIT 등)")]
         public StatType stat;
-        [Tooltip("해당 스탯이 가져야 하는 최소 값")]
+        [Tooltip("필요한 최소 값")]
         public int value;
     }
 
+    [Space(10)]
+    // ────────────────────────────────────────────────────────────────
+    // 3) 기본 스탯 (Base Stats)
+    // ────────────────────────────────────────────────────────────────
+    [Header("── 기본 스탯 (착용 시 고정 보너스) ──")]
+    [Tooltip("장비 착용 시 추가되는 공격력 (고정값)")]
+    public int baseATK;
+
+    [Tooltip("장비 착용 시 추가되는 방어력 (고정값)")]
+    public int baseDEF;
+
+    [Tooltip("장비 착용 시 추가되는 최대 체력 (고정값)")]
+    public int baseHP;
+
+    [Tooltip("장비 착용 시 추가되는 최대 마나 (고정값)")]
+    public int baseMP;
+
+    [Tooltip("장비 착용 시 추가되는 STR (고정값)")]
+    public int baseSTR;
+
+    [Tooltip("장비 착용 시 추가되는 DEX (고정값)")]
+    public int baseDEX;
+
+    [Tooltip("장비 착용 시 추가되는 CRIT 확률 (고정값, 퍼센트)")]
+    public int baseCRIT;
+
 
     [Space(10)]
-    // ───────────────────────────────────────────────────────────────────────────────
-    // 기본 스탯
-    // ───────────────────────────────────────────────────────────────────────────────
-    [Header("── 기본 스탯 ──")]
-    [Tooltip("이 장비를 착용했을 때 한 번에 증가시키는 공격력(레벨 보정 전)")]
-    public int atk;
+    // ────────────────────────────────────────────────────────────────
+    // 4) 강화 레벨당 보너스 (Per-Level Bonuses)
+    // ────────────────────────────────────────────────────────────────
+    [Header("── 강화 레벨당 보너스 (Per Level) ──")]
+    [Tooltip("강화 1레벨당 추가되는 공격력")]
+    public int perLevelATK;
 
-    [Tooltip("이 장비를 착용했을 때 한 번에 증가시키는 체력(레벨 보정 전)")]
-    public int hpBonusPerLevel;  // 실제로는 레벨당 보너스이므로, 이 이름은 '레벨당 보너스'로 바꿀 수도 있습니다.
+    [Tooltip("강화 1레벨당 추가되는 방어력")]
+    public int perLevelDEF;
 
-    [Tooltip("이 장비를 착용했을 때 한 번에 증가시키는 마나(레벨 보정 전)")]
-    public int mpBonusPerLevel;
+    [Tooltip("강화 1레벨당 추가되는 체력")]
+    public int perLevelHP;
 
-    [Tooltip("이 장비를 착용했을 때 한 번에 증가시키는 STR(레벨 보정 전)")]
-    public int strBonusPerLevel;
+    [Tooltip("강화 1레벨당 추가되는 마나")]
+    public int perLevelMP;
 
-    [Tooltip("이 장비를 착용했을 때 한 번에 증가시키는 DEX(레벨 보정 전)")]
-    public int dexBonusPerLevel;
+    [Tooltip("강화 1레벨당 추가되는 STR")]
+    public int perLevelSTR;
 
-    [Tooltip("이 장비를 착용했을 때 한 번에 증가시키는 CRIT 확률(레벨 보정 전)")]
-    public int critBonusPerLevel;
+    [Tooltip("강화 1레벨당 추가되는 DEX")]
+    public int perLevelDEX;
+
+    [Tooltip("강화 1레벨당 추가되는 CRIT 확률 (퍼센트)")]
+    public int perLevelCRIT;
 
 
     [Space(10)]
-    // ───────────────────────────────────────────────────────────────────────────────
-    // 강화 관련 설정
-    // ───────────────────────────────────────────────────────────────────────────────
+    // ────────────────────────────────────────────────────────────────
+    // 5) 강화 관련 설정
+    // ────────────────────────────────────────────────────────────────
     [Header("── 강화 관련 설정 ──")]
-    [Tooltip("현재 장비의 런타임 강화 레벨(실제 계산 시에는 InventoryItem.level을 사용)")]
-    public int level = 1;
-
-    [Tooltip("강화 최대 레벨")]
+    [Tooltip("아이템 강화 최대 레벨")]
     public int maxLevel = 10;
 
     [Tooltip("강화 비용 (레벨당 곱해지는 금액)")]
     public int upgradeCost = 100;
 
-    [Tooltip("레벨별 최소 성공 확률 (강화가 실패하더라도 최소 보장)")]
+    [Tooltip("레벨별 최소 성공 확률 (강화 실패 시에도 보장)")]
     public float minSuccessRate = 0.1f;
 
-    [Tooltip("기본 강화 성공 확률 (1레벨→2레벨 시 50% 등)")]
+    [Tooltip("기본 강화 성공 확률 (예: 1→2레벨 시 50%)")]
     public float baseSuccessRate = 0.5f;
 
-    [Tooltip("강화 레벨당 패널티 (예: 레벨당 -1%)")]
+    [Tooltip("강화 레벨당 패널티 (예: 레벨 하나당 -1% 감소)")]
     public float penaltyPerLevel = 0.01f;
 
     /// <summary>
-    /// 현재 레벨을 인자로 받아 실제 성공 확률을 계산합니다.
-    /// 주의: 내부적으로 'level' 필드를 사용하지 않고, 호출 시 넘겨받은 값만 반영해야 합니다.
+    /// 실제 성공 확률 계산 (currentLevel 값을 인자로 받아 사용).
     /// </summary>
     public float GetSuccessRate(int currentLevel)
     {
@@ -122,41 +145,31 @@ public class ItemData : ScriptableObject
 
 
     [Space(10)]
-    // ───────────────────────────────────────────────────────────────────────────────
-    // 기타 아이템 속성 (소비 아이템 등)
-    // ───────────────────────────────────────────────────────────────────────────────
-    [Header("── 기타 속성 ──")]
-    [Tooltip("힐량 (소비 아이템인 경우)")]
+    // ────────────────────────────────────────────────────────────────
+    // 6) 기타 속성 (소비 아이템 등)
+    // ────────────────────────────────────────────────────────────────
+    [Header("── 소비 아이템 속성 ──")]
+    [Tooltip("힐량 (소비 아이템)")]
     public int healAmount;
 
-    [Tooltip("마나 회복량 (소비 아이템인 경우)")]
+    [Tooltip("마나 회복량 (소비 아이템)")]
     public int ManaAmount;
 
     [Tooltip("툴팁에 추가로 보여줄 보조 정보 (필요 시 확장)")]
-    public StatType statType; // 예: 툴팁에 ‘이 아이템은 CRIT 확률을 증가시킵니다’ 등을 표시할 때 사용
+    public StatType statType;  // (예: 툴팁에 ‘이 아이템은 CRIT 확률을 증가시킵니다’ 등)
 
 
-    // ───────────────────────────────────────────────────────────────────────────────
-    // 내부로 관리만 하는 리스트(인스펙터 노출 불필요)
-    // ───────────────────────────────────────────────────────────────────────────────
+    [Space(10)]
+    // ────────────────────────────────────────────────────────────────
+    // 7) 런타임용 내부 필드 (인스펙터 노출 불필요)
+    // ────────────────────────────────────────────────────────────────
     [HideInInspector]
-    public StatModifier[] bonusStats; // 레벨 1당 주어지는 보너스: InventoryItem.GetEnhancedStats()에서 사용
+    public StatModifier[] bonusStats; // InventoryItem.PopulateBonusStats() 단계에서 채워집니다.
 
     [Serializable]
     public struct StatModifier
     {
         public StatType stat;
-        public int amount;
+        public int amount; // Per-Level 보너스 값
     }
-
-
-    [Space(10)]
-    // ───────────────────────────────────────────────────────────────────────────────
-    // 참고용/디버깅용 필드 (편집 금지)
-    // ───────────────────────────────────────────────────────────────────────────────
-    [HideInInspector]
-    public int tmpAttackValue; // (툴팁 계산 시 임시로 쓸 수 있음)
-
-    [HideInInspector]
-    public bool isEquipped;    // 장착 여부 체크 용도 (인스펙터에 안 보이게 함)
 }

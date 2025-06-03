@@ -22,9 +22,6 @@ public class EquipmentManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 아이템 장착
-    /// </summary>
     public void EquipItem(InventoryItem item)
     {
         if (item == null) return;
@@ -103,28 +100,57 @@ public class EquipmentManager : MonoBehaviour
     public void ApplyEquipmentEffects()
     {
         // PlayerStat이 준비되지 않았다면 아무 것도 하지 않는다
-        if (PlayerStat.instance == null) return;
+        if (PlayerStat.instance == null)
+            return;
 
         // 1) 이전에 더해 준 모든 장비 보너스를 초기화
         PlayerStat.instance.ResetEquipmentBonuses();
 
-        // 2) equippedItems 한 벌씩 순회하며, GetEnhancedStats() 결과를 꺼내서 더해 준다
+        // 2) equippedItems 한 벌씩 순회
         foreach (var kv in equippedItems)
         {
             InventoryItem invItem = kv.Value;
+            ItemData data = invItem.itemData;  // ← 여기서 ItemData 참조를 가져옵니다
 
-            // GetEnhancedStats()는 “현재 레벨(level) × Per‐Level 보너스”를 계산한 Dictionary
+            // (A) “기본 스탯(Base Stats)” 보너스가 있다면 추가
+            // 예: 기본 공격력(atk)이 baseATK 필드에 들어 있다면 아래처럼
+            if (data.baseATK != 0)
+            {
+                PlayerStat.instance.AddEquipmentBonus(StatType.ATK, data.baseATK);
+            }
+
+            if (data.baseHP != 0)
+            {
+                PlayerStat.instance.AddEquipmentBonus(StatType.HP, data.baseHP);
+            }
+            if (data.baseMP != 0)
+            {
+                PlayerStat.instance.AddEquipmentBonus(StatType.MP, data.baseMP);
+            }
+            if (data.baseSTR != 0)
+            {
+                PlayerStat.instance.AddEquipmentBonus(StatType.STR, data.baseSTR);
+            }
+            if (data.baseDEX != 0)
+            {
+                PlayerStat.instance.AddEquipmentBonus(StatType.DEX, data.baseDEX);
+            }
+            if (data.baseCRIT != 0)
+            {
+                PlayerStat.instance.AddEquipmentBonus(StatType.CRIT, data.baseCRIT);
+            }
+
+            // (B) “강화 보너스(Per-Level × level)” 계산
+            // invItem.GetEnhancedStats()가 내부적으로 (perLevelXXX × invItem.level)을 계산해서 돌려줍니다.
             Dictionary<StatType, int> enhanced = invItem.GetEnhancedStats();
-
-            // 각 StatType별 보너스를 PlayerStat에 더해 준다
             foreach (var pair in enhanced)
             {
-                // 예) pair.Key = StatType.HP, pair.Value = (hpBonusPerLevel × lev)
+                // 예: pair.Key = StatType.HP, pair.Value = (perLevelHP × level)
                 PlayerStat.instance.AddEquipmentBonus(pair.Key, pair.Value);
             }
         }
 
-        // 3) 스탯이 모두 더해졌으면, PlayerStat에게 “변경 알림”
+        // 3) 변경된 스탯을 PlayerStat에게 알림
         PlayerStat.instance.NotifyStatChanged();
 
         // 4) 화면(UI) 갱신
