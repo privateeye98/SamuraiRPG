@@ -60,6 +60,7 @@ public class EquipmentManager : MonoBehaviour
         // 새 아이템 장착
         equippedItems[part] = item;
         Inventory.instance?.items.Remove(item);
+        Debug.Log($"[EquipItem] {item.itemData.itemName} 장착 시도, ApplyEquipmentEffects 호출 직전");
 
         // 스탯 보너스 및 UI 갱신
         ApplyEquipmentEffects();
@@ -105,52 +106,67 @@ public class EquipmentManager : MonoBehaviour
 
         // 1) 이전에 더해 준 모든 장비 보너스를 초기화
         PlayerStat.instance.ResetEquipmentBonuses();
+        Debug.Log("[ApplyEquipmentEffects] 장비 보너스 초기화 완료");
 
         // 2) equippedItems 한 벌씩 순회
         foreach (var kv in equippedItems)
         {
             InventoryItem invItem = kv.Value;
-            ItemData data = invItem.itemData;  // ← 여기서 ItemData 참조를 가져옵니다
+            ItemData data = invItem.itemData;
 
-            // (A) “기본 스탯(Base Stats)” 보너스가 있다면 추가
-            // 예: 기본 공격력(atk)이 baseATK 필드에 들어 있다면 아래처럼
             if (data.baseATK != 0)
             {
                 PlayerStat.instance.AddEquipmentBonus(StatType.ATK, data.baseATK);
+                Debug.Log($"[ApplyEquipmentEffects] 기본 ATK 추가: {data.baseATK}");
+
             }
 
             if (data.baseHP != 0)
             {
                 PlayerStat.instance.AddEquipmentBonus(StatType.HP, data.baseHP);
+                Debug.Log($"[ApplyEquipmentEffects] {data.itemName} 기본 HP +{data.baseHP}");
+
             }
             if (data.baseMP != 0)
             {
                 PlayerStat.instance.AddEquipmentBonus(StatType.MP, data.baseMP);
+                Debug.Log($"[ApplyEquipmentEffects] {data.itemName} 기본 MP +{data.baseMP}");
+
             }
             if (data.baseSTR != 0)
             {
                 PlayerStat.instance.AddEquipmentBonus(StatType.STR, data.baseSTR);
+                Debug.Log($"[ApplyEquipmentEffects] {data.itemName} 기본 STR +{data.baseSTR}");
+
             }
             if (data.baseDEX != 0)
             {
                 PlayerStat.instance.AddEquipmentBonus(StatType.DEX, data.baseDEX);
+                Debug.Log($"[ApplyEquipmentEffects] {data.itemName} 기본 DEX +{data.baseDEX}");
+
             }
             if (data.baseCRIT != 0)
             {
                 PlayerStat.instance.AddEquipmentBonus(StatType.CRIT, data.baseCRIT);
+                Debug.Log($"[ApplyEquipmentEffects] {data.itemName} 기본 CRIT +{data.baseCRIT}");
+
             }
 
-            // (B) “강화 보너스(Per-Level × level)” 계산
-            // invItem.GetEnhancedStats()가 내부적으로 (perLevelXXX × invItem.level)을 계산해서 돌려줍니다.
+
             Dictionary<StatType, int> enhanced = invItem.GetEnhancedStats();
+            if (enhanced.Count == 0)
+            {
+                Debug.Log($"[ApplyEquipmentEffects] ▶ {data.itemName} 인벤토리 아이템 레벨 {invItem.level}, GetEnhancedStats 결과가 비어있습니다.");
+            }
+
             foreach (var pair in enhanced)
             {
-                // 예: pair.Key = StatType.HP, pair.Value = (perLevelHP × level)
                 PlayerStat.instance.AddEquipmentBonus(pair.Key, pair.Value);
+                Debug.Log($"[ApplyEquipmentEffects] {data.itemName} 강화 보너스 적용 → {pair.Key} +{pair.Value}");
+
             }
         }
 
-        // 3) 변경된 스탯을 PlayerStat에게 알림
         PlayerStat.instance.NotifyStatChanged();
 
         // 4) 화면(UI) 갱신

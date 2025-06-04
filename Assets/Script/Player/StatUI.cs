@@ -55,13 +55,20 @@ public class StatUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        if (playerStat == null || PlayerLevel.instance == null) return;
+        if (playerStat == null || PlayerLevel.instance == null)
+            return;
 
         levelText.text = "LV : " + PlayerLevel.instance.currentLevel;
-        atkText.text = $"ATK : {playerStat.MinDamage} ~ {playerStat.MaxDamage}";
-        strText.text = "STR : " + playerStat.strength;
-        dexText.text = "DEX : " + playerStat.dexterity;
-        critText.text = "CRIT : " + playerStat.critical;
+        atkText.text = "ATK : " + playerStat.MinDamage + " ~ " + playerStat.MaxDamage;
+
+        int strWithEquip = playerStat.GetStat(StatType.STR);
+        int dexWithEquip = playerStat.GetStat(StatType.DEX);
+        int critWithEquip = playerStat.GetStat(StatType.CRIT);
+
+        strText.text = "STR : " + strWithEquip;
+        dexText.text = "DEX : " + dexWithEquip;
+        critText.text = "CRIT : " + critWithEquip;
+
         expText.text = $"EXP : {PlayerLevel.instance.currentExp} / {PlayerLevel.instance.GetRequiredExp(PlayerLevel.instance.currentLevel)}";
     }
 }

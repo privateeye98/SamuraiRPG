@@ -265,19 +265,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e8e53343d78374bb9e96b396c073c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropTable: {fileID: 11400000, guid: 7e8127fe317d1b147a636f03db193345, type: 2}
-  nightbuff:
-    healthMultiplier: 1.5
-    attackMultiplier: 1.5
-    nightStartTime: 40
-  maxHP: 100
-  moveSpeed: 1.5
+  level: 10
+  hpPerLevel: 5
+  expPerLevel: 20
+  goldPerLevel: 1
+  baseExpReward: 50
+  baseGoldReward: 5
+  baseMaxHP: 500
+  moveSpeed: 3
   chaseRange: 7
-  dropGold: 10
+  currentState: 0
+  patrolRadius: 3
+  patrolSpeed: 1
+  patrolChangeInterval: 2
+  dropTable: {fileID: 11400000, guid: 7e8127fe317d1b147a636f03db193345, type: 2}
   goldPrefab: {fileID: 1420984807580001495, guid: c3523e0207bdd8c489c4b1e09129b3ab, type: 3}
-  expReward: 100
-  floatingTextPrefab: {fileID: 0}
-  floatingTextSpawnPoint: {fileID: 0}
+  yDeathLimit: -20
+  DropItemData: {fileID: 0}
+  dropQuantity: 1
   defense: 0
   evade: 5
 --- !u!95 &1912335482205324146

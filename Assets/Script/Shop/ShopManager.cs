@@ -19,6 +19,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] TMP_InputField amountInput;
     ItemData selectedItem;
 
+    [Header("UI References (판매)")]
+    [SerializeField] private GameObject sellUI;        
+    [SerializeField] private Transform sellSlotParent;     
+    [SerializeField] private GameObject sellSlotPrefab;
     public List<ItemData> shopItems = new List<ItemData>();
     public GameObject shopInventoryUI;
     void Awake()
@@ -54,6 +58,7 @@ public class ShopManager : MonoBehaviour
     public void CloseShop()
     {
         shopUI.SetActive(false);
+        sellUI.SetActive(false);
         if (inventoryUI_Shop != null)
             inventoryUI_Shop.gameObject.SetActive(false);
 
@@ -201,5 +206,63 @@ public void CancelBuy()
         selectedItem = null;
         buyPopup.SetActive(false);
     }
+    private void UpdateGoldDisplay()
+    {
+        if (goldText != null && GoldManager.instance != null)
+            goldText.text = "Gold: " + GoldManager.instance.currentGold;
+    }
+    public void OpenBuyTab()
+    {
+        // 1) 판매 UI는 숨기고
+        sellUI.SetActive(false);
+        // 2) 구매 UI를 띄우고
+        //    (purchase slots는 shopUI 하위라고 가정)
+        if (itemSlotParent != null && itemSlotPrefab != null)
+        {
+            foreach (Transform child in itemSlotParent) Destroy(child.gameObject);
+            foreach (var item in shopItems)
+            {
+                if (item == null) continue;
+                GameObject slotGO = Instantiate(itemSlotPrefab, itemSlotParent);
+                slotGO.GetComponent<ShopItemSlot>().Setup(item);
+            }
+        }
+        UpdateGoldDisplay();
+    }
+
+
+    // ────────────────────────────────────────────────────────────────────
+    // “판매 탭” 관련
+    // ────────────────────────────────────────────────────────────────────
+    public void OpenSellTab()
+    {
+        foreach (Transform child in itemSlotParent)
+            Destroy(child.gameObject);
+
+        sellUI.SetActive(true);
+
+        foreach (Transform child in sellSlotParent)
+            Destroy(child.gameObject);
+
+        foreach (var invItem in Inventory.instance.items)
+        {
+            if (CanSell(invItem.itemData))
+            {
+                GameObject slotGO = Instantiate(sellSlotPrefab, sellSlotParent);
+                slotGO.GetComponent<SellItemSlot>().Setup(invItem);
+            }
+        }
+
+        UpdateGoldDisplay();
+    }
+
+    private bool CanSell(ItemData data)
+    {
+        // 예시: 퀘스트 아이템은 판매 불가
+        if (data.type == ItemType.Quest) return false;
+        return true;
+    }
+
+
 
 }

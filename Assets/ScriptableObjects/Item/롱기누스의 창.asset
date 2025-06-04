@@ -30,13 +30,20 @@ MonoBehaviour:
   requiredStats:
   - stat: 1
     value: 50
-  atk: 5
-  hpBonusPerLevel: 300
-  mpBonusPerLevel: 100
-  strBonusPerLevel: 10
-  dexBonusPerLevel: 10
-  critBonusPerLevel: 10
-  level: 1
+  baseATK: 30
+  baseDEF: 5
+  baseHP: 100
+  baseMP: 50
+  baseSTR: 5
+  baseDEX: 5
+  baseCRIT: 3
+  perLevelATK: 3
+  perLevelDEF: 1
+  perLevelHP: 10
+  perLevelMP: 10
+  perLevelSTR: 30
+  perLevelDEX: 30
+  perLevelCRIT: 30
   maxLevel: 30
   upgradeCost: 10000
   minSuccessRate: 0.1
@@ -46,5 +53,3 @@ MonoBehaviour:
   ManaAmount: 0
   statType: 0
   bonusStats: []
-  tmpAttackValue: 0
-  isEquipped: 0
