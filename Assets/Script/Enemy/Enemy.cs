@@ -76,7 +76,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
         // 2) 컴포넌트 획득
         _rb = GetComponent<Rigidbody2D>();
-        _spr = GetComponent<SpriteRenderer>();
+        _spr = GetComponentInChildren<SpriteRenderer>();
+        if (_spr == null)
+        {
+            _spr = GetComponent<SpriteRenderer>();
+        }
         _anim = GetComponent<Animator>();
         _player = GameObject.FindWithTag("Player")?.transform;
 

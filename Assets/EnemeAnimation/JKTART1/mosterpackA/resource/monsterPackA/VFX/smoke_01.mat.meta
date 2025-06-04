@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 3e510647abf268f41aff0c8b86a89e5b
+timeCreated: 1555652405
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 85053
+  packageName: 2D Monster pack
+  packageVersion: 1.1
+  assetPath: Assets/JKTART1/mosterpackA/resource/monsterPackA/VFX/smoke_01.mat
+  uploadId: 601600
