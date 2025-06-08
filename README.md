@@ -49,7 +49,7 @@ https://www.notion.so/UNITY-RPG-REPORT-1f9d26a2e08b805b9b4de1440db706f4
 ##  실행 방법
 
 ```bash
-git clone https://github.com/your-name/roguelike-rpg.git
+git clone https://github.com/privateeye/projectT.git
 cd roguelike-rpg
 # Unity에서 프로젝트 열기
 ```
