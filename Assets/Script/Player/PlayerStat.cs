@@ -187,7 +187,7 @@ public class PlayerStat : MonoBehaviour
         float weaponBonus = 0f;
         if (equippedItems != null && equippedItems.TryGetValue(ItemPartType.Weapon, out var weaponData))
         {
-            weaponBonus = 0f; // 이미 ApplyEquipmentEffects()에서 장비 ATK를 equipmentBonuses로 반영했다면 0으로 두셔도 됩니다.
+            weaponBonus = 0f; 
         }
 
         return baseatk + strBonus + dexBonus + weaponBonus;

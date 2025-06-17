@@ -46,6 +46,11 @@ public class Enemy : MonoBehaviour, IDamageable
     public ItemData DropItemData;
     public int dropQuantity = 1;
 
+
+    [Header("밀격 설정")]
+    private float knockbackTimer = 0f;
+    public float knockbackDuration = 0.2f;
+
     // 내부 계산된 값
     private int maxHP;
     private int currentHP;
@@ -91,6 +96,14 @@ public class Enemy : MonoBehaviour, IDamageable
     void Update()
     {
         if (currentState == State.Dead) return;
+
+        //밀격 컴포넌트
+        if (knockbackTimer > 0f)
+        {
+            knockbackTimer -= Time.deltaTime;
+            return; // 밀격 중엔 이동 X
+        }
+
 
         // 플레이어 거리 계산
         float dist = _player
@@ -146,6 +159,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public void TakeDamage(int baseDmg, Vector2 hitPoint, Vector2 hitDir)
     {
         if (currentState == State.Dead) return;
+
         int playerLevel = PlayerLevel.instance?.currentLevel ?? 1;
         int levelDiff = playerLevel - level;  
 
@@ -159,8 +173,15 @@ public class Enemy : MonoBehaviour, IDamageable
             modifier += levelDiff * penaltyPerLevel;
 
         int finalDmg = Mathf.RoundToInt(baseDmg * modifier);
-
         int mitigated = Mathf.Max(0, finalDmg - defense);
+
+        //밀격
+        float knockbackForce = 5f;
+        _rb.linearVelocity = Vector2.zero;
+        _rb.AddForce(hitDir.normalized * knockbackForce, ForceMode2D.Impulse);
+        knockbackTimer = knockbackDuration;
+
+
 
         // 6) 체력 차감 & 히트 연출
         currentHP -= mitigated;

@@ -17,13 +17,23 @@ public class PlayerAttack : MonoBehaviour
     [Header("Level Gating & Damage Boost")]
     [Tooltip("3타 콤보를 해제할 플레이어 레벨")]
     [SerializeField] private int skillUnlockLevel = 10;
-    [Tooltip("언락 레벨 이후 레벨당 데미지 보너스 비율 (예: 0.02 → +2% per level)")]
+    [Tooltip("언락 레벨 이후 레벨당 데미지 보너스 비율")]
     [SerializeField] private float damageBoostPerLevel = 0.05f;
     private Animator anim;
     private SpriteRenderer spriteRenderer;
 
     private int comboStep = 1;
     private float lastAttackTime;
+    /// <summary>
+    /// 
+    /// </summary>
+    /// 
+
+    // 15레벨 스킬 해금
+    [SerializeField] private GameObject meteorPrefab;
+    [SerializeField] private float meteorChance = 1f; //1% 확률
+    [SerializeField] private float meteorUnlockLevel = 5;
+
 
     void Awake()
     {
@@ -45,7 +55,23 @@ public class PlayerAttack : MonoBehaviour
             anim.SetTrigger("Attack");
         }
     }
+    private void TrySpawnMeteor()
+    {
+        int currentLevel = PlayerLevel.instance.currentLevel;
+        if (currentLevel < meteorUnlockLevel) return;
+        if (Random.value > meteorChance) return;
 
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length == 0) return;
+
+        GameObject target = enemies[Random.Range(0, enemies.Length)];
+        Vector3 enemyPos = target.transform.position;
+
+        float heightOffset = Random.Range(6f, 8f); // 적 위 상공
+        Vector3 spawnPos = enemyPos + new Vector3(0f, heightOffset, 0f);
+
+        Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
+    }
     public void EnableHitBox()
     {
         if (hitbox == null || spriteRenderer == null) return;
@@ -91,7 +117,8 @@ public class PlayerAttack : MonoBehaviour
 
             Destroy(go, 0.5f);
         }
-        }
+        TrySpawnMeteor();
+    }
     
     public void DisableHitBox()
     {

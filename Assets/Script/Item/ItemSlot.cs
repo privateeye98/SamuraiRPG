@@ -107,36 +107,19 @@ public void OnPointerExit(PointerEventData eventData)
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (currentItem == null) return;
+        if (currentItem == null ) return;
 
-        // 1-1) 원래 부모 저장
-        originalParent = transform.parent;
-
-        // 1-2) 이 슬롯(UI 전체)를 최상단 Canvas 아래로 이동시켜서
-        // 드롭할 때 다른 UI 위에 겹치도록 한다
-        transform.SetParent(transform.root);
-
-        // 1-3) 드래그 중에는 아이콘만 따로 따라다니도록 CanvasGroup 설정
-        canvasGroup.blocksRaycasts = false; // Raycast(드롭 대상 검사)를 막기
+        DragItemUI.instance.Show(currentItem.itemData.icon);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         if (currentItem == null) return;
-        transform.position = Input.mousePosition;
     }
 
-    // ─────────────────────────────────────────────────────────────────
-    // 3) 드래그 끝: 원래대로 위치 복원 or DropHandler가 받을 때까지 기다림
-    // ─────────────────────────────────────────────────────────────────
     public void OnEndDrag(PointerEventData eventData)
     {
-        // 3-1) 드래그가 끝나면 다시 원래 부모로 붙이기
-        transform.SetParent(originalParent);
-        transform.localPosition = Vector3.zero;
-
-        // 3-2) Raycast 블록 해제
-        canvasGroup.blocksRaycasts = true;
+        DragItemUI.instance.Hide();
     }
     public void OnClickUse()
     {

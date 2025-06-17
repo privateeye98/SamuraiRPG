@@ -232,7 +232,7 @@ public class Player : MonoBehaviour, IDamageable
         if (Input.GetKeyDown(KeyCode.F9))
         {
             PlayerStat.instance.RecoverMana(100);
-            Debug.Log("🔵 마나 +100 회복됨");
+            Debug.Log("마나 +100 회복됨");
         }
     }
 
@@ -246,12 +246,10 @@ public class Player : MonoBehaviour, IDamageable
     {
 
 
-        // Dashing
         if (isDashing)
         {
             rb.linearVelocity = dashDirection * dashSpeed;
 
-            //--create after image;
             afterImageTimer -= Time.fixedDeltaTime;
             if (afterImageTimer <= 0f)
             {
@@ -259,7 +257,6 @@ public class Player : MonoBehaviour, IDamageable
                 afterImageTimer = afterImageInterval;
             }
             dashTime -= Time.fixedDeltaTime;
-            // -- dash time
             if (dashTime <= 0)
             {
                 isDashing = false;
@@ -267,7 +264,6 @@ public class Player : MonoBehaviour, IDamageable
             }
             return;
         }
-        // Movement
         float h = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(h * maxSpeed, rb.linearVelocity.y);
         if (Mathf.Abs(h) > 0.01f)
@@ -276,7 +272,6 @@ public class Player : MonoBehaviour, IDamageable
         rb.AddForce(Vector2.right * h * 10f, ForceMode2D.Force);
 
 
-        // Clamp the player's speed
         rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocity.x, -maxSpeed, maxSpeed), rb.linearVelocity.y);   // �� ����
 
         float targetSpeed = Mathf.Abs(rb.linearVelocity.x) / maxSpeed;  // 0~1
@@ -289,7 +284,6 @@ public class Player : MonoBehaviour, IDamageable
         if (rb.linearVelocity.y < 0)
         {
             Debug.DrawRay(transform.position, Vector3.down * 2f, Color.blue);
-            // Check if the player is grounded
             RaycastHit2D rH = Physics2D.Raycast(rb.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
             if (rH.collider != null)
             {
@@ -330,8 +324,9 @@ public class Player : MonoBehaviour, IDamageable
         float str = PlayerStat.instance.strength;
         float dex = PlayerStat.instance.dexterity;
 
+        int baseDamage = PlayerStat.instance.GetAttackDamage();
         float rawDamage = wideSkillBaseDamage + (str * 2f) + (dex * 0.5f);
-        int totalDamage = Mathf.RoundToInt(rawDamage * wideSkillMultiplier);
+        int totalDamage = Mathf.RoundToInt(rawDamage * wideSkillMultiplier * baseDamage * 0.05f);
 
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
