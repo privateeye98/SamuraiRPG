@@ -208,7 +208,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         PlayerLevel.instance?.AddExp(expReward);
         GoldManager.instance?.AddGold(goldReward);
-
+        QuestManager.instance?.UpdateQuestProgress(gameObject.name);
         TryDropItems();
         onDeath?.Invoke();
         Destroy(gameObject, 1f);

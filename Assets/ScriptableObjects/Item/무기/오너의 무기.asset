@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d7d82828f1e8094b8ed0537efa95668, type: 3}
+  m_Name: "\uC624\uB108\uC758 \uBB34\uAE30"
+  m_EditorClassIdentifier: 
+  id: 0
+  itemName: "\uC624\uB108\uC758 \uBB34\uAE30 "
+  icon: {fileID: 21300000, guid: a972929e7b262ac42acefb672b6dfcd3, type: 3}
+  type: 0
+  part: 5
+  description: "HLE vs T1\uC758 Road To MSI \uC5D0\uC11C \uC0AC\uC6A9\uD55C \uC624\uB108\uC758
+    \uBB34\uC774\uB2E4. \uC774\uAC78 \uC0AC\uC6A9\uD55C\uB2E4\uBA74 \uAE30\uC801\uC774
+    \uC77C\uC5B4\uB09C\uB2E4\uACE0 \uC54C\uB824\uC838 \uC788\uB2E4."
+  isStackable: 0
+  maxStack: 1
+  sellRatio: 0.5
+  price: 1
+  requiredLevel: 1
+  requiredStats:
+  - stat: 1
+    value: 10
+  baseATK: 111
+  baseDEF: 111
+  baseHP: 111
+  baseMP: 111
+  baseSTR: 111
+  baseDEX: 111
+  baseCRIT: 111
+  perLevelATK: 10
+  perLevelDEF: 10
+  perLevelHP: 10
+  perLevelMP: 10
+  perLevelSTR: 10
+  perLevelDEX: 10
+  perLevelCRIT: 10
+  maxLevel: 10
+  upgradeCost: 100
+  minSuccessRate: 0.1
+  baseSuccessRate: 0.5
+  penaltyPerLevel: 0.01
+  healAmount: 0
+  ManaAmount: 0
+  statType: 0
+  bonusStats:
+  - stat: 0
+    amount: 10
+  - stat: 4
+    amount: 10
+  - stat: 5
+    amount: 10
+  - stat: 1
+    amount: 10
+  - stat: 2
+    amount: 10
+  - stat: 3
+    amount: 10

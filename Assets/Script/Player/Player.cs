@@ -114,6 +114,7 @@ public class Player : MonoBehaviour, IDamageable
     {
 
         // -- Jump
+  
         if (Input.GetKeyDown(KeyCode.Space) && !anim.GetBool("isJumping"))
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -244,7 +245,16 @@ public class Player : MonoBehaviour, IDamageable
     }
     void FixedUpdate()
     {
-
+        isGrounded = Physics2D.OverlapBox(
+           transform.position + new Vector3(0, -0.5f, 0),
+            groundCheckSize,
+            0f,
+            groundMask
+    );
+        if (isGrounded && anim.GetBool("isJumping"))
+        {
+            anim.SetBool("isJumping", false);
+        }
 
         if (isDashing)
         {

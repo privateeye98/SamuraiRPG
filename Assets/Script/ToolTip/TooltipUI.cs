@@ -9,11 +9,12 @@ public class TooltipUI : MonoBehaviour
 
     [Header("UI References")]
     public GameObject tooltipPanel;            // 툴팁 전체 패널
-    public TextMeshProUGUI tooltipText;        // 아이템 이름 + 설명
-
-    [Header("Star (Enhancement Level)")]
-    [SerializeField] private Transform starContainer;
-    [SerializeField] private GameObject starPrefab;
+    public TextMeshProUGUI nametext;      // 아이템 이름 + 설명
+    public TextMeshProUGUI desciptionText; // 아이템 설명 (추가 설명용, 필요시 사용)
+    public TextMeshProUGUI requirementText; // 아이템 요구 사항 (레벨, 스탯 등)
+    //[Header("Star (Enhancement Level)")]
+    //[SerializeField] private Transform starContainer;
+    //[SerializeField] private GameObject starPrefab;
 
     [Header("Stat Bonuses")]
     [SerializeField] private Transform statContainer;
@@ -46,12 +47,12 @@ public class TooltipUI : MonoBehaviour
         tooltipPanel.SetActive(true);
 
         // 1) 별(★)로 강화 레벨 표시
-        foreach (Transform child in starContainer)
+        /* foreach (Transform child in starContainer)
             Destroy(child.gameObject);
         int currentLevel = invItem.level;
         for (int i = 0; i < currentLevel; i++)
             Instantiate(starPrefab, starContainer);
-
+        */
         // 2) statContainer 초기화
         foreach (Transform child in statContainer)
             Destroy(child.gameObject);
@@ -59,11 +60,10 @@ public class TooltipUI : MonoBehaviour
         ItemData data = invItem.itemData;
         int lvl = invItem.level;
 
-        // 3) 아이템 이름 + 설명
-        tooltipText.text =
-            $"<size=18><b>{data.itemName}</b></size>\n" +
-            $"{data.description}";
-
+        string levelText = invItem.level > 0 ? $" <color=#FFD700>(+{invItem.level})</color>" : "";
+        nametext.text = $"<size=38><b>{data.itemName}{levelText}</b></size>";
+        desciptionText.text = $"<size=20><color=#FFFFFF>{data.description}</color></size>";
+        requirementText.text = GetRequirementText(invItem);
         // 4) 타입별 분기
         if (data.type == ItemType.Equipment)
         {
@@ -105,7 +105,7 @@ public class TooltipUI : MonoBehaviour
 
         // ── 기본 스탯(Base Stats) 헤더 ──
         var baseHeader = Instantiate(statTextPrefab, statContainer);
-        baseHeader.text = "<b><color=#D3D3D3>── 기본 스탯 (착용 시 고정) ──</color></b>";
+        baseHeader.text = "<b><color=#FFFFFF>── 기본 스탯 (착용 시 고정) ──</color></b>";
 
         // (A) 기본 스탯 출력
         if (data.baseATK != 0)
@@ -150,9 +150,6 @@ public class TooltipUI : MonoBehaviour
             var enhHeader = Instantiate(statTextPrefab, statContainer);
             enhHeader.text = $"<b><color=#FFD700>── 강화 보너스 (Lv {lvl}) ──</color></b>";
 
-            // (B) perLevelXXX × (lvl - 1) 계산
-            // perLevelXXX은 “강화 레벨 1당” 추가될 값이므로,
-            // 실제 강화 보너스는 (lvl - 1)배만큼 추가되어야 합니다.
             int mult = lvl - 1;
 
             if (data.perLevelATK != 0)
@@ -200,7 +197,47 @@ public class TooltipUI : MonoBehaviour
         }
     }
 
-    public void Hide()
+
+        private string GetRequirementText(InventoryItem item)
+    {
+        var data = item.itemData;
+        Dictionary<StatType, int> required = new Dictionary<StatType, int>();
+
+        // 1. level
+        string lvColor = PlayerLevel.instance.currentLevel >= data.requiredLevel ? "#FFFFFF" : "#FF5555";
+        string levelText = $"<color={lvColor}>LV: {data.requiredLevel}</color>";
+
+        foreach (StatType stat in System.Enum.GetValues(typeof(StatType)))
+            required[stat] = 0;
+
+        foreach (var req in data.requiredStats)
+            required[req.stat] = req.value;
+
+        List<string> parts = new List<string> { levelText };
+
+        foreach (var kv in required)
+        {
+            StatType stat = kv.Key;
+            int value = kv.Value;
+            int current = PlayerStat.instance.GetStat(stat);
+
+            string color;
+            if (value == 0)
+                color = "#FFFFFF";
+            else if (current >= value)
+                color = "#888888";
+            else
+                color = "#FF5555";
+
+            parts.Add($"<color={color}>{stat}: {value}</color>");
+        }
+
+        return string.Join("   ", parts);
+    }
+
+
+
+public void Hide()
     {
         if (tooltipPanel == null)
         {
@@ -215,8 +252,8 @@ public class TooltipUI : MonoBehaviour
             // 화면에서 보이던 모든 스탯 라인과 별(★)을 제거
             foreach (Transform child in statContainer)
                 Destroy(child.gameObject);
-            foreach (Transform child in starContainer)
-                Destroy(child.gameObject);
+          /*  foreach (Transform child in starContainer)
+                Destroy(child.gameObject); */
         }
     }
 }

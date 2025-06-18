@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d7d82828f1e8094b8ed0537efa95668, type: 3}
+  m_Name: "LV0.\uB300\uC7A5\uC7A5\uC774\uC758 \uAC11\uC637"
+  m_EditorClassIdentifier: 
+  id: 0
+  itemName: "\uB300\uC7A5\uC7A5\uC774\uC758 \uAC11\uC637"
+  icon: {fileID: 21301546, guid: 4e799e9a72d583c4ebba9f2e35c2a5f4, type: 3}
+  type: 0
+  part: 1
+  description: "\uB300\uC7A5\uC7A5\uC774\uC758 \uAC11\uC637\uC774\uB2E4."
+  isStackable: 0
+  maxStack: 200
+  sellRatio: 0.5
+  price: 300
+  requiredLevel: 1
+  requiredStats: []
+  baseATK: 3
+  baseDEF: 50
+  baseHP: 10
+  baseMP: 5
+  baseSTR: 3
+  baseDEX: 3
+  baseCRIT: 3
+  perLevelATK: 1
+  perLevelDEF: 1
+  perLevelHP: 10
+  perLevelMP: 10
+  perLevelSTR: 1
+  perLevelDEX: 1
+  perLevelCRIT: 1
+  maxLevel: 10
+  upgradeCost: 100
+  minSuccessRate: 0.1
+  baseSuccessRate: 0.5
+  penaltyPerLevel: 0.01
+  healAmount: 0
+  ManaAmount: 0
+  statType: 0
+  bonusStats:
+  - stat: 0
+    amount: 1
+  - stat: 4
+    amount: 10
+  - stat: 5
+    amount: 10
+  - stat: 1
+    amount: 1
+  - stat: 2
+    amount: 1
+  - stat: 3
+    amount: 1

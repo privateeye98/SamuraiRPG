@@ -27,6 +27,11 @@ public class ShopManager : MonoBehaviour
     public GameObject shopInventoryUI;
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject); // 기존 싱글톤 제거
+            return;
+        }
         instance = this;
     }
 
