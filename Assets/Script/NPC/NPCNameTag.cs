@@ -15,6 +15,11 @@ public class NPCNameTag : MonoBehaviour
     }
     void LateUpdate()
     {
-        transform.rotation = Quaternion.identity; // 카메라 회전과 무관하게 항상 정방향 유지
+        if (nameText != null)
+        {
+            nameText.transform.rotation = Quaternion.identity;
+            
+        }
+        transform.localPosition = new Vector3(0f, -1.2f, 0f);
     }
 }

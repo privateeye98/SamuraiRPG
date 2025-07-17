@@ -71,6 +71,23 @@ public class Enemy : MonoBehaviour, IDamageable
     public int defense = 0;
     public int evade = 5;
 
+    [Header("HP바 세팅")]
+    [SerializeField] private EnemyHealthUI hpUI;
+    [SerializeField] private GameObject hpUIPrefab;
+    private Transform hpUIInstance;
+
+
+    void Start()
+    {
+        if(hpUIPrefab != null)
+        {
+            var uiGO = Instantiate(hpUIPrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+            hpUI = uiGO.GetComponent<EnemyHealthUI>();
+            hpUI.SetHP(currentHP, maxHP);
+
+            hpUIInstance = uiGO.transform;
+        }
+    }
     void Awake()
     {
         // 1) 레벨 기반 스케일링
@@ -124,6 +141,9 @@ public class Enemy : MonoBehaviour, IDamageable
         // 낙사 처리
         if (transform.position.y < yDeathLimit)
             Die();
+
+        if(hpUIInstance != null)
+            hpUIInstance.position = transform.position + Vector3.up * 1.5f;
     }
 
     private void Patrol()
@@ -185,6 +205,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
         // 6) 체력 차감 & 히트 연출
         currentHP -= mitigated;
+        //HP UI 업데이트
+        hpUI?.SetHP(currentHP, maxHP);
+
+
         _anim?.SetTrigger("Hit");
 
         DamageTextSpawner.I.Spawn(mitigated, hitPoint, false);
@@ -195,6 +219,7 @@ public class Enemy : MonoBehaviour, IDamageable
         }
         if (currentHP <= 0)
             Die();
+
     }
     #endregion
 
@@ -212,6 +237,10 @@ public class Enemy : MonoBehaviour, IDamageable
         TryDropItems();
         onDeath?.Invoke();
         Destroy(gameObject, 1f);
+
+        if (hpUIInstance != null)
+            Destroy(hpUIInstance.gameObject);
+
     }
 
      void TryDropItems()

@@ -283,8 +283,11 @@ MonoBehaviour:
   yDeathLimit: -20
   DropItemData: {fileID: 0}
   dropQuantity: 1
+  knockbackDuration: 0.2
   defense: 0
   evade: 5
+  hpUI: {fileID: 0}
+  hpUIPrefab: {fileID: 4889435277965834258, guid: 0bc83c369afdf4140add92a6a6ae1f88, type: 3}
 --- !u!95 &1912335482205324146
 Animator:
   serializedVersion: 7

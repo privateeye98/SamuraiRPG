@@ -210,6 +210,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamageText
       objectReference: {fileID: 0}
+    - target: {fileID: 7961187677548216818, guid: 461cab87d6ad395458414271c8703b57, type: 3}
+      propertyPath: m_margin.w
+      value: -0.064208984
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961187677548216818, guid: 461cab87d6ad395458414271c8703b57, type: 3}
+      propertyPath: m_margin.y
+      value: -0.5053711
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961187677548216818, guid: 461cab87d6ad395458414271c8703b57, type: 3}
+      propertyPath: m_margin.z
+      value: 0.20166016
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961187677548216818, guid: 461cab87d6ad395458414271c8703b57, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7610944007269910477, guid: ccdf81f10292f38448ba6e124c6c1612, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -221,7 +237,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 7173547053576991886}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
